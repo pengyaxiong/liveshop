@@ -226,6 +226,9 @@ class IndexController extends Controller
 
         $product = Product::find($id);
         $product['price'] = $product[$price];
+
+        $product['is_collect']=CollectProduct::where(['product_id'=>$id,'customer_id'=>$customer->id])->exists();
+        
         return $this->success_data('商品详情', ['product' => $product, 'customer' => $customer]);
     }
 
