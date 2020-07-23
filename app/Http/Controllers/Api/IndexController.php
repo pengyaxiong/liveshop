@@ -227,8 +227,8 @@ class IndexController extends Controller
         $product = Product::find($id);
         $product['price'] = $product[$price];
 
-        $product['is_collect']=CollectProduct::where(['product_id'=>$id,'customer_id'=>$customer->id])->exists();
-        
+        $product['is_collect'] = CollectProduct::where(['product_id' => $id, 'customer_id' => $customer->id])->exists();
+
         return $this->success_data('商品详情', ['product' => $product, 'customer' => $customer]);
     }
 
@@ -416,6 +416,20 @@ class IndexController extends Controller
         return $this->success_data('收藏商品成功');
     }
 
+    public function collect_product_del(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        CollectProduct::where(['product_id' => $request->product_id,
+            'customer_id' => $customer->id,])->delete();
+
+        return $this->success_data('取消收藏商品成功');
+    }
+    
     public function cart(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';

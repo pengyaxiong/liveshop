@@ -55,6 +55,10 @@
   "Causer type": "被操作模型",
   "Properties": "数据",
 
+  "Teacher name": "讲师名称",
+  "Teacher image": "讲师头像",
+  "Teacher des": "讲师简介",
+
   "Name cn": "中文名",
   "Address cn": "中文地址",
   "Address en": "英文地址",

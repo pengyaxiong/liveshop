@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers\Cms;
 
 use App\Models\Cms\Article;
+use App\Models\Cms\Category;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -79,7 +80,12 @@ class ArticleController extends AdminController
     {
         $form = new Form(new Article());
 
-        $form->number('category_id', __('Category id'));
+        $category_arr = Category::where('parent_id',true)->get()->toarray();
+
+        $form->select('category_id', __('Category id'))->options(
+            array_column($category_arr, 'name', 'id')
+        );
+
         $form->text('title', __('Title'));
         $form->textarea('image', __('Image'));
         $form->textarea('video', __('Video'));

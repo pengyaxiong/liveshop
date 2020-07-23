@@ -71,6 +71,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('change_num', 'IndexController@change_num');
     //收藏商品
     Route::post('collect_product', 'IndexController@collect_product');
+    //取消收藏
+    Route::post('collect_product_del', 'IndexController@collect_product_del');
 
     //用户信息
     Route::get('customer', 'IndexController@customer');
