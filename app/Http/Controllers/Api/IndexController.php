@@ -159,6 +159,8 @@ class IndexController extends Controller
         }
         $customer = Customer::where('openid', $openid)->first();
 
+        $grade=$customer?$customer->grade:1;
+        $price='price_'.$grade;
         //多条件查找
         $where = function ($query) use ($request) {
             $query->where('is_show', true);
@@ -181,10 +183,10 @@ class IndexController extends Controller
             $products = Product::where($where)->orderby('sale_num', 'desc')->paginate($request->total);
         }
         if ($request->has('price_desc') and $request->price_desc != '') {
-            $products = Product::where($where)->orderby('price', 'desc')->paginate($request->total);
+            $products = Product::where($where)->orderby($price, 'desc')->paginate($request->total);
         }
         if ($request->has('price_asc') and $request->price_asc != '') {
-            $products = Product::where($where)->orderby('price', 'asc')->paginate($request->total);
+            $products = Product::where($where)->orderby($price, 'asc')->paginate($request->total);
         }
 
         $page = isset($page) ? $request['page'] : 1;

@@ -103,4 +103,6 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('finish_order', 'IndexController@finish_order');
 
 
+
+
 });
