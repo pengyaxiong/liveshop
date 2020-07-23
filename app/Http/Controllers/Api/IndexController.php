@@ -93,6 +93,7 @@ class IndexController extends Controller
         $categories = Category::orderby('sort_order', 'asc')->limit(3)->get();
         //轮播
         $banner = Config::first()->banner;
+        $image = Config::first()->image;
         //品牌
         $brand = Brand::orderby('sort_order', 'asc')->get();
         //热销
@@ -106,7 +107,7 @@ class IndexController extends Controller
         }
         $customer = Customer::where('openid', $openid)->first();
 
-        return $this->success_data('首页', ['categories' => $categories, 'banner' => $banner, 'brand' => $brand, 'hot' => $hot, 'recommend' => $recommend, 'customer' => $customer]);
+        return $this->success_data('首页', ['categories' => $categories, 'banner' => $banner, 'image' => $image, 'brand' => $brand, 'hot' => $hot, 'recommend' => $recommend, 'customer' => $customer]);
     }
 
     public function categories()
