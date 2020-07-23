@@ -137,8 +137,8 @@ class ProductController extends AdminController
         $select_brand = array_column($brands, 'name_cn', 'id');
         $select_designer = array_column($designers, 'name_cn', 'id');
 
-        $form->select('brand_id', __('品牌'))->options($select_category);
-        $form->select('category_id', __('品类'))->options($select_brand);
+        $form->select('brand_id', __('品牌'))->options($select_brand);
+        $form->select('category_id', __('品类'))->options($select_category);
         $form->select('designer_id', __('设计师'))->options($select_designer);
 
         $form->text('name', __('Name'))->rules('required');
