@@ -35,6 +35,16 @@ class Product extends Model
         $this->attributes['images'] = json_encode(array_values($images));
     }
 
+    public function getInfoImagesAttribute($images)
+    {
+        return array_values(json_decode($images, true) ?: []);
+    }
+
+    public function setInfoImagesAttribute($images)
+    {
+        $this->attributes['info_images'] = json_encode(array_values($images));
+    }
+
     public function getSkuAttribute($sku)
     {
         return array_values(json_decode($sku, true) ?: []);

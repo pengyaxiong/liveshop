@@ -39,7 +39,8 @@ class ProductController extends AdminController
         $grid->column('images', __('Images'))->carousel();
         $grid->column('video', __('Video'))->downloadable();
         $grid->column('description', __('Description'));
-        $grid->column('content', __('Content'))->hide();
+        $grid->column('info_images', __('产品展示'))->carousel()->hide();
+        $grid->column('info_video', __('视频展示'))->downloadable()->hide();
         $grid->column('price_1', __('Price 1'));
         $grid->column('price_2', __('Price 2'));
         $grid->column('price_3', __('Price 3'));
@@ -103,7 +104,8 @@ class ProductController extends AdminController
         $show->field('images', __('Images'));
         $show->field('video', __('Video'));
         $show->field('description', __('Description'));
-        $show->field('content', __('Content'));
+        $show->field('info_images', __('产品展示'));
+        $show->field('info_video', __('视频展示'));
         $show->field('price_1', __('Price 1'));
         $show->field('price_2', __('Price 2'));
         $show->field('price_3', __('Price 3'));
@@ -158,7 +160,21 @@ class ProductController extends AdminController
         ])->removable()->downloadable();
 
         $form->textarea('description', __('Description'))->rules('required');
-        $form->ueditor('content', __('Content'))->rules('required');
+
+        $form->multipleImage('info_images', __('产品展示'))->removable()->sortable();
+        $form->file('info_video', __('视频展示'))->addElementClass('video_upload')->options([
+            'showPreview' => false,
+            'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
+            'showUpload'=>true,
+            'uploadAsync' =>true,
+//            'uploadUrl' => storage_path('app/public/video_upload'),
+            'uploadExtraData' => [
+                '_token'    => csrf_token(),
+                '_method'   => 'POST',
+            ],
+        ])->removable()->downloadable();
+
+
         $form->decimal('price_1', __('Price 1'))->default(99.00);
         $form->decimal('price_2', __('Price 2'))->default(99.00);
         $form->decimal('price_3', __('Price 3'))->default(99.00);

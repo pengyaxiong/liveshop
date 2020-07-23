@@ -33,6 +33,16 @@ Route::group([
 
 
     });
+    //课程管理
+    Route::group(['prefix' => 'cms', 'namespace' => 'Cms', 'as' => 'cms.'], function (Router $router) {
+
+        //分类管理
+        $router->resource('categories', 'CategoryController');
+        //课程管理
+        $router->resource('articles', 'ArticleController');
+        //章节管理
+        $router->resource('chapters', 'ChapterController');
+    });
 
     $router->resource('configs', 'ConfigController');
 

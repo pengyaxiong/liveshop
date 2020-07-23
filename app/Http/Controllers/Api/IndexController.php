@@ -224,7 +224,7 @@ class IndexController extends Controller
         $price = 'price_' . $grade;
 
         $product = Product::find($id);
-        $product['price']=$product[$price];
+        $product['price'] = $product[$price];
         return $this->success_data('商品详情', ['product' => $product, 'customer' => $customer]);
     }
 
@@ -403,7 +403,15 @@ class IndexController extends Controller
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
+
         $carts = Cart::with('product')->where('customer_id', $customer->id)->get();
+        foreach ($carts as $cart) {
+            if (!empty($cart->product)) {
+                $cart->product['price']=$cart->product[$price];
+            }
+        }
 
         $count = Cart::count_cart($carts, $customer->id);
 
@@ -516,6 +524,7 @@ class IndexController extends Controller
 
         $order = Order::with('order_products.product', 'customer', 'address')->find($request->order_id);
 
+
         return $this->success_data('订单详情', ['order' => $order]);
     }
 
@@ -546,6 +555,8 @@ class IndexController extends Controller
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
 
         if ($request->cart_id) {
             $cart_id = $request->cart_id;
@@ -557,7 +568,7 @@ class IndexController extends Controller
         if ($request->product_id) {
             $carts = [];
             $product = Product::find($request->product_id);
-            $total_price = $product->price;
+            $total_price = $product[$price];
 
             $carts[0]['product'] = $product;
             $carts[0]['num'] = 1;
@@ -576,6 +587,8 @@ class IndexController extends Controller
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
 
         $product_id = $request->product_id;
         $cart_id = $request->cart_id;
@@ -584,7 +597,7 @@ class IndexController extends Controller
 
         if ($product_id) {
             $product = Product::find($product_id);
-            $total_price = $product->price;
+            $total_price = $product[$price];
 
             $order = Order::create([
                 'customer_id' => $customer->id,

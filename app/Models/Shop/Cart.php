@@ -39,6 +39,9 @@ class Cart extends Model
         $count = [];
         //避免重复查询数据
         $carts = $carts ? $carts : Cart::where('customer_id', $customer_id)->get();
+        $customer = Customer::find($customer_id);
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
 
         foreach ($carts as $key=>$cart){
             if (empty($cart->product)) {
@@ -50,7 +53,7 @@ class Cart extends Model
         $num = 0;
         foreach ($carts as $v) {
             if ($v->product){
-                $total_price += $v->product->price * $v->num;
+                $total_price += $v->product[$price] * $v->num;
                 $num += $v->num;
             }
         }
