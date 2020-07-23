@@ -1,0 +1,194 @@
+.top img{
+	width: 100%;
+	max-height: 10rem;
+}
+.list{
+	background: #FFFFFF;
+	position: relative;
+}
+.classify{
+	width: 80px;
+	height: 100%;
+	overflow-y: auto;
+	background-color: #F9F9F9;
+}
+.classify div{
+	height: 0.88rem;
+	box-sizing: border-box;
+	padding: 0 15px;
+	text-align: center;
+	color: #7B7B7B;
+}
+.classify div img{
+	width: 0.24rem;
+	height: 0.24rem;
+	margin-right: 3px;
+}
+.classify .active{
+	background-color: #fff;
+}
+.productList{
+	width: calc(100% - 80px);
+	height: 100%;
+	overflow-y: scroll;
+}
+.productItem{
+	box-sizing: border-box;
+	padding: 0 10px;
+	margin: 30px 0;
+	position: relative;
+}
+.productUrl{
+	width: 72px;
+	height: 72px;
+}
+.productInfo{
+	width: calc(100% - 82px);
+}
+.productName{
+	font-size:15px;
+	font-weight:bold;
+	color:rgba(68,68,68,1);
+	height: 20px;
+	line-height: 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: break-all;
+}
+.productGift,.productNum{
+	font-size:11px;
+	font-weight:400;
+	color:rgba(202,202,202,1);
+	height: 16px;
+	line-height: 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: break-all;
+}
+.productPrice{
+	font-size:18px;
+	font-weight:bold;
+	color:rgba(219,57,21,1);
+}
+.btns{
+	position: absolute;
+	bottom: 3px;
+	right: 10px;
+	z-index: 22;
+}
+.btns img{
+	width: 20px;
+	height: 20px;
+}
+.btns p{
+	width: 22px;
+	text-align: center;
+	color: #333;
+}
+.shopCar{
+	position: absolute;
+	z-index: 33;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width:calc(100% - 0.6rem);
+	height:44px;
+	background:rgba(23,23,23,1);
+	box-shadow:0px 2px 9px 0px rgba(4,0,0,0.13);
+	border-radius:22px;
+}
+.shopCarView{
+	width: 5.7rem;
+	box-sizing: border-box;
+	padding-left: 1.4rem;
+}
+.shopcarNum{
+	width: 0.85rem;
+	height: 0.85rem;
+	background: url(../img/shopcar.png) center no-repeat;
+	background-size: cover;
+	position: relative;
+	top: -15px;
+}
+.scNum{
+	position: absolute;
+	top: 5px;
+	right: 0;
+	min-width:12px;
+	height:12px;
+	background:rgba(255,255,255,1);
+	border-radius:50%;
+	font-size:10px;
+	font-weight:500;
+	color:rgba(221,57,21,1);
+	text-align: center;
+	line-height: 12px;
+}
+.shopCarPrice{
+	font-size:13px;
+	font-weight:500;
+	color:rgba(255,255,255,1);
+	height: 44px;
+	line-height: 44px;
+}
+.submit{
+	width: 1.2rem;
+	background-color: #DD3915;
+	color: #fff;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	border-radius: 0 22px 22px 0;
+}
+/*  */
+.alert{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	display: none;
+}
+.alert .bg{
+	position: position;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background:rgba(0,0,0,0.6);
+}
+.alert .alertShopCar{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: #fff;
+	border-radius: 8px 8px 0px 0px;
+	width: 100%;
+	max-height: 370px;
+	z-index: 22;
+	box-sizing: border-box;
+	padding: 15px 15px 60px 15px;
+}
+.alert .asc_title{
+	color: #333;
+	padding: 10px 0;
+}
+.alert .alertShopCarList{
+	max-height: 250px;
+	overflow-y: scroll;
+}
+.alert .productItem{
+	padding: 0;
+	margin: 15px 0;
+}
+/*  */
+.fixedBottom{
+	position: fixed;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 9999;
+}

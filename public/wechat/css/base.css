@@ -1,0 +1,86 @@
+input::-webkit-input-placeholder {color: #999;font-size:12px;}
+input:-moz-placeholder{color: #999;font-size:12px;}
+input::-moz-placeholder{color: #999;font-size:12px;}
+input:-ms-input-placeholder{color: #999;font-size:12px;}
+
+textarea::-webkit-input-placeholder {color: #999;font-size:13px;}
+textarea:-moz-placeholder{color: #999;font-size:13px;}
+textarea::-moz-placeholder{color: #999;font-size:13px;}
+textarea:-ms-input-placeholder{color: #999;font-size:13px;}
+/*  */
+/**/
+div,p.span,section,a,img{
+	cursor: pointer;
+}
+input,textarea{
+	border: none;
+	resize: none;
+	outline: none;
+}
+/**/
+a{text-decoration: none;color:#333;}
+p{margin: 0;}
+/**/
+.color{color:;}
+.bg_f2{background-color: #f2f2f2;}
+.bg_fff{background-color: #FFFFFF !important;}
+/**/
+.hide{display: none;}
+/**/
+*{margin: 0 ;padding: 0;list-style: none;font-size: 14px; font-family: Microsoft Yahei,SimSun,Helvetica;}
+body,html{width: 100%;overflow-x: hidden;min-height: 100%;}
+/**/
+.d-flex {display: flex;}
+.d-flex-column {flex-direction: column;}
+.d-flex-wrap {flex-wrap: wrap;}
+.d-flex-item {flex: 1;}
+.d-flex-unShrink {flex-shrink: 0;}
+.d-flex-between {justify-content: space-between;}
+.d-flex-around {justify-content: space-around;}
+.d-flex-center {justify-content: center;}
+.d-flex-start {justify-content: flex-start;}
+.d-flex-end {justify-content: flex-end;}
+.d-flex-middle {align-items: center;}
+.d-flex-top {align-items: flex-start;}
+.d-flex-bottom {align-items: flex-end;}
+.d-flex-align-between {align-content: space-between;}
+.d-flex-align-around {align-content: space-around;}
+/*  */
+@media screen and (max-aspect-ratio: 13/9){
+    html {font-size:calc(100vw / 750 * 100);}
+    @media screen and (min-width: 750px) {
+        html{font-size:100px;max-width:750px;}
+    }
+}
+/*  */
+body{
+	background-color: #F2F2F2;
+}
+/*  */
+.hide{
+	display: none;
+}
+/*  */
+#tabs{
+	position: fixed;
+	background-color: #FFFFFF;
+	height: 1rem;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+#tabs a{
+	display: block;
+	width: 50%;
+}
+#tabs img{
+	width: 0.4rem;
+	height: 0.4rem;
+}
+#tabs p{
+	font-size: 10px;
+}
+#tabs .active{
+	color: #DD3915;
+}

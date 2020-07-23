@@ -1,0 +1,74 @@
+.top{
+	height: 3.6rem;
+	width: 100%;
+	background:rgba(219,57,21,1);
+	border-radius:0px 0px 75px 75px;
+	box-sizing: border-box;
+	padding: 0.8rem 0.42rem;
+}
+.top div{
+	height: 1.6rem;
+}
+.top img{
+	width: 1.12rem;
+	height: 1.12rem;
+	border-radius: 50%;
+	margin-right: 0.3rem;
+}
+.top p{
+	font-size:0.3rem;
+	font-weight:bold;
+	color:rgba(255,255,255,1);
+}
+.content{
+	background-color: #fff;
+	width: 6.9rem;
+	margin: 0 auto;
+	position: relative;
+	z-index: 22;
+	top: -1rem;
+	border-radius: 0.1rem;
+	box-sizing: border-box;
+	padding: 0 0.3rem;
+}
+.userInfo{
+	box-sizing: border-box;
+	padding: 0.4rem 0;
+	border-bottom: 0.02rem solid #F0F0F0;
+}
+.userInfo img{
+	width: 0.35rem;
+	height: 0.35rem;
+	margin-right: 0.05rem;
+}
+.userInfo div p{
+	font-size:0.24rem;
+	font-weight:400;
+	color:rgba(51,51,51,1);
+}
+.userMoney{
+	text-indent: 0.4rem;
+	font-size:0.36rem;
+	font-weight:bold;
+	color:rgba(51,51,51,1);
+	margin-top: 0.12rem;
+}
+.meanList{
+	
+}
+.meanList a{
+	height: 1.02rem;
+	border-bottom: 0.02rem solid #F0F0F0;
+	background: url(../img/right.png) right center no-repeat;
+	background-size: 0.35rem;
+}
+.meanList a img{
+	width: 0.35rem;
+	height: 0.35rem;
+	margin-right: 0.05rem;
+}
+.meanList a p{
+	font-size:0.24rem;
+	font-weight:400;
+	color:rgba(51,51,51,1);
+}

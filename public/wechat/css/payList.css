@@ -1,0 +1,17 @@
+.li{
+	border-top: 0.2rem solid #F0F0F0;
+	box-sizing: border-box;
+	padding: 0.2rem 0.3rem;
+}
+.title{
+	font-size:0.3rem;
+	font-weight:bold;
+	color:rgba(51,51,51,1);
+	margin-bottom: 0.3rem;
+}
+.time,.price{
+	font-size:0.24rem;
+	font-weight:500;
+	color:rgba(51,51,51,1);
+	line-height: 0.4rem;
+}
