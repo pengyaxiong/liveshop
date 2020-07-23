@@ -30,7 +30,7 @@ class CategoryController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('parent_id', __('Parent id'))->display(function () {
-            return '点击查看';
+            return '点击查看下级';
         })->expand(function ($model) {
             $children = $model->children->map(function ($child) {
                 return $child->only(['id','name']);
