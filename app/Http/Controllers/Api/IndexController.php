@@ -87,7 +87,7 @@ class IndexController extends Controller
         return $this->success_data('系统信息', $configs);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         //品类
         $categories = Category::orderby('sort_order', 'asc')->limit(3)->get();
@@ -100,7 +100,13 @@ class IndexController extends Controller
         //推荐
         $recommend = Product::where('is_show', true)->where('is_recommend', true)->orderby('sort_order', 'asc')->get();
 
-        return $this->success_data('首页', ['categories' => $categories, 'banner' => $banner, 'brand' => $brand, 'hot' => $hot, 'recommend' => $recommend]);
+        $openid = $request->openid;
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        return $this->success_data('首页', ['categories' => $categories, 'banner' => $banner, 'brand' => $brand, 'hot' => $hot, 'recommend' => $recommend, 'customer' => $customer]);
     }
 
     public function categories()
@@ -146,6 +152,12 @@ class IndexController extends Controller
 
     public function products(Request $request)
     {
+        $openid = $request->openid;
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
         //多条件查找
         $where = function ($query) use ($request) {
             $query->where('is_show', true);
@@ -181,18 +193,31 @@ class IndexController extends Controller
             'is_new' => $request->is_new,
         ));
 
-        return $this->success_data('分类商品', $products);
+        return $this->success_data('分类商品', ['products' => $products, 'customer' => $customer]);
     }
 
-    public function product($id)
+    public function product(Request $request, $id)
     {
-        $product=Product::find($id);
-        return $this->success_data('商品详情', $product);
+        $openid = $request->openid;
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        $product = Product::find($id);
+        return $this->success_data('商品详情', ['product' => $product, 'customer' => $customer]);
     }
 
 
     public function search(Request $request)
     {
+        $openid = $request->openid;
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+
         $where = function ($query) use ($request) {
             $keyword = '%' . $request->keyword . '%';
             $query->where('name', 'like', $keyword);
@@ -205,7 +230,7 @@ class IndexController extends Controller
             'page' => $page,
             'keyword' => $request->keyword,
         ));
-        return $this->success_data('搜索', $products);
+        return $this->success_data('搜索', ['products' => $products, 'customer' => $customer]);
     }
 
 
