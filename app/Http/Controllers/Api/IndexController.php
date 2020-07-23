@@ -184,6 +184,12 @@ class IndexController extends Controller
         return $this->success_data('分类商品', $products);
     }
 
+    public function product($id)
+    {
+        $product=Product::find($id);
+        return $this->success_data('商品详情', $product);
+    }
+
 
     public function search(Request $request)
     {
