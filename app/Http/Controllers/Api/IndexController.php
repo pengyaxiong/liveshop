@@ -429,7 +429,7 @@ class IndexController extends Controller
 
         return $this->success_data('取消收藏商品成功');
     }
-    
+
     public function cart(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
@@ -605,9 +605,11 @@ class IndexController extends Controller
             $total_price = $product[$price];
 
             $carts[0]['product'] = $product;
-            $carts[0]['num'] = 1;
-            $count['num'] = 1;
-            $count['total_price'] = $total_price;
+            $carts[0]['num'] =$request->num;
+            $carts[0]['sku'] = $request->sku;
+
+            $count['num'] =$request->num;
+            $count['total_price'] = $total_price*$request->num;;
         }
         $address = Address::find($customer->address_id);
 
@@ -650,7 +652,7 @@ class IndexController extends Controller
                 'name' => $address->name
             ]);
 
-            $order->order_products()->create(['product_id' => $product_id, 'num' => 1]);
+            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'sku' => $request->sku]);
             $result = Order::with('order_products.product', 'address')->find($order->id);
         }
 
@@ -685,7 +687,7 @@ class IndexController extends Controller
 
             foreach ($carts as $cart) {
 
-                $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'num' => $cart->num]);
+                $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'num' => $cart->num, 'sku' => $cart->sku]);
                 if ($result_) {
                     Cart::destroy($cart->id);
                 }
