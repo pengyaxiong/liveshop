@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Shop\Address;
+use App\Models\Shop\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -15,8 +17,14 @@ class Customer extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function bills()
+    public function addresses()
     {
-        return $this->hasMany(Bill::class);
+        return $this->hasMany(Address::class);
+    }
+
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
     }
 }

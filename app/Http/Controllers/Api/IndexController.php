@@ -240,7 +240,7 @@ class IndexController extends Controller
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
-        $customer = Customer::where('openid', $openid)->first();
+        $customer = Customer::with('address')->where('openid', $openid)->first();
 
         return $this->success_data('用户信息', $customer);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Shop;
 
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
@@ -14,4 +15,5 @@ class Address extends Model
     {
         return $this->hasMany(Order::class);
     }
+
 }
