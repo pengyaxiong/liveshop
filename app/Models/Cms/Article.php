@@ -14,4 +14,9 @@ class Article extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function chapters()
+    {
+        return $this->hasMany('App\Models\Cms\Chapter');
+    }
 }

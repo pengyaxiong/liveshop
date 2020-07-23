@@ -9,6 +9,7 @@ use App\Models\Shop\Address;
 use App\Models\Shop\Brand;
 use App\Models\Shop\Cart;
 use App\Models\Shop\Category;
+use App\Models\Shop\CollectProduct;
 use App\Models\Shop\Designer;
 use App\Models\Shop\Order;
 use App\Models\Shop\Product;
@@ -396,6 +397,22 @@ class IndexController extends Controller
         return $this->success_data('删除地址');
     }
 
+    public function collect_product(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        CollectProduct::create([
+            'product_id' => $request->product_id,
+            'customer_id' => $customer->id,
+        ]);
+
+        return $this->success_data('收藏商品成功');
+    }
+
     public function cart(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
@@ -409,7 +426,7 @@ class IndexController extends Controller
         $carts = Cart::with('product')->where('customer_id', $customer->id)->get();
         foreach ($carts as $cart) {
             if (!empty($cart->product)) {
-                $cart->product['price']=$cart->product[$price];
+                $cart->product['price'] = $cart->product[$price];
             }
         }
 

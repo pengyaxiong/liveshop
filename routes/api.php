@@ -69,6 +69,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('destroy_checked', 'IndexController@destroy_checked');
     //修改购物车商品数量
     Route::post('change_num', 'IndexController@change_num');
+    //收藏商品
+    Route::post('collect_product', 'IndexController@collect_product');
 
     //用户信息
     Route::get('customer', 'IndexController@customer');
