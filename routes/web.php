@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/wechat/index');
+    return redirect('/admin');
 });
 //微信商城前端'middleware' => ['wechat.oauth','wechat'],
 Route::group(['namespace' => 'Wechat',  'prefix' => 'wechat','as' => 'wechat.'], function () {
