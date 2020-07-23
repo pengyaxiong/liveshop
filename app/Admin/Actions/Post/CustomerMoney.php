@@ -22,7 +22,7 @@ class CustomerMoney extends RowAction
         $description=$request->get('description');
 
         activity()->inLog('system')
-            ->performedOn(auth('admin')->user())
+            ->performedOn(\Admin::user())
             ->causedBy($model)
             ->withProperties(['type' => $type, 'money' => $money])
             ->log($description);

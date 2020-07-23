@@ -15,7 +15,7 @@
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+              <caret line="22" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -24,7 +24,7 @@
       <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3045">
+            <state relative-caret-position="623">
               <caret line="180" column="29" lean-forward="false" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="29" />
               <folding>
                 <element signature="e#3341#4533#0#PHP" expanded="false" />
@@ -36,8 +36,8 @@
       <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1953">
-              <caret line="93" column="26" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="26" />
+            <state relative-caret-position="329">
+              <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -46,7 +46,7 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14952">
+            <state relative-caret-position="476">
               <caret line="725" column="38" lean-forward="false" selection-start-line="721" selection-start-column="17" selection-end-line="725" selection-end-column="38" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
@@ -58,11 +58,9 @@
       <file leaf-file-name="BillController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/BillController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="882">
-              <caret line="47" column="47" lean-forward="false" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
-              <folding>
-                <element signature="e#46#70#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="126">
+              <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,8 +68,8 @@
       <file leaf-file-name="CustomerMoney.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Admin/Actions/Post/CustomerMoney.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+            <state relative-caret-position="399">
+              <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
               <folding>
                 <element signature="e#42#77#0#PHP" expanded="true" />
               </folding>
@@ -280,6 +278,51 @@
               <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="routes" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="encore" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="encore" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel-admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="encore" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel-admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="encore" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel-admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="encore" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravel-admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="partials" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -326,15 +369,16 @@
       <workItem from="1595232560828" duration="12737000" />
       <workItem from="1595293345336" duration="8733000" />
       <workItem from="1595379907046" duration="24071000" />
-      <workItem from="1595466307571" duration="286000" />
+      <workItem from="1595466307571" duration="1880000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45827000" />
+    <option name="totallyTimeSpent" value="47421000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16770834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -368,25 +412,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/CategoryController.php" />
-    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Grid/Column.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="700" column="30" lean-forward="false" selection-start-line="700" selection-start-column="22" selection-end-line="700" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Actions/Post/OrderPrint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1372">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/BrandController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
           <caret line="89" column="65" lean-forward="true" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -461,6 +491,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -587,6 +618,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="584">
           <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -608,13 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -623,6 +648,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="74" column="24" lean-forward="false" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -630,13 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="26" column="58" lean-forward="false" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1953">
-          <caret line="93" column="26" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -652,16 +671,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3045">
-          <caret line="180" column="29" lean-forward="false" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="29" />
-          <folding>
-            <element signature="e#3341#4533#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -669,26 +679,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
           <caret line="112" column="16" lean-forward="true" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/BillController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="47" column="47" lean-forward="false" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
-          <folding>
-            <element signature="e#46#70#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14952">
-          <caret line="725" column="38" lean-forward="false" selection-start-line="721" selection-start-column="17" selection-end-line="725" selection-end-column="38" />
-          <folding>
-            <element signature="e#44#81#0#PHP" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -699,10 +690,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="180" column="29" lean-forward="false" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="29" />
+          <folding>
+            <element signature="e#3341#4533#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="725" column="38" lean-forward="false" selection-start-line="721" selection-start-column="17" selection-end-line="725" selection-end-column="38" />
+          <folding>
+            <element signature="e#44#81#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1225">
+          <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/BillController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-616">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1594192528472" expanded="true" signature="30:52" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="232:246" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="264:280" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="287:294" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="300:309" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="506:543" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="583:591" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="615:629" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="653:670" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="958:978" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="983:1016" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1026:1060" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1181:1189" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1248:1272" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1288:1313" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1381:1397" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1439:1448" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1476:1493" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1508:1523" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1552:1576" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1738:1752" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1777:1784" ph="..." />
+            <marker date="1594192528472" expanded="true" signature="1830:1843" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/resources/views/partials/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="34" column="64" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="64" />
+          <folding>
+            <marker date="1594192528516" expanded="true" signature="84:100" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="210:259" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="362:406" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="781:817" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="1328:1351" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="1548:1569" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="1800:1823" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="1931:1952" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="2015:2042" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="2260:2287" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="2326:2350" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="2488:2514" ph="..." />
+            <marker date="1594192528516" expanded="true" signature="2553:2576" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/Actions/Post/CustomerMoney.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+        <state relative-caret-position="399">
+          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
           <folding>
             <element signature="e#42#77#0#PHP" expanded="true" />
           </folding>
