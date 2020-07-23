@@ -96,16 +96,26 @@ class IndexController extends Controller
         $image = Config::first()->image;
         //品牌
         $brand = Brand::orderby('sort_order', 'asc')->get();
-        //热销
-        $hot = Product::where('is_show', true)->where('is_hot', true)->orderby('sort_order', 'asc')->get();
-        //推荐
-        $recommend = Product::where('is_show', true)->where('is_recommend', true)->orderby('sort_order', 'asc')->get();
 
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
-       //     return $this->error_data('用户不存在');
+            return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
+
+        //热销
+        $hot = Product::where('is_show', true)->where('is_hot', true)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
+            $model['price'] = $model[$price];
+            return $model;
+        });
+        //推荐
+        $recommend = Product::where('is_show', true)->where('is_recommend', true)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
+            $model['price'] = $model[$price];
+            return $model;
+        });
+
 
         return $this->success_data('首页', ['categories' => $categories, 'banner' => $banner, 'image' => $image, 'brand' => $brand, 'hot' => $hot, 'recommend' => $recommend, 'customer' => $customer]);
     }
@@ -153,14 +163,14 @@ class IndexController extends Controller
 
     public function products(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
 
-        $grade=$customer?$customer->grade:1;
-        $price='price_'.$grade;
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
         //多条件查找
         $where = function ($query) use ($request) {
             $query->where('is_show', true);
@@ -188,6 +198,9 @@ class IndexController extends Controller
         if ($request->has('price_asc') and $request->price_asc != '') {
             $products = Product::where($where)->orderby($price, 'asc')->paginate($request->total);
         }
+        foreach ($products as $key => $product) {
+            $products[$key]['price'] = $product[$price];
+        }
 
         $page = isset($page) ? $request['page'] : 1;
         $products = $products->appends(array(
@@ -201,25 +214,30 @@ class IndexController extends Controller
 
     public function product(Request $request, $id)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
 
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
+
         $product = Product::find($id);
+        $product['price']=$product[$price];
         return $this->success_data('商品详情', ['product' => $product, 'customer' => $customer]);
     }
 
 
     public function search(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
-
+        $grade = $customer ? $customer->grade : 1;
+        $price = 'price_' . $grade;
 
         $where = function ($query) use ($request) {
             $keyword = '%' . $request->keyword . '%';
@@ -228,6 +246,11 @@ class IndexController extends Controller
             $query->where('is_show', true);
         };
         $products = Product::where($where)->paginate($request->total);
+
+        foreach ($products as $key => $product) {
+            $products[$key]['price'] = $product[$price];
+        }
+
         $page = isset($page) ? $request['page'] : 1;
         $products = $products->appends(array(
             'page' => $page,
@@ -239,7 +262,7 @@ class IndexController extends Controller
 
     public function customer(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -250,7 +273,7 @@ class IndexController extends Controller
 
     public function address(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -268,7 +291,7 @@ class IndexController extends Controller
 
     public function add_address(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -320,7 +343,7 @@ class IndexController extends Controller
 
     public function edit_address(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         $id = $request->address_id;
         if (!$openid) {
             return $this->error_data('用户不存在');
@@ -335,7 +358,7 @@ class IndexController extends Controller
     public function update_address(Request $request)
     {
         $id = $request->address_id;
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -361,7 +384,7 @@ class IndexController extends Controller
 
     public function delete_address(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         $address_id = $request->address_id;
         if (!$openid) {
             return $this->error_data('用户不存在');
@@ -375,7 +398,7 @@ class IndexController extends Controller
 
     public function cart(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -390,7 +413,7 @@ class IndexController extends Controller
 
     function add_cart(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -421,7 +444,7 @@ class IndexController extends Controller
 
     function change_num(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -439,7 +462,7 @@ class IndexController extends Controller
 
     function delete_cart(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -456,7 +479,7 @@ class IndexController extends Controller
 
     public function order(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -485,7 +508,7 @@ class IndexController extends Controller
 
     public function order_info(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -499,7 +522,7 @@ class IndexController extends Controller
 
     public function finish_order(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -518,7 +541,7 @@ class IndexController extends Controller
      */
     public function checkout(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -548,7 +571,7 @@ class IndexController extends Controller
 
     public function add_order(Request $request)
     {
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }
@@ -629,7 +652,7 @@ class IndexController extends Controller
     public function pay(Request $request)
     {
 
-        $openid = $request->openid;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
             return $this->error_data('用户不存在');
         }

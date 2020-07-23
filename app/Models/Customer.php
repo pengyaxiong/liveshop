@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Cms\CollectArticle;
 use App\Models\Shop\Address;
+use App\Models\Shop\CollectProduct;
 use App\Models\Shop\Order;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +28,15 @@ class Customer extends Model
     public function address()
     {
         return $this->hasOne(Address::class);
+    }
+
+    public function collect_products()
+    {
+        return $this->hasMany(CollectProduct::class);
+    }
+
+    public function collect_articles()
+    {
+        return $this->hasMany(CollectArticle::class);
     }
 }
