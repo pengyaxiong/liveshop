@@ -473,7 +473,7 @@ class IndexController extends Controller
         //判断购物车是否有当前商品,如果有,那么 num +1
         $product_id = $request->product_id;
 
-        $cart = Cart::where('product_id', $product_id)->where('customer_id', $customer->id)->first();
+        $cart = Cart::where('product_id', $product_id)->where('sku', $request->sku)->where('customer_id', $customer->id)->first();
 
         if ($cart) {
             Cart::where('id', $cart->id)->increment('num');
