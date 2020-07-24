@@ -594,7 +594,7 @@ class IndexController extends Controller
 
         $id = $request->order_id;
 
-        Order::where('customer_id',$customer->id)->where('id',$id)->delete();
+        Order::where('customer_id', $customer->id)->where('id', $id)->delete();
 
         return $this->success_data('取消订单成功');
     }
@@ -656,12 +656,16 @@ class IndexController extends Controller
             $product = Product::find($product_id);
             $total_price = $product[$price];
 
-            $num=$request->num?$request->num:1;
+
+            $num = $request->num ? $request->num : 1;
+            $product->sale_num += $num;
+            $product->save();
+
             $order = Order::create([
                 'customer_id' => $customer->id,
                 'order_sn' => $order_sn,
                 'address_id' => $request->address_id,
-                'total_price' => $total_price*$num,
+                'total_price' => $total_price * $num,
                 'remark' => $request->remark,
             ]);
             $address = Address::find($request->address_id);
@@ -674,7 +678,7 @@ class IndexController extends Controller
                 'name' => $address->name
             ]);
 
-            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num,  'price' =>$total_price,'sku' => $request->sku]);
+            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'price' => $total_price, 'sku' => $request->sku]);
             $result = Order::with('order_products.product', 'address')->find($order->id);
         }
 
@@ -711,7 +715,10 @@ class IndexController extends Controller
                 $product = Product::find($cart['product_id']);
                 $t_price = $product[$price];
 
-                $result_ = $order->order_products()->create(['product_id' => $cart->product_id,'price' => $t_price, 'num' => $cart->num, 'sku' => $cart->sku]);
+                $product->sale_num += $cart->num;
+                $product->save();
+
+                $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'price' => $t_price, 'num' => $cart->num, 'sku' => $cart->sku]);
                 if ($result_) {
                     Cart::destroy($cart->id);
                 }
@@ -821,7 +828,7 @@ class IndexController extends Controller
                     $product = Product::find($cart['product_id']);
                     $t_price = $product[$price];
 
-                    $result_ = $order->order_products()->create(['product_id' => $cart->product_id,'price' => $t_price, 'sku' => $cart->sku, 'num' => $cart->num]);
+                    $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'price' => $t_price, 'sku' => $cart->sku, 'num' => $cart->num]);
                     if ($result_) {
                         Cart::destroy($cart->id);
                     }
@@ -875,6 +882,24 @@ class IndexController extends Controller
     }
 
 
+    public function collect_list(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+        $collects=[];
+        if ($request->type='article') {
+            $collects=CollectArticle::with('article')->where('customer_id',$customer->id)->get();
+        }
+        if ($request->type='product') {
+            $collects=CollectProduct::with('product')->where('customer_id',$customer->id)->get();
+        }
+
+        return $this->success_data('我的收藏', ['collects' => $collects]);
+    }
+
     //讲堂接口
     public function cms_categories()
     {
@@ -905,7 +930,7 @@ class IndexController extends Controller
         return $this->success_data('课程分类详情', ['articles' => $articles]);
     }
 
-    public function cms_article(Request $request,$id)
+    public function cms_article(Request $request, $id)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -958,4 +983,7 @@ class IndexController extends Controller
 
         return $this->success_data('取消收藏课程成功');
     }
+
+    //关于我们接口
+
 }

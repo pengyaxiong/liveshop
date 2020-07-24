@@ -88,6 +88,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('delete_address', 'IndexController@delete_address');
 
 
+    //我的收藏
+    Route::get('collect_list', 'IndexController@collect_list');
 
     //我的订单
     Route::get('order', 'IndexController@order');
@@ -125,4 +127,10 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('collect_article_del', 'IndexController@collect_article_del');
 
 
+    //关于我们
+    Route::post('about_us', 'IndexController@about_us');
+    //意见反馈
+    Route::post('feedback', 'IndexController@feedback');
+    //加入我们
+    Route::post('join_us', 'IndexController@join_us');
 });

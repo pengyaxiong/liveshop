@@ -44,6 +44,13 @@ Route::group([
         $router->resource('chapters', 'ChapterController');
     });
 
+    //关于我们
+    $router->resource('abouts', 'AboutController');
+    //意见反馈
+    $router->resource('feedback', 'FeedbackController');
+    //加入我们
+    $router->resource('join-uses', 'JoinUsController');
+
     $router->resource('configs', 'ConfigController');
 
     $router->resource('customers', 'CustomerController');
