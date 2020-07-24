@@ -278,6 +278,8 @@ class IndexController extends Controller
         }
         $customer = Customer::with('address')->where('openid', $openid)->first();
 
+        $cart_num=Cart::where('customer_id',$customer->id)->count();
+        $customer['cart_num']=$cart_num;
         return $this->success_data('用户信息', $customer);
     }
 
