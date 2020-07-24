@@ -98,6 +98,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('add_order', 'IndexController@add_order');
     //确认订单
     Route::post('checkout', 'IndexController@checkout');
+    //取消订单
+    Route::post('del_order', 'IndexController@del_order');
 
     //付款
     Route::post('pay', 'IndexController@pay');

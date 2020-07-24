@@ -584,6 +584,21 @@ class IndexController extends Controller
         return $this->success_data('收货成功');
     }
 
+    public function del_order(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        $id = $request->order_id;
+
+        Order::where('customer_id',$customer->id)->where('id',$id)->delete();
+
+        return $this->success_data('取消订单成功');
+    }
+
     /**
      * 购物车点击结算跳到下单页面，即check_out
      * 此页面需要的数据：用户的收货地址；要购买的商品信息；若购物车没有商品，跳回购物车页面。
