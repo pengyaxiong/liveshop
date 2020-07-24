@@ -641,11 +641,12 @@ class IndexController extends Controller
             $product = Product::find($product_id);
             $total_price = $product[$price];
 
+            $num=$request->num?$request->num:1;
             $order = Order::create([
                 'customer_id' => $customer->id,
                 'order_sn' => $order_sn,
                 'address_id' => $request->address_id,
-                'total_price' => $total_price,
+                'total_price' => $total_price*$num,
                 'remark' => $request->remark,
             ]);
             $address = Address::find($request->address_id);
@@ -658,7 +659,7 @@ class IndexController extends Controller
                 'name' => $address->name
             ]);
 
-            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'sku' => $request->sku]);
+            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num,  'price' =>$total_price,'sku' => $request->sku]);
             $result = Order::with('order_products.product', 'address')->find($order->id);
         }
 
@@ -692,8 +693,10 @@ class IndexController extends Controller
             ]);
 
             foreach ($carts as $cart) {
+                $product = Product::find($cart['product_id']);
+                $t_price = $product[$price];
 
-                $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'num' => $cart->num, 'sku' => $cart->sku]);
+                $result_ = $order->order_products()->create(['product_id' => $cart->product_id,'price' => $t_price, 'num' => $cart->num, 'sku' => $cart->sku]);
                 if ($result_) {
                     Cart::destroy($cart->id);
                 }
@@ -794,8 +797,16 @@ class IndexController extends Controller
                     'tel' => $address->tel,
                     'name' => $address->name
                 ]);
+
+                $grade = $customer ? $customer->grade : 1;
+                $price = 'price_' . $grade;
+
                 foreach ($carts as $cart) {
-                    $result_ = $order->order_products()->create(['product_id' => $cart->product_id, 'category' => $cart->category, 'num' => $cart->num]);
+
+                    $product = Product::find($cart['product_id']);
+                    $t_price = $product[$price];
+
+                    $result_ = $order->order_products()->create(['product_id' => $cart->product_id,'price' => $t_price, 'sku' => $cart->sku, 'num' => $cart->num]);
                     if ($result_) {
                         Cart::destroy($cart->id);
                     }

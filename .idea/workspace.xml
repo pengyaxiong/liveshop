@@ -92,16 +92,13 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-168">
-              <caret line="891" column="23" lean-forward="true" selection-start-line="891" selection-start-column="23" selection-end-line="891" selection-end-column="23" />
+            <state relative-caret-position="393">
+              <caret line="569" column="0" lean-forward="true" selection-start-line="569" selection-start-column="0" selection-end-line="569" selection-end-column="0" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
-                <element signature="e#18707#19170#0#PHP" expanded="false" />
                 <element signature="e#19177#19635#0#PHP" expanded="false" />
-                <element signature="e#19740#20977#0#PHP" expanded="false" />
-                <element signature="e#20983#24008#0#PHP" expanded="false" />
-                <element signature="e#24014#28300#0#PHP" expanded="false" />
-                <element signature="e#28466#29763#0#PHP" expanded="false" />
+                <element signature="e#24219#28738#0#PHP" expanded="false" />
+                <element signature="e#28904#30201#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -122,6 +119,7 @@
       <find>customer(</find>
       <find>price</find>
       <find>$openid = $request-&gt;openid;</find>
+      <find>order_products</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -171,7 +169,6 @@
         <option value="$PROJECT_DIR$/app/Models/Cms/Category.php" />
         <option value="$PROJECT_DIR$/app/Models/Shop/CollectProduct.php" />
         <option value="$PROJECT_DIR$/app/Models/Cms/CollectArticle.php" />
-        <option value="$PROJECT_DIR$/app/Models/Shop/Cart.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Models/Shop/Product.php" />
         <option value="$PROJECT_DIR$/app/Models/Cms/Chapter.php" />
@@ -184,6 +181,7 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Cms/ArticleController.php" />
         <option value="$PROJECT_DIR$/app/Models/Customer.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/app/Models/Shop/Cart.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
       </list>
     </option>
@@ -410,12 +408,12 @@
       <workItem from="1595293345336" duration="8733000" />
       <workItem from="1595379907046" duration="24071000" />
       <workItem from="1595466307571" duration="22992000" />
-      <workItem from="1595552646495" duration="5149000" />
+      <workItem from="1595552646495" duration="7795000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73682000" />
+    <option name="totallyTimeSpent" value="76328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -710,14 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Shop/Cart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Cms/Chapter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -856,18 +846,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Shop/Cart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="60" column="45" lean-forward="true" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168">
-          <caret line="891" column="23" lean-forward="true" selection-start-line="891" selection-start-column="23" selection-end-line="891" selection-end-column="23" />
+        <state relative-caret-position="393">
+          <caret line="569" column="0" lean-forward="true" selection-start-line="569" selection-start-column="0" selection-end-line="569" selection-end-column="0" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
-            <element signature="e#18707#19170#0#PHP" expanded="false" />
             <element signature="e#19177#19635#0#PHP" expanded="false" />
-            <element signature="e#19740#20977#0#PHP" expanded="false" />
-            <element signature="e#20983#24008#0#PHP" expanded="false" />
-            <element signature="e#24014#28300#0#PHP" expanded="false" />
-            <element signature="e#28466#29763#0#PHP" expanded="false" />
+            <element signature="e#24219#28738#0#PHP" expanded="false" />
+            <element signature="e#28904#30201#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
