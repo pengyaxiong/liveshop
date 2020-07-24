@@ -508,7 +508,7 @@ class IndexController extends Controller
         return $this->success_data('修改购物车数量成功', $count);
     }
 
-    function delete_cart(Request $request)
+    function destroy_checked(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
