@@ -27,7 +27,7 @@ class Customer extends Model
 
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Address::class,'address_id');
     }
 
     public function collect_products()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Handlers\WechatConfigHandler;
+use App\Models\Cms\Article;
 use App\Models\Config;
 use App\Models\Customer;
 use App\Models\Shop\Address;
@@ -845,4 +846,39 @@ class IndexController extends Controller
         return $response;
     }
 
+
+    //讲堂接口
+    public function cms_categories()
+    {
+        $categories = \App\Models\Cms\Category::with(['children.articles' => function ($query) {
+            $query->orderBy('sort_order');
+        }])->where('parent_id', 0)->orderBy('sort_order')->get();
+
+        return $this->success_data('课程分类', ['categories' => $categories]);
+    }
+
+    public function cms_category(Request $request)
+    {
+        //多条件查找
+        $where = function ($query) use ($request) {
+            if ($request->has('category_id') and $request->category_id != '') {
+                $query->where('category_id', $request->category_id);
+            }
+            if ($request->has('is_new') and $request->is_new != '') {
+                $query->where('is_new', $request->is_new);
+            }
+            if ($request->has('is_hot') and $request->is_hot != '') {
+                $query->where('is_hot', $request->is_hot);
+            }
+        };
+
+        $articles = Article::where($where)->orderBy('sort_order')->get();
+
+        return $this->success_data('课程分类详情', ['articles' => $articles]);
+    }
+
+    public function cms_article()
+    {
+
+    }
 }
