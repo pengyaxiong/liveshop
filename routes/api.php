@@ -128,7 +128,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
 
     //关于我们
-    Route::post('about_us', 'IndexController@about_us');
+    Route::get('about_us', 'IndexController@about_us');
     //意见反馈
     Route::post('feedback', 'IndexController@feedback');
     //加入我们

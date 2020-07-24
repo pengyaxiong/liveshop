@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Handlers\WechatConfigHandler;
+use App\Models\About;
 use App\Models\Cms\Article;
 use App\Models\Cms\Chapter;
 use App\Models\Cms\CollectArticle;
 use App\Models\Config;
 use App\Models\Customer;
+use App\Models\Feedback;
+use App\Models\JoinUs;
 use App\Models\Shop\Address;
 use App\Models\Shop\Brand;
 use App\Models\Shop\Cart;
@@ -889,12 +892,12 @@ class IndexController extends Controller
             return $this->error_data('用户不存在');
         }
         $customer = Customer::where('openid', $openid)->first();
-        $collects=[];
-        if ($request->type='article') {
-            $collects=CollectArticle::with('article')->where('customer_id',$customer->id)->get();
+        $collects = [];
+        if ($request->type = 'article') {
+            $collects = CollectArticle::with('article')->where('customer_id', $customer->id)->get();
         }
-        if ($request->type='product') {
-            $collects=CollectProduct::with('product')->where('customer_id',$customer->id)->get();
+        if ($request->type = 'product') {
+            $collects = CollectProduct::with('product')->where('customer_id', $customer->id)->get();
         }
 
         return $this->success_data('我的收藏', ['collects' => $collects]);
@@ -985,5 +988,85 @@ class IndexController extends Controller
     }
 
     //关于我们接口
+    public function about_us()
+    {
+        $about = About::first();
+        return $this->success_data('关于我们',['about'=>$about]);
+    }
 
+    public function feedback(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        try {
+            $messages = [
+                'content.required' => '建议不能为空!',
+            ];
+            $rules = [
+                'content' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                $error = $validator->errors()->first();
+                $this->error_data($error);
+            }
+
+            $feedback = Feedback::create([
+                'customer_id' => $customer->id,
+                'content' => $request['content'],
+            ]);
+
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
+            $this->error_data($exception->getMessage());
+        }
+
+        return $this->success_data('意见反馈', $feedback);
+    }
+
+    public function join_us(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        try {
+            $messages = [
+                'name.required' => '姓名不能为空!',
+                'phone.required' => '电话不能为空!',
+            ];
+            $rules = [
+                'name' => 'required',
+                'phone' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                $error = $validator->errors()->first();
+                $this->error_data($error);
+            }
+
+            $join = JoinUs::create([
+                'customer_id' => $customer->id,
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'age' => $request['age'],
+                'sex' => $request['sex'],
+                'address' => $request['address'],
+            ]);
+
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
+            $this->error_data($exception->getMessage());
+        }
+
+        return $this->success_data('加入我们', $join);
+    }
 }
