@@ -113,14 +113,14 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     //课程分类详情
     Route::get('cms_category', 'IndexController@cms_category');
     //课程详情
-    Route::get('cms_article', 'IndexController@cms_article');
+    Route::get('cms_article/{id}', 'IndexController@cms_article');
     //章节详情
-    Route::get('cms_chapter', 'IndexController@cms_chapter');
+    Route::get('cms_chapter/{id}', 'IndexController@cms_chapter');
 
-    //收藏商品
-    Route::post('collect_product', 'IndexController@collect_product');
+    //收藏课程
+    Route::post('collect_article', 'IndexController@collect_article');
     //取消收藏
-    Route::post('collect_product_del', 'IndexController@collect_product_del');
+    Route::post('collect_article_del', 'IndexController@collect_article_del');
 
 
 });

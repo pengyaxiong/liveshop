@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Handlers\WechatConfigHandler;
 use App\Models\Cms\Article;
+use App\Models\Cms\Chapter;
+use App\Models\Cms\CollectArticle;
 use App\Models\Config;
 use App\Models\Customer;
 use App\Models\Shop\Address;
@@ -877,8 +879,57 @@ class IndexController extends Controller
         return $this->success_data('课程分类详情', ['articles' => $articles]);
     }
 
-    public function cms_article()
+    public function cms_article(Request $request,$id)
     {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
 
+        $article = Article::with(['chapters' => function ($query) {
+            $query->orderBy('sort_order');
+        }])->find($id);
+
+        $article['is_collect'] = CollectArticle::where(['article_id' => $id, 'customer_id' => $customer->id])->exists();
+
+        return $this->success_data('课程详情', ['article' => $article]);
+    }
+
+    public function cms_chapter($id)
+    {
+        $chapter = Chapter::find($id);
+
+        return $this->success_data('章节详情', ['chapter' => $chapter]);
+    }
+
+    public function collect_article(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        CollectArticle::create([
+            'article_id' => $request->article_id,
+            'customer_id' => $customer->id,
+        ]);
+
+        return $this->success_data('收藏课程成功');
+    }
+
+    public function collect_article_del(Request $request)
+    {
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        CollectArticle::where(['article_id' => $request->article_id,
+            'customer_id' => $customer->id,])->delete();
+
+        return $this->success_data('取消收藏课程成功');
     }
 }
