@@ -355,7 +355,7 @@ class IndexController extends Controller
         $customer = Customer::where('openid', $openid)->first();
 
         $address = Address::find($id);
-
+        $address['default_address'] = false;
         if ($customer->address_id == $id) {
             $address['default_address'] = true;
         }

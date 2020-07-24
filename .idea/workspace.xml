@@ -94,8 +94,8 @@
       <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="116" column="0" lean-forward="true" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+            <state relative-caret-position="413">
+              <caret line="106" column="64" lean-forward="true" selection-start-line="106" selection-start-column="64" selection-end-line="106" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -104,8 +104,8 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="360" column="9" lean-forward="true" selection-start-line="360" selection-start-column="9" selection-end-line="360" selection-end-column="9" />
+            <state relative-caret-position="276">
+              <caret line="357" column="44" lean-forward="true" selection-start-line="357" selection-start-column="44" selection-end-line="357" selection-end-column="44" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
               </folding>
@@ -189,8 +189,8 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Cms/ChapterController.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Cms/ArticleController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
       </list>
     </option>
   </component>
@@ -416,12 +416,12 @@
       <workItem from="1595293345336" duration="8733000" />
       <workItem from="1595379907046" duration="24071000" />
       <workItem from="1595466307571" duration="22992000" />
-      <workItem from="1595552646495" duration="2437000" />
+      <workItem from="1595552646495" duration="2836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70970000" />
+    <option name="totallyTimeSpent" value="71369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -830,14 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="116" column="0" lean-forward="true" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Customer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="539">
@@ -848,10 +840,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="106" column="64" lean-forward="true" selection-start-line="106" selection-start-column="64" selection-end-line="106" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="360" column="9" lean-forward="true" selection-start-line="360" selection-start-column="9" selection-end-line="360" selection-end-column="9" />
+        <state relative-caret-position="276">
+          <caret line="357" column="44" lean-forward="true" selection-start-line="357" selection-start-column="44" selection-end-line="357" selection-end-column="44" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
           </folding>

@@ -111,9 +111,11 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     //课程分类
     Route::get('cms_categories', 'IndexController@cms_categories');
     //课程分类详情
-    Route::get('cms_articles', 'IndexController@cms_articles');
+    Route::get('cms_category', 'IndexController@cms_category');
     //课程详情
     Route::get('cms_article', 'IndexController@cms_article');
+    //章节详情
+    Route::get('cms_chapter', 'IndexController@cms_chapter');
 
     //收藏商品
     Route::post('collect_product', 'IndexController@collect_product');
