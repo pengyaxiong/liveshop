@@ -356,6 +356,9 @@ class IndexController extends Controller
 
         $address = Address::find($id);
 
+        if ($customer->address_id == $id) {
+            $address['default_address'] = true;
+        }
         return $this->success_data('编辑地址', $address);
     }
 
@@ -605,11 +608,11 @@ class IndexController extends Controller
             $total_price = $product[$price];
 
             $carts[0]['product'] = $product;
-            $carts[0]['num'] =$request->num;
+            $carts[0]['num'] = $request->num;
             $carts[0]['sku'] = $request->sku;
 
-            $count['num'] =$request->num;
-            $count['total_price'] = $total_price*$request->num;;
+            $count['num'] = $request->num;
+            $count['total_price'] = $total_price * $request->num;;
         }
         $address = Address::find($customer->address_id);
 

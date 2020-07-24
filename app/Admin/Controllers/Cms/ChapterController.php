@@ -28,8 +28,7 @@ class ChapterController extends AdminController
         $grid = new Grid(new Chapter());
 
         $grid->column('id', __('Id'));
-        $grid->column('article.name', __('课程'));
-
+        $grid->column('article.title', __('课程'))->link('/admin/cms/articles');
         $grid->column('title', __('Title'));
         $grid->column('description', __('Description'));
         $grid->column('content', __('Content'))->hide();
@@ -82,7 +81,7 @@ class ChapterController extends AdminController
         $article_arr = Article::all()->toarray();
 
         $form->select('article_id', __('课程'))->options(
-            array_column($article_arr, 'name', 'id')
+            array_column($article_arr, 'title', 'id')
         );
 
         $form->text('title', __('Title'))->rules('required');

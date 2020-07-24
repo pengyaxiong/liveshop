@@ -8,7 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-
+use Encore\Admin\Widgets\Table;
 class ArticleController extends AdminController
 {
     /**
@@ -30,7 +30,20 @@ class ArticleController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('category.name', __('Category id'));
-        $grid->column('title', __('Title'));
+        $grid->column('title', __('Title'))->expand(function ($model) {
+            $chapters = $model->chapters->map(function ($chapters) {
+                return $chapters->only(['id','title']);
+            });
+            $array=$chapters->toArray();
+            foreach ($array as $k=>$v){
+                $url=route('admin.cms.chapters.edit',$v['id']);
+                $array[$k]['edit']='<div class="btn">
+              <a class="btn btn-sm btn-default pull-right" href="'.$url.'" >
+              <i class="fa fa-edit"></i> 编辑</a>
+                 </div>';
+            }
+            return new Table(['ID',__('Name'),'操作'], $array);
+        });
 
         $grid->column('image', __('Image'))->image('',88,88);
         $grid->column('video', __('Video'))->downloadable();
@@ -57,7 +70,7 @@ class ArticleController extends AdminController
             $filter->equal('is_hot', __('Is hot'))->select($status_text);
             $filter->equal('is_new', __('Is new'))->select($status_text);
 
-            $categories = Category::where('parent_id','neq',0)->get()->toarray();
+            $categories = Category::where('parent_id','>',0)->get()->toarray();
             $select_category = array_column($categories, 'name', 'id');
 
             $filter->equal('category_id', __('Category id'))->select($select_category);
@@ -102,7 +115,7 @@ class ArticleController extends AdminController
     {
         $form = new Form(new Article());
 
-        $category_arr = Category::where('parent_id','neq',0)->get()->toarray();
+        $category_arr = Category::where('parent_id','>',0)->get()->toarray();
 
         $form->select('category_id', __('Category id'))->options(
             array_column($category_arr, 'name', 'id')
