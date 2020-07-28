@@ -10,19 +10,9 @@ class Product extends Model
     protected $guarded = [];
     protected $table = 'shop_product';
 
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function designer()
-    {
-        return $this->belongsTo(Designer::class);
     }
 
     public function getImagesAttribute($images)

@@ -31,9 +31,7 @@ class ProductController extends AdminController
         $grid->model()->orderBy('sort_order', 'asc');
 
         $grid->column('id', __('Id'));
-        $grid->column('brand.name_cn', __('品牌'));
-        $grid->column('category.name_cn', __('品类'));
-        $grid->column('designer.name_cn', __('设计师'));
+        $grid->column('category.name_cn', __('分类'));
         $grid->column('name', __('Name'));
         $grid->column('image', __('Image'))->image('',88,88);
         $grid->column('images', __('Images'))->carousel();
@@ -71,16 +69,10 @@ class ProductController extends AdminController
             $filter->equal('is_new', __('Is new'))->select($status_text);
             $filter->equal('is_recommend', __('Is recommend'))->select($status_text);
 
-            $categories = Category::all()->toArray();
-            $brands = Brand::all()->toArray();
-            $designers = Designer::all()->toArray();
+            $categories = Category::where('parent_id','>',0)->get()->toArray();
             $select_category = array_column($categories, 'name_cn', 'id');
-            $select_brand = array_column($brands, 'name_cn', 'id');
-            $select_designer = array_column($designers, 'name_cn', 'id');
 
-            $filter->equal('category_id', __('品牌'))->select($select_category);
-            $filter->equal('brand_id', __('品类'))->select($select_brand);
-            $filter->equal('designer_id', __('设计师'))->select($select_designer);
+            $filter->equal('category_id', __('分类'))->select($select_category);
         });
         return $grid;
     }
@@ -96,9 +88,7 @@ class ProductController extends AdminController
         $show = new Show(Product::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('brand_id', __('Brand id'));
         $show->field('category_id', __('Category id'));
-        $show->field('designer_id', __('Designer id'));
         $show->field('name', __('Name'));
         $show->field('image', __('Image'));
         $show->field('images', __('Images'));
@@ -132,16 +122,11 @@ class ProductController extends AdminController
     {
         $form = new Form(new Product());
 
-        $categories = Category::all()->toArray();
-        $brands = Brand::all()->toArray();
-        $designers = Designer::all()->toArray();
-        $select_category = array_column($categories, 'name_cn', 'id');
-        $select_brand = array_column($brands, 'name_cn', 'id');
-        $select_designer = array_column($designers, 'name_cn', 'id');
+        $categories = Category::where('parent_id','>',0)->get()->toArray();
 
-        $form->select('brand_id', __('品牌'))->options($select_brand);
-        $form->select('category_id', __('品类'))->options($select_category);
-        $form->select('designer_id', __('设计师'))->options($select_designer);
+        $select_category = array_column($categories, 'name_cn', 'id');
+
+        $form->select('category_id', __('分类'))->options($select_category);
 
         $form->text('name', __('Name'))->rules('required');
         $form->image('image', __('Image'))->rules('required|image');

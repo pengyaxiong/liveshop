@@ -20,8 +20,6 @@ Route::group([
         $router->resource('brands', 'BrandController');
         //品类管理
         $router->resource('categories', 'CategoryController');
-        //设计师管理
-        $router->resource('designers', 'DesignerController');
         //商品管理
         $router->resource('products', 'ProductController');
         //优惠券管理

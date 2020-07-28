@@ -16,7 +16,6 @@ use App\Models\Shop\Brand;
 use App\Models\Shop\Cart;
 use App\Models\Shop\Category;
 use App\Models\Shop\CollectProduct;
-use App\Models\Shop\Designer;
 use App\Models\Shop\Order;
 use App\Models\Shop\Product;
 use Illuminate\Http\Request;
@@ -97,12 +96,12 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         //品类
-        $categories = Category::orderby('sort_order', 'asc')->limit(3)->get();
+        $categories = Category::where('parent_id','>',0)->orderby('sort_order', 'asc')->limit(3)->get();
         //轮播
         $banner = Config::first()->banner;
         $image = Config::first()->image;
         //品牌
-        $brand = Brand::orderby('sort_order', 'asc')->get();
+        $brand = Brand::first();
 
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -129,43 +128,18 @@ class IndexController extends Controller
 
     public function categories()
     {
-        $categories = Category::orderby('sort_order', 'asc')->get();
-        $category_top = Category::where('is_top', true)->first();
-        return $this->success_data('商品分类', ['categories' => $categories, 'category_top' => $category_top]);
+        $categories = Category::with(['children' => function ($query) {
+            $query->orderby('sort_order')->get();
+        }])->where('parent_id', 0)->get();
+
+        return $this->success_data('商品分类', ['categories' => $categories]);
     }
 
-    public function category($id)
-    {
-        $category = Category::find($id);
-        return $this->success_data('品类详情', $category);
-    }
 
-    public function brands()
+    public function brand()
     {
-        $brands = Brand::all();
-        $brand_top = Brand::where('is_top', true)->first();
-
-        return $this->success_data('商品品牌', ['brands' => $brands, 'brand_top' => $brand_top]);
-    }
-
-    public function brand($id)
-    {
-        $brand = Brand::find($id);
+        $brand = Brand::first();
         return $this->success_data('品牌详情', $brand);
-    }
-
-    public function designers()
-    {
-        $designers = Designer::all();
-        $designer_top = Designer::where('is_top', true)->first();
-
-        return $this->success_data('&设计师', ['designers' => $designers, 'designer_top' => $designer_top]);
-    }
-
-    public function designer($id)
-    {
-        $designer = Designer::find($id);
-        return $this->success_data('设计师详情', $designer);
     }
 
     public function products(Request $request)
@@ -184,15 +158,16 @@ class IndexController extends Controller
             if ($request->has('category_id') and $request->category_id != '') {
                 $query->where('category_id', $request->category_id);
             }
-            if ($request->has('brand_id') and $request->brand_id != '') {
-                $query->where('brand_id', $request->brand_id);
-            }
-            if ($request->has('designer_id') and $request->designer_id != '') {
-                $query->where('designer_id', $request->designer_id);
-            }
             if ($request->has('is_new') and $request->is_new != '') {
                 $query->where('is_new', true);
             }
+            if ($request->has('is_hot') and $request->is_hot != '') {
+                $query->where('is_hot', true);
+            }
+            if ($request->has('is_recommend') and $request->is_recommend != '') {
+                $query->where('is_recommend', true);
+            }
+
         };
         $products = Product::where($where)->orderby('sort_order', 'asc')->paginate($request->total);
 

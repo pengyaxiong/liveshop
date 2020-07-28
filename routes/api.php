@@ -42,18 +42,10 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::get('index', 'IndexController@index');
 
 
-    //品牌
-    Route::get('brands', 'IndexController@brands');
     //品牌详情
-    Route::get('brand/{id}', 'IndexController@brand');
+    Route::get('brand', 'IndexController@brand');
     //商品分类
     Route::get('categories', 'IndexController@categories');
-    //分类商品
-    Route::get('category/{id}', 'IndexController@category');
-    //设计师
-    Route::get('designers', 'IndexController@designers');
-    //设计师详情
-    Route::get('designer/{id}', 'IndexController@designer');
     //商品
     Route::get('products', 'IndexController@products');
     //商品详情

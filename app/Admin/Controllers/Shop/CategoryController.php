@@ -7,7 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-
+use Encore\Admin\Widgets\Table;
 class CategoryController extends AdminController
 {
     /**
@@ -15,7 +15,7 @@ class CategoryController extends AdminController
      *
      * @var string
      */
-    protected $title = '品类管理';
+    protected $title = '分类管理';
 
     /**
      * Make a grid builder.
@@ -25,12 +25,30 @@ class CategoryController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Category());
+        $grid->model()->where('parent_id', '0');
         $grid->model()->orderBy('sort_order', 'asc');
 
         $grid->column('id', __('Id'));
         $grid->column('name_cn', __('Name cn'));
         $grid->column('name_en', __('Name en'));
         $grid->column('image', __('Image'))->image('',88, 88);
+        $grid->column('parent_id', '下级')->display(function () {
+            return '点击查看下级';
+        })->expand(function ($model) {
+            $children = $model->children->map(function ($child) {
+                return $child->only(['id', 'name_cn']);
+            });
+            $array = $children->toArray();
+            foreach ($array as $k => $v) {
+                $url = route('admin.shop.categories.edit', $v['id']);
+                $array[$k]['edit'] = '<div class="btn">
+              <a class="btn btn-sm btn-default pull-right"  href="' . $url . '" rel="external" >
+              <i class="fa fa-edit"></i> 编辑</a>
+                 </div>';
+            }
+
+            return new Table(['ID', __('名称'), '操作'], $array);
+        });
         $grid->column('description', __('Description'));
         $grid->column('content', __('Content'))->hide();
         $states = [
@@ -68,6 +86,7 @@ class CategoryController extends AdminController
         $show->field('name_cn', __('Name cn'));
         $show->field('name_en', __('Name en'));
         $show->field('image', __('Image'));
+        $show->field('parent_id', __('Parent id'));
         $show->field('description', __('Description'));
         $show->field('content', __('Content'));
         $show->field('is_top', __('Is top'));
@@ -87,9 +106,15 @@ class CategoryController extends AdminController
     {
         $form = new Form(new Category());
 
+        $parents = Category::where('parent_id', 0)->get()->toArray();
+        $select_ = array_prepend($parents, ['id' => 0, 'name_cn' => '顶级']);
+        $select_array = array_column($select_, 'name_cn', 'id');
+        //创建select
+        $form->select('parent_id', '上级')->options($select_array);
+
         $form->text('name_cn', __('Name cn'))->rules('required');
         $form->text('name_en', __('Name en'))->rules('required');
-        $form->image('image', __('Image'))->rules('required|image');
+        $form->image('image', __('Image'));
         $form->text('description', __('Description'))->rules('required');
         $form->ueditor('content', __('Content'));
         $states = [
