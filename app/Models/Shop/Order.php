@@ -23,6 +23,6 @@ class Order extends Model
 
     public function address()
     {
-        return $this->belongsTo(OrderAddress::class);
+        return $this->hasOne(OrderAddress::class);
     }
 }
