@@ -5,8 +5,8 @@ namespace App\Admin\Controllers\Shop;
 use App\Admin\Actions\Post\OrderConfirm;
 use App\Admin\Actions\Post\OrderOver;
 use App\Models\Customer;
-use App\Models\Shop\Address;
 use App\Models\Shop\Order;
+use App\Models\Shop\OrderAddress;
 use App\Models\Shop\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -43,7 +43,7 @@ class OrderController extends AdminController
         $grid->column('order_sn', __('Order sn'));
         $grid->column('customer.nickname', __('Customer id'));
         $grid->column('address_id', __('地址'))->display(function ($model){
-            $address=Address::find($model);
+            $address=OrderAddress::find($model);
             return $address->province.'-'.$address->city.'-'.$address->area.'-'.$address->detai.'-联系人:'.$address->name.'-联系电话:'.$address->tel;
         });
         $grid->column('express_name', __('Express name'))->hide();
@@ -139,7 +139,7 @@ class OrderController extends AdminController
         $show->field('order_sn', __('Order sn'));
         $show->field('customer.nickname', __('Customer id'));
         $show->field('address_id', __('地址'))->as(function ($model){
-            $address=Address::find($model);
+            $address=OrderAddress::find($model);
             return $address->province.'-'.$address->city.'-'.$address->area.'-'.$address->detai.'-联系人:'.$address->name.'-联系电话:'.$address->tel;
         });
         $show->field('express_name', __('Express name'));
