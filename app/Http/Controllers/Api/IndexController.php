@@ -722,7 +722,7 @@ class IndexController extends Controller
         $cart_id = $request->cart_id;
         $order_id = $request->order_id;
         $remark = $request->remark;
-        
+
         $app = $this->wechat->pay();
 
         $title = '';
@@ -737,7 +737,7 @@ class IndexController extends Controller
 
             $w_order = $app->order->queryByOutTradeNumber($order_sn);
 
-            if ($w_order['trade_state'] == "NOTPAY") {
+           // if ($w_order['trade_state'] == "NOTPAY") {
 
                 $order_config = [
                     'body' => $title,
@@ -761,7 +761,7 @@ class IndexController extends Controller
                     $config = $app->jssdk->sdkConfig($prepayId);
                     return response()->json($config);
                 }
-            }
+           // }
 
         } else {
             $carts = Cart::with('product')->whereIn('id', $cart_id)->get();
