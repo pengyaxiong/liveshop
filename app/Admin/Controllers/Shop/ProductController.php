@@ -132,42 +132,34 @@ class ProductController extends AdminController
         $form->image('image', __('Image'))->rules('required|image');
         $form->multipleImage('images', __('Images'))->removable()->sortable();
 
-        $form->file('video', __('Video'))->addElementClass('video_upload')->options([
+        $form->file('video', __('Video'))->addElementClass('video_upload')->removable()->options([
             'showPreview' => true,
 //            'showCancel' => true,
             'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
 //            'showUpload'=>true,
-            'showRemove'=>true,
+//            'showRemove'=>true,
             'uploadAsync' =>true,
 //            'uploadUrl' => storage_path('app/public/video_upload'),
-            'uploadExtraData' => [
-                '_token'    => csrf_token(),
-                '_method'   => 'POST',
-            ],
-//            'deleteExtraData'      => [
-//                '_token'                         => csrf_token(),
-//                '_method'                        => 'PUT',
+//            'uploadExtraData' => [
+//                '_token'    => csrf_token(),
+//                '_method'   => 'POST',
 //            ],
         ]);
 
         $form->textarea('description', __('Description'))->rules('required');
 
         $form->multipleImage('info_images', __('产品展示'))->removable()->sortable();
-        $form->file('info_video', __('视频展示'))->addElementClass('video_upload')->options([
+        $form->file('info_video', __('视频展示'))->addElementClass('info_video_upload')->removable()->options([
             'showPreview' => true,
 //            'showCancel' => true,
             'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
 //            'showUpload'=>true,
-            'showRemove'=>true,
+//            'showRemove'=>true,
             'uploadAsync' =>true,
 //            'uploadUrl' => storage_path('app/public/video_upload'),
-            'uploadExtraData' => [
-                '_token'    => csrf_token(),
-                '_method'   => 'POST',
-            ],
-//            'deleteExtraData'      => [
-//                '_token'                         => csrf_token(),
-//                '_method'                        => 'PUT',
+//            'uploadExtraData' => [
+//                '_token'    => csrf_token(),
+//                '_method'   => 'POST',
 //            ],
         ]);
 
@@ -195,14 +187,7 @@ class ProductController extends AdminController
         $form->switch('is_recommend', __('Is recommend'))->states($states)->default(0);
         $form->number('sort_order', __('Sort order'))->default(99);
 
-
-        $form->saving(function ($form) {
-            $video = $form->video;
-
-            if ($video == null) {
-                $form->video = '';
-            }
-        });
+//        $form->ignore(['video','info_video']);
 
         return $form;
     }
