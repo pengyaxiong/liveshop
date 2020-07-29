@@ -722,7 +722,7 @@ class IndexController extends Controller
         $cart_id = $request->cart_id;
         $order_id = $request->order_id;
         $remark = $request->remark;
-        return $this->wechat->pay_config();
+        
         $app = $this->wechat->pay();
 
         $title = '';
