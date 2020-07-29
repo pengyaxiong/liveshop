@@ -42,7 +42,7 @@ class CustomerController extends AdminController
         ], 'warning');
         $grid->column('tel', __('Tel'));
         $grid->column('grade', __('Grade'))->editable('select', [1 => '一级', 2 => '二级', 3 => '三级']);
-        $grid->column('money', __('Money'));
+//        $grid->column('money', __('Money'));
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
 
@@ -53,7 +53,7 @@ class CustomerController extends AdminController
             $actions->disableEdit();
             $actions->disableDelete();
 
-            $actions->add(new CustomerMoney());
+//            $actions->add(new CustomerMoney());
         });
 
         $grid->filter(function ($filter) {

@@ -99,6 +99,10 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('pay', 'IndexController@pay');
     //付款回调
     Route::any('paid', 'IndexController@paid');
+    //退款
+    Route::post('refund', 'IndexController@refund');
+    //退款回调
+    Route::any('refund_back', 'IndexController@refund_back');
     //完成订单
     Route::post('finish_order', 'IndexController@finish_order');
 

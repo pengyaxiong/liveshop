@@ -96,7 +96,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         //品类
-        $categories = Category::where('parent_id','>',0)->orderby('sort_order', 'asc')->limit(3)->get();
+        $categories = Category::where('parent_id', '>', 0)->orderby('sort_order', 'asc')->limit(3)->get();
         //轮播
         $banner = Config::first()->banner;
         $image = Config::first()->image;
@@ -253,8 +253,8 @@ class IndexController extends Controller
         }
         $customer = Customer::with('address')->where('openid', $openid)->first();
 
-        $cart_num=Cart::where('customer_id',$customer->id)->count();
-        $customer['cart_num']=$cart_num;
+        $cart_num = Cart::where('customer_id', $customer->id)->count();
+        $customer['cart_num'] = $cart_num;
         return $this->success_data('用户信息', $customer);
     }
 
@@ -412,7 +412,7 @@ class IndexController extends Controller
 
         $checked_id = explode(',', $request->product_id);
 
-        CollectProduct::wherein('product_id', $checked_id)->where('customer_id',$customer->id)->delete();
+        CollectProduct::wherein('product_id', $checked_id)->where('customer_id', $customer->id)->delete();
 
         return $this->success_data('取消收藏商品成功');
     }
@@ -581,10 +581,88 @@ class IndexController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return array
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     */
+    public function refund(Request $request)
+    {
+        $order_id = $request->order_id;
+        $order = Order::find($order_id);
+        $total_price = $order->total_price;
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        $customer = Customer::where('openid', $openid)->first();
+
+        $out_refund_no = date('YmdHms', time()) . '_' . $customer->id;//商户系统内部的退款单号
+        $out_trade_no = $order->order_sn;//商户系统内部订单号
+        $total_fee = $total_price * 100;
+        $refund_fee = $total_price * 100;
+        $app = $this->wechat->pay();
+
+        // 参数分别为：微信订单号、商户退款单号、订单金额、退款金额、其他参数
+        $result = $app->refund->byOutTradeNumber($out_trade_no, $out_refund_no, $total_fee, $refund_fee, [
+            // 可在此处传入其他参数，详细参数见微信支付文档
+            'refund_desc' => '退款',
+            'notify_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/wechat/refund_back',
+        ]);
+        if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
+            return $this->success_data('退款申请请求成功');
+        }
+        return $this->success_data('退款失败~');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \EasyWeChat\Kernel\Exceptions\Exception
+     */
+    public function refund_back(Request $request)
+    {
+        $app = $this->wechat->pay();
+        $response = $app->handleRefundedNotify(function ($message, $reqInfo, $fail) use ($request) {
+            // 其中 $message['req_info'] 获取到的是加密信息
+            // $reqInfo 为 message['req_info'] 解密后的信息
+
+            $order = Order::where('order_sn', $reqInfo['out_trade_no'])->first();
+
+            if (!$order || $order->status == '4') { // 如果订单不存在 或者 订单已经退过款了
+                return $this->success_data('退款成功~'); // 告诉微信，我已经处理完了，订单没找到，别再通知我了
+            }
+            if ($message['return_code'] == 'SUCCESS') {
+                if ($reqInfo['refund_status'] == 'SUCCESS') {
+                    $order->finish_time = date('Y-m-d H:i:s', time());
+                    $order->status = 4;
+
+                    $customer_id = $order->customer_id;
+                    $customer = Customer::find($customer_id);
+
+                    $activity = activity()->inLog('refund')
+                        ->performedOn($customer)
+                        ->withProperties(['type' => 0, 'money' => $order->total_price])
+                        ->causedBy($customer)
+                        ->log("微信退款");
+                }
+                return $this->success_data('退款成功~'); // 返回 true 告诉微信“我已处理完成”
+                // 或返回错误原因 $fail('参数格式校验错误');
+            } else {
+                return $fail('参数格式校验错误');
+            }
+
+        });
+
+        return $response;
+    }
+
+    /**
      * 购物车点击结算跳到下单页面，即check_out
      * 此页面需要的数据：用户的收货地址；要购买的商品信息；若购物车没有商品，跳回购物车页面。
      */
-    public function checkout(Request $request)
+    public
+    function checkout(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -618,7 +696,8 @@ class IndexController extends Controller
         return $this->success_data('结算', ['carts' => $carts, 'count' => $count, 'address' => $address]);
     }
 
-    public function add_order(Request $request)
+    public
+    function add_order(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -710,7 +789,8 @@ class IndexController extends Controller
 
     }
 
-    public function pay(Request $request)
+    public
+    function pay(Request $request)
     {
 
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
@@ -738,31 +818,31 @@ class IndexController extends Controller
 
             $w_order = $app->order->queryByOutTradeNumber($order_sn);
 
-           // if ($w_order['trade_state'] == "NOTPAY") {
+            // if ($w_order['trade_state'] == "NOTPAY") {
 
-                $order_config = [
-                    'body' => $title,
-                    'out_trade_no' => date('YmdHms', time()) . '_' . $customer->id,
-                    'total_fee' => $total_price * 100,
-                    //'spbill_create_ip' => '', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
-                    'notify_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/wechat/paid', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-                    'trade_type' => 'JSAPI', // 请对应换成你的支付方式对应的值类型
-                    'openid' => $openid,
-                ];
+            $order_config = [
+                'body' => $title,
+                'out_trade_no' => date('YmdHms', time()) . '_' . $customer->id,
+                'total_fee' => $total_price * 100,
+                //'spbill_create_ip' => '', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
+                'notify_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/wechat/paid', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+                'trade_type' => 'JSAPI', // 请对应换成你的支付方式对应的值类型
+                'openid' => $openid,
+            ];
 
-                $order->order_sn = $order_config['out_trade_no'];
-                $order->save();
+            $order->order_sn = $order_config['out_trade_no'];
+            $order->save();
 
-                //重新生成预支付生成订单
-                $result = $app->order->unify($order_config);
+            //重新生成预支付生成订单
+            $result = $app->order->unify($order_config);
 
-                if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
-                    $prepayId = $result['prepay_id'];
+            if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
+                $prepayId = $result['prepay_id'];
 
-                    $config = $app->jssdk->sdkConfig($prepayId);
-                    return response()->json($config);
-                }
-           // }
+                $config = $app->jssdk->sdkConfig($prepayId);
+                return response()->json($config);
+            }
+            // }
 
         } else {
             $carts = Cart::with('product')->whereIn('id', $cart_id)->get();
@@ -830,7 +910,8 @@ class IndexController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \EasyWeChat\Kernel\Exceptions\Exception
      */
-    public function paid(Request $request)
+    public
+    function paid(Request $request)
     {
         $app = $this->wechat->pay();
         $response = $app->handlePaidNotify(function ($message, $fail) use ($request) {
@@ -866,7 +947,8 @@ class IndexController extends Controller
     }
 
 
-    public function collect_list(Request $request)
+    public
+    function collect_list(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -884,8 +966,9 @@ class IndexController extends Controller
         return $this->success_data('我的收藏', ['collects' => $collects]);
     }
 
-    //讲堂接口
-    public function cms_categories()
+//讲堂接口
+    public
+    function cms_categories()
     {
         $categories = \App\Models\Cms\Category::with(['children.articles' => function ($query) {
             $query->orderBy('sort_order');
@@ -894,7 +977,8 @@ class IndexController extends Controller
         return $this->success_data('课程分类', ['categories' => $categories]);
     }
 
-    public function cms_category(Request $request)
+    public
+    function cms_category(Request $request)
     {
         //多条件查找
         $where = function ($query) use ($request) {
@@ -914,7 +998,8 @@ class IndexController extends Controller
         return $this->success_data('课程分类详情', ['articles' => $articles]);
     }
 
-    public function cms_article(Request $request, $id)
+    public
+    function cms_article(Request $request, $id)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -931,14 +1016,16 @@ class IndexController extends Controller
         return $this->success_data('课程详情', ['article' => $article]);
     }
 
-    public function cms_chapter($id)
+    public
+    function cms_chapter($id)
     {
         $chapter = Chapter::find($id);
 
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }
 
-    public function collect_article(Request $request)
+    public
+    function collect_article(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -954,7 +1041,8 @@ class IndexController extends Controller
         return $this->success_data('收藏课程成功');
     }
 
-    public function collect_article_del(Request $request)
+    public
+    function collect_article_del(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -968,14 +1056,16 @@ class IndexController extends Controller
         return $this->success_data('取消收藏课程成功');
     }
 
-    //关于我们接口
-    public function about_us()
+//关于我们接口
+    public
+    function about_us()
     {
         $about = About::first();
-        return $this->success_data('关于我们',['about'=>$about]);
+        return $this->success_data('关于我们', ['about' => $about]);
     }
 
-    public function feedback(Request $request)
+    public
+    function feedback(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -1010,7 +1100,8 @@ class IndexController extends Controller
         return $this->success_data('意见反馈', $feedback);
     }
 
-    public function join_us(Request $request)
+    public
+    function join_us(Request $request)
     {
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
