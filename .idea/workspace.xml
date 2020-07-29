@@ -78,14 +78,24 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="644" column="0" lean-forward="true" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
+            <state relative-caret-position="507">
+              <caret line="256" column="8" lean-forward="false" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="8" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
-                <element signature="e#14923#16006#0#PHP" expanded="false" />
-                <element signature="e#16012#16625#0#PHP" expanded="false" />
-                <element signature="e#31905#33206#0#PHP" expanded="false" />
+                <element signature="e#15041#16124#0#PHP" expanded="false" />
+                <element signature="e#16130#16743#0#PHP" expanded="false" />
+                <element signature="e#32023#33324#0#PHP" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VisualizationController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/VisualizationController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -94,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Order</find>
-      <find>Address</find>
       <find>add_order</find>
       <find>trade_state</find>
       <find>categories</find>
@@ -124,6 +132,8 @@
       <find>activity()</find>
       <find>$product_ids</find>
       <find>maximumWords</find>
+      <find>week_start</find>
+      <find>customer(</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -382,12 +392,12 @@
       <workItem from="1595552646495" duration="21629000" />
       <workItem from="1595812313976" duration="4855000" />
       <workItem from="1595898512457" duration="13748000" />
-      <workItem from="1595985015676" duration="15751000" />
+      <workItem from="1595985015676" duration="18009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124516000" />
+    <option name="totallyTimeSpent" value="126774000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -425,13 +435,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Models/Shop/CustomerCoupon.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/OrderProduct.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -792,15 +795,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/VisualizationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="644" column="0" lean-forward="true" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
+        <state relative-caret-position="507">
+          <caret line="256" column="8" lean-forward="false" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="8" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
-            <element signature="e#14923#16006#0#PHP" expanded="false" />
-            <element signature="e#16012#16625#0#PHP" expanded="false" />
-            <element signature="e#31905#33206#0#PHP" expanded="false" />
+            <element signature="e#15041#16124#0#PHP" expanded="false" />
+            <element signature="e#16130#16743#0#PHP" expanded="false" />
+            <element signature="e#32023#33324#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
