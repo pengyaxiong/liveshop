@@ -78,24 +78,14 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="587" column="44" lean-forward="true" selection-start-line="587" selection-start-column="44" selection-end-line="587" selection-end-column="44" />
+            <state relative-caret-position="618">
+              <caret line="610" column="8" lean-forward="false" selection-start-line="610" selection-start-column="8" selection-end-line="610" selection-end-column="8" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
                 <element signature="e#14923#16006#0#PHP" expanded="false" />
                 <element signature="e#16012#16625#0#PHP" expanded="false" />
-                <element signature="e#31865#33166#0#PHP" expanded="false" />
+                <element signature="e#31876#33177#0#PHP" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomerController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/CustomerController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -392,12 +382,12 @@
       <workItem from="1595552646495" duration="21629000" />
       <workItem from="1595812313976" duration="4855000" />
       <workItem from="1595898512457" duration="13748000" />
-      <workItem from="1595985015676" duration="13838000" />
+      <workItem from="1595985015676" duration="14931000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122603000" />
+    <option name="totallyTimeSpent" value="123696000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -435,7 +425,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/OneDrive/桌面/直播商城.postman_collection.json" />
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/CustomerCoupon.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -752,19 +741,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/Order.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="789">
+          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <folding>
+            <element signature="e#46#86#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -776,13 +767,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-          <folding>
-            <element signature="e#46#86#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="728">
+          <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -794,15 +783,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/OneDrive/桌面/customers.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-37769">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="587" column="44" lean-forward="true" selection-start-line="587" selection-start-column="44" selection-end-line="587" selection-end-column="44" />
+        <state relative-caret-position="618">
+          <caret line="610" column="8" lean-forward="false" selection-start-line="610" selection-start-column="8" selection-end-line="610" selection-end-column="8" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
             <element signature="e#14923#16006#0#PHP" expanded="false" />
             <element signature="e#16012#16625#0#PHP" expanded="false" />
-            <element signature="e#31865#33166#0#PHP" expanded="false" />
+            <element signature="e#31876#33177#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
