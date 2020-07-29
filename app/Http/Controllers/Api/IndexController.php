@@ -722,6 +722,8 @@ class IndexController extends Controller
         $cart_id = $request->cart_id;
         $order_id = $request->order_id;
         $remark = $request->remark;
+
+        return $this->wechat;
         $app = $this->wechat->pay();
         $title = '';
         if ($order_id) {
@@ -753,7 +755,6 @@ class IndexController extends Controller
                 //重新生成预支付生成订单
                 $result = $app->order->unify($order_config);
 
-                return $result;
                 if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
                     $prepayId = $result['prepay_id'];
 
