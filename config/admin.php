@@ -408,6 +408,7 @@ return [
             // 编辑器的前端配置 参考：http://fex.baidu.com/ueditor/#start-config
             'config' => [
                 'initialFrameHeight' => 400, // 例如初始化高度
+                'maximumWords'  => 65535,         //最大长度限制
             ],
             // 'field_type' => '自定义名字'
         ],

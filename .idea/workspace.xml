@@ -78,13 +78,13 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="610" column="8" lean-forward="false" selection-start-line="610" selection-start-column="8" selection-end-line="610" selection-end-column="8" />
+            <state relative-caret-position="555">
+              <caret line="616" column="5" lean-forward="true" selection-start-line="616" selection-start-column="5" selection-end-line="616" selection-end-column="5" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
                 <element signature="e#14923#16006#0#PHP" expanded="false" />
                 <element signature="e#16012#16625#0#PHP" expanded="false" />
-                <element signature="e#31876#33177#0#PHP" expanded="false" />
+                <element signature="e#31869#33170#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -94,7 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>order(</find>
       <find>Order</find>
       <find>Address</find>
       <find>add_order</find>
@@ -124,6 +123,7 @@
       <find>$total_price</find>
       <find>activity()</find>
       <find>$product_ids</find>
+      <find>maximumWords</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -183,11 +183,11 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/ConfigController.php" />
         <option value="$PROJECT_DIR$/resources/lang/zh-CN.json" />
-        <option value="$PROJECT_DIR$/config/admin.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/CustomerController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
+        <option value="$PROJECT_DIR$/config/admin.php" />
       </list>
     </option>
   </component>
@@ -382,12 +382,12 @@
       <workItem from="1595552646495" duration="21629000" />
       <workItem from="1595812313976" duration="4855000" />
       <workItem from="1595898512457" duration="13748000" />
-      <workItem from="1595985015676" duration="14931000" />
+      <workItem from="1595985015676" duration="15278000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123696000" />
+    <option name="totallyTimeSpent" value="124043000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -581,13 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="68" column="47" lean-forward="false" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/Category.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -709,14 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4547">
-          <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Form/Field/UploadField.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -791,15 +776,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1092">
+          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="401" column="21" lean-forward="true" selection-start-line="401" selection-start-column="21" selection-end-line="401" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="610" column="8" lean-forward="false" selection-start-line="610" selection-start-column="8" selection-end-line="610" selection-end-column="8" />
+        <state relative-caret-position="555">
+          <caret line="616" column="5" lean-forward="true" selection-start-line="616" selection-start-column="5" selection-end-line="616" selection-end-column="5" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
             <element signature="e#14923#16006#0#PHP" expanded="false" />
             <element signature="e#16012#16625#0#PHP" expanded="false" />
-            <element signature="e#31876#33177#0#PHP" expanded="false" />
+            <element signature="e#31869#33170#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

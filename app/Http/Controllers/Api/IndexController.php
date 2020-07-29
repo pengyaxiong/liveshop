@@ -608,10 +608,11 @@ class IndexController extends Controller
             'refund_desc' => '退款',
             'notify_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/wechat/refund_back',
         ]);
-        
+
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             return $this->success_data('退款申请请求成功');
         }
+
         return $this->error_data('退款申请请求失败~');
     }
 
