@@ -28,6 +28,7 @@ class ConfigController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('image', __('Image'))->image();
+        $grid->column('tel', __('Tel'));
         $grid->column('banner', __('Banner'))->carousel();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -63,6 +64,7 @@ class ConfigController extends AdminController
         $show->field('id', __('Id'));
         $show->field('banner', __('Banner'));
         $show->field('image', __('Image'));
+        $show->field('tel', __('Tel'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -80,6 +82,7 @@ class ConfigController extends AdminController
 
         $form->multipleImage('banner', __('Banner'))->rules('required|image')->removable()->sortable();
         $form->image('image', __('Image'))->rules('required|image');
+        $form->text('tel', __('Tel'))->rules('required');
 
         return $form;
     }

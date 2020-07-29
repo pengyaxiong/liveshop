@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="132" column="65" lean-forward="true" selection-start-line="132" selection-start-column="65" selection-end-line="132" selection-end-column="65" />
+            <state relative-caret-position="351">
+              <caret line="128" column="32" lean-forward="false" selection-start-line="128" selection-start-column="32" selection-end-line="128" selection-end-column="32" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
                 <element signature="e#28930#30227#0#PHP" expanded="false" />
@@ -68,11 +68,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="602">
+              <caret line="201" column="0" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadField.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Form/Field/UploadField.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="491" column="29" lean-forward="false" selection-start-line="491" selection-start-column="19" selection-end-line="491" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="411">
-              <caret line="57" column="24" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+              <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
               <folding>
                 <element signature="e#46#86#0#PHP" expanded="true" />
               </folding>
@@ -104,8 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>products</find>
-      <find>images</find>
       <find>l</find>
       <find>count_cart</find>
       <find>$page</find>
@@ -128,6 +146,14 @@
       <find>trade_state</find>
       <find>brand</find>
       <find>categories</find>
+      <find>$options</find>
+      <find>options</find>
+      <find>allowedFileExtensions</find>
+      <find>showPreview</find>
+      <find>Tel</find>
+      <find>showUpload</find>
+      <find>destroyThumbnail</find>
+      <find>retainable</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -145,7 +171,6 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/CustomerController.php" />
         <option value="$PROJECT_DIR$/app/Models/Shop/Bill.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/app/Admin/Controllers/ConfigController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/sales_count.blade.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/order_count.blade.php" />
@@ -181,7 +206,6 @@
         <option value="$PROJECT_DIR$/../TIMSDK/H5/dist/debug/GenerateTestUserSig.js" />
         <option value="$PROJECT_DIR$/app/Models/Shop/Category.php" />
         <option value="$PROJECT_DIR$/app/Models/Shop/Product.php" />
-        <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/CategoryController.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/BrandController.php" />
         <option value="$PROJECT_DIR$/config/UEditorUpload.php" />
@@ -192,6 +216,8 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
+        <option value="$PROJECT_DIR$/app/Admin/Controllers/ConfigController.php" />
+        <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php" />
       </list>
     </option>
   </component>
@@ -316,11 +342,6 @@
             <path>
               <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="liveshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="liveshop" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="routes" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
@@ -386,12 +407,12 @@
       <workItem from="1595552646495" duration="21629000" />
       <workItem from="1595812313976" duration="4855000" />
       <workItem from="1595898512457" duration="13748000" />
-      <workItem from="1595985015676" duration="5672000" />
+      <workItem from="1595985015676" duration="9006000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114437000" />
+    <option name="totallyTimeSpent" value="117771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -429,20 +450,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-616">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/resources/views/partials/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="34" column="64" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -572,13 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lang/zh-CN.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Cms/ChapterController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -636,24 +636,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="33" column="48" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/Product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="17" column="47" lean-forward="false" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/ConfigController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="49" column="21" lean-forward="false" selection-start-line="28" selection-start-column="7" selection-end-line="49" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -771,7 +757,7 @@
     <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
-          <caret line="57" column="24" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
           <folding>
             <element signature="e#46#86#0#PHP" expanded="true" />
           </folding>
@@ -780,12 +766,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="132" column="65" lean-forward="true" selection-start-line="132" selection-start-column="65" selection-end-line="132" selection-end-column="65" />
+        <state relative-caret-position="351">
+          <caret line="128" column="32" lean-forward="false" selection-start-line="128" selection-start-column="32" selection-end-line="128" selection-end-column="32" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
             <element signature="e#28930#30227#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lang/zh-CN.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="159" column="6" lean-forward="false" selection-start-line="159" selection-start-column="3" selection-end-line="159" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/ConfigController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="84" column="57" lean-forward="true" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Form/Field.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="21" column="10" lean-forward="false" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Form/Field/UploadField.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="491" column="29" lean-forward="false" selection-start-line="491" selection-start-column="19" selection-end-line="491" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="201" column="0" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -133,31 +133,43 @@ class ProductController extends AdminController
         $form->multipleImage('images', __('Images'))->removable()->sortable();
 
         $form->file('video', __('Video'))->addElementClass('video_upload')->options([
-            'showPreview' => false,
+            'showPreview' => true,
+//            'showCancel' => true,
             'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
-            'showUpload'=>true,
+//            'showUpload'=>true,
+            'showRemove'=>true,
             'uploadAsync' =>true,
 //            'uploadUrl' => storage_path('app/public/video_upload'),
             'uploadExtraData' => [
                 '_token'    => csrf_token(),
                 '_method'   => 'POST',
             ],
-        ])->removable()->downloadable();
+            'deleteExtraData'      => [
+                '_token'                         => csrf_token(),
+                '_method'                        => 'PUT',
+            ],
+        ]);
 
         $form->textarea('description', __('Description'))->rules('required');
 
         $form->multipleImage('info_images', __('产品展示'))->removable()->sortable();
         $form->file('info_video', __('视频展示'))->addElementClass('video_upload')->options([
-            'showPreview' => false,
+            'showPreview' => true,
+//            'showCancel' => true,
             'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
-            'showUpload'=>true,
+//            'showUpload'=>true,
+            'showRemove'=>true,
             'uploadAsync' =>true,
 //            'uploadUrl' => storage_path('app/public/video_upload'),
             'uploadExtraData' => [
                 '_token'    => csrf_token(),
                 '_method'   => 'POST',
             ],
-        ])->removable()->downloadable();
+            'deleteExtraData'      => [
+                '_token'                         => csrf_token(),
+                '_method'                        => 'PUT',
+            ],
+        ]);
 
 
         $form->decimal('price_1', __('Price 1'))->default(99.00);
@@ -182,6 +194,15 @@ class ProductController extends AdminController
         $form->switch('is_new', __('Is new'))->states($states)->default(0);
         $form->switch('is_recommend', __('Is recommend'))->states($states)->default(0);
         $form->number('sort_order', __('Sort order'))->default(99);
+
+
+        $form->saving(function ($form) {
+            $video = $form->video;
+
+            if ($video == null) {
+                $form->video = '';
+            }
+        });
 
         return $form;
     }
