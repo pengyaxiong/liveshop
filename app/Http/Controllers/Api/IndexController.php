@@ -130,7 +130,7 @@ class IndexController extends Controller
     {
         $categories = Category::with(['children' => function ($query) {
             $query->orderby('sort_order')->get();
-        }])->where('parent_id', 0)->get();
+        }])->where('parent_id', 0)->orderby('sort_order')->get();
 
         return $this->success_data('商品分类', ['categories' => $categories]);
     }
