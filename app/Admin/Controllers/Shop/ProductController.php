@@ -144,10 +144,10 @@ class ProductController extends AdminController
                 '_token'    => csrf_token(),
                 '_method'   => 'POST',
             ],
-            'deleteExtraData'      => [
-                '_token'                         => csrf_token(),
-                '_method'                        => 'PUT',
-            ],
+//            'deleteExtraData'      => [
+//                '_token'                         => csrf_token(),
+//                '_method'                        => 'PUT',
+//            ],
         ]);
 
         $form->textarea('description', __('Description'))->rules('required');
@@ -165,10 +165,10 @@ class ProductController extends AdminController
                 '_token'    => csrf_token(),
                 '_method'   => 'POST',
             ],
-            'deleteExtraData'      => [
-                '_token'                         => csrf_token(),
-                '_method'                        => 'PUT',
-            ],
+//            'deleteExtraData'      => [
+//                '_token'                         => csrf_token(),
+//                '_method'                        => 'PUT',
+//            ],
         ]);
 
 

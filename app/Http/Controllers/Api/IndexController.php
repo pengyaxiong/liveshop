@@ -410,8 +410,9 @@ class IndexController extends Controller
         }
         $customer = Customer::where('openid', $openid)->first();
 
-        CollectProduct::where(['product_id' => $request->product_id,
-            'customer_id' => $customer->id,])->delete();
+        $checked_id = explode(',', $request->product_id);
+
+        CollectProduct::wherein('product_id', $checked_id)->where(['customer_id' => $customer->id,])->delete();
 
         return $this->success_data('取消收藏商品成功');
     }
