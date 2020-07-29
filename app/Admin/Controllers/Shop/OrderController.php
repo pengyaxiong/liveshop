@@ -43,7 +43,7 @@ class OrderController extends AdminController
         $grid->column('order_sn', __('Order sn'));
         $grid->column('customer.nickname', __('Customer id'));
         $grid->column('address_id', __('地址'))->display(function ($model){
-            $address=OrderAddress::find($model);
+            $address=OrderAddress::where('order_id',$this->id)->first();
             return $address->province.'-'.$address->city.'-'.$address->area.'-'.$address->detai.'-联系人:'.$address->name.'-联系电话:'.$address->tel;
         });
         $grid->column('express_name', __('Express name'))->hide();
