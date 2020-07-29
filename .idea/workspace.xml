@@ -78,13 +78,13 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="616" column="5" lean-forward="true" selection-start-line="616" selection-start-column="5" selection-end-line="616" selection-end-column="5" />
+            <state relative-caret-position="513">
+              <caret line="644" column="0" lean-forward="true" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
                 <element signature="e#14923#16006#0#PHP" expanded="false" />
                 <element signature="e#16012#16625#0#PHP" expanded="false" />
-                <element signature="e#31869#33170#0#PHP" expanded="false" />
+                <element signature="e#31905#33206#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -186,8 +186,8 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/ProductController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/CustomerController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
         <option value="$PROJECT_DIR$/config/admin.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
       </list>
     </option>
   </component>
@@ -382,12 +382,12 @@
       <workItem from="1595552646495" duration="21629000" />
       <workItem from="1595812313976" duration="4855000" />
       <workItem from="1595898512457" duration="13748000" />
-      <workItem from="1595985015676" duration="15278000" />
+      <workItem from="1595985015676" duration="15751000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124043000" />
+    <option name="totallyTimeSpent" value="124516000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -794,13 +794,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="616" column="5" lean-forward="true" selection-start-line="616" selection-start-column="5" selection-end-line="616" selection-end-column="5" />
+        <state relative-caret-position="513">
+          <caret line="644" column="0" lean-forward="true" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
             <element signature="e#14923#16006#0#PHP" expanded="false" />
             <element signature="e#16012#16625#0#PHP" expanded="false" />
-            <element signature="e#31869#33170#0#PHP" expanded="false" />
+            <element signature="e#31905#33206#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

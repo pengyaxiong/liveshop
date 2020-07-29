@@ -638,6 +638,7 @@ class IndexController extends Controller
                 if ($reqInfo['refund_status'] == 'SUCCESS') {
                     $order->finish_time = date('Y-m-d H:i:s', time());
                     $order->status = 4;
+                    $order->save();
 
                     $customer_id = $order->customer_id;
                     $customer = Customer::find($customer_id);
