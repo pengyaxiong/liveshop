@@ -254,7 +254,7 @@ class IndexController extends Controller
         $customer = Customer::with('address')->where('openid', $openid)->first();
 
         $cart_num = Cart::where('customer_id', $customer->id)->count();
-        
+
         if (!empty($customer->address)){
             $customer['tel']=$customer->address['tel'];
         }

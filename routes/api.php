@@ -129,4 +129,21 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('feedback', 'IndexController@feedback');
     //加入我们
     Route::post('join_us', 'IndexController@join_us');
+
+
+    //获取录制模板列表
+    Route::post('DescribeLiveRecordTemplates', 'LiveController@DescribeLiveRecordTemplates');
+    //创建录制模板
+    Route::post('CreateLiveRecordTemplate', 'LiveController@CreateLiveRecordTemplate');
+    //修改录制模板
+    Route::post('ModifyLiveRecordTemplate', 'LiveController@ModifyLiveRecordTemplate');
+    //删除录制模板
+    Route::post('DeleteLiveRecordTemplate', 'LiveController@DeleteLiveRecordTemplate');
+
+    //创建录制任务
+    Route::post('CreateRecordTask', 'LiveController@CreateRecordTask');
+    //终止录制任务
+    Route::post('StopRecordTask', 'LiveController@StopRecordTask');
+    //删除录制任务
+    Route::post('DeleteRecordTask', 'LiveController@DeleteRecordTask');
 });
