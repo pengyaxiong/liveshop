@@ -307,7 +307,7 @@ class IndexController extends Controller
             if ($validator->fails()) {
                 $error = $validator->errors()->first();
 
-                $this->error_data($error);
+                return $this->error_data($error);
             }
 
             $pca = explode(",", $request->pca);
@@ -321,18 +321,20 @@ class IndexController extends Controller
                 'detail' => $request->detail,
             ]);
 
+
             if ($request->default_address) {
                 Customer::where('openid', $openid)->update(['address_id' => $address->id]);
             }
 
+            return $this->success_data('新增地址', $address);
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
-            $this->error_data($exception->getMessage());
+            return $this->error_data($exception->getMessage());
         }
 
-        return $this->success_data('新增地址', $address);
+
     }
 
     public function edit_address(Request $request)
@@ -1093,17 +1095,20 @@ class IndexController extends Controller
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {
                 $error = $validator->errors()->first();
-                $this->error_data($error);
+                return $this->error_data($error);
             }
 
-            $feedback = Feedback::create($request->all());
+            $feedback = Feedback::create([
+                'customer_id' => $customer->id,
+                'content' => $request['content'],
+            ]);
 
             return $this->success_data('意见反馈',$feedback);
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
-            $this->error_data($exception->getMessage());
+            return $this->error_data($exception->getMessage());
         }
 
 
@@ -1130,17 +1135,24 @@ class IndexController extends Controller
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {
                 $error = $validator->errors()->first();
-                $this->error_data($error);
+                return $this->error_data($error);
             }
 
-            $join = JoinUs::create($request->all());
+            $join = JoinUs::create([
+                'customer_id' => $customer->id,
+                'name' => $request['name'],
+                'phone' => $request['phone'],
+                'age' => $request['age'],
+                'sex' => $request['sex'],
+                'address' => $request['address'],
+            ]);
 
             return $this->success_data('加入我们', $join);
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
-            $this->error_data($exception->getMessage());
+            return $this->error_data($exception->getMessage());
         }
 
 
