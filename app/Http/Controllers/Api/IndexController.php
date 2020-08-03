@@ -968,10 +968,10 @@ class IndexController extends Controller
         }
         $customer = Customer::where('openid', $openid)->first();
         $collects = [];
-        if ($request->type = 'article') {
+        if ($request->type == 'article') {
             $collects = CollectArticle::with('article')->where('customer_id', $customer->id)->get();
         }
-        if ($request->type = 'product') {
+        if ($request->type == 'product') {
             $collects = CollectProduct::with('product')->where('customer_id', $customer->id)->get();
         }
 
