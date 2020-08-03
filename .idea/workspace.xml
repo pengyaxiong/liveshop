@@ -64,8 +64,8 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="1138" column="13" lean-forward="true" selection-start-line="1138" selection-start-column="13" selection-end-line="1138" selection-end-column="13" />
+            <state relative-caret-position="582">
+              <caret line="1040" column="5" lean-forward="true" selection-start-line="1040" selection-start-column="5" selection-end-line="1040" selection-end-column="5" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
                 <element signature="e#16143#16756#0#PHP" expanded="false" />
@@ -75,11 +75,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="777">
+              <caret line="59" column="23" lean-forward="true" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="111" column="30" lean-forward="false" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="30" />
+            <state relative-caret-position="203">
+              <caret line="114" column="10" lean-forward="false" selection-start-line="114" selection-start-column="6" selection-end-line="114" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -89,7 +99,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>取消收藏</find>
       <find>retainable</find>
       <find>FILE_DELETE_FLAG</find>
       <find>deleteExtraData</find>
@@ -119,6 +128,7 @@
       <find>Validator</find>
       <find>catch</find>
       <find>error_data</find>
+      <find>collect_article</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -196,8 +206,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
-    <option name="y" value="-8" />
+    <option name="x" value="1890" />
+    <option name="y" value="6" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -339,7 +349,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../companyHyt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zsg" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -396,12 +406,12 @@
       <workItem from="1596072920948" duration="9225000" />
       <workItem from="1596157380828" duration="6991000" />
       <workItem from="1596267334011" duration="5349000" />
-      <workItem from="1596415892958" duration="5127000" />
+      <workItem from="1596415892958" duration="9669000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156647000" />
+    <option name="totallyTimeSpent" value="161189000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -560,13 +570,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/OneDrive/桌面/customers.sql" />
-    <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -630,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="39" column="32" lean-forward="false" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Actions/RowAction.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
@@ -663,6 +659,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="613">
           <caret line="193" column="20" lean-forward="false" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -685,13 +682,6 @@
         <state relative-caret-position="336">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -770,14 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="111" column="30" lean-forward="false" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/Validator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -794,10 +776,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="64" column="86" lean-forward="true" selection-start-line="64" selection-start-column="86" selection-end-line="64" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controllers/Shop/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="59" column="23" lean-forward="true" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="114" column="10" lean-forward="false" selection-start-line="114" selection-start-column="6" selection-end-line="114" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="1138" column="13" lean-forward="true" selection-start-line="1138" selection-start-column="13" selection-end-line="1138" selection-end-column="13" />
+        <state relative-caret-position="582">
+          <caret line="1040" column="5" lean-forward="true" selection-start-line="1040" selection-start-column="5" selection-end-line="1040" selection-end-column="5" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
             <element signature="e#16143#16756#0#PHP" expanded="false" />

@@ -1025,6 +1025,7 @@ class IndexController extends Controller
 
         $article['is_collect'] = CollectArticle::where(['article_id' => $id, 'customer_id' => $customer->id])->exists();
 
+
         return $this->success_data('课程详情', ['article' => $article]);
     }
 
@@ -1032,6 +1033,9 @@ class IndexController extends Controller
     function cms_chapter($id)
     {
         $chapter = Chapter::find($id);
+
+        $chapter['prev_data']=Chapter::where('sort_order','<=',$chapter->sort_order)->first();
+        $chapter['next_data']=Chapter::where('sort_order','>=',$chapter->sort_order)->first();
 
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }
