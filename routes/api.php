@@ -146,4 +146,12 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('StopRecordTask', 'LiveController@StopRecordTask');
     //删除录制任务
     Route::post('DeleteRecordTask', 'LiveController@DeleteRecordTask');
+
+    //查询直播中的流
+    Route::post('DescribeLiveStreamOnlineList', 'LiveController@DescribeLiveStreamOnlineList');
+    //创建推流地址
+    Route::post('CreatePush', 'LiveController@CreatePush');
+    //断开直播流
+    Route::post('DropLiveStream', 'LiveController@DropLiveStream');
+
 });
