@@ -16,6 +16,8 @@ use TencentCloud\Live\V20180801\Models\ModifyLiveRecordTemplateRequest;
 use TencentCloud\Live\V20180801\Models\CreateRecordTaskRequest;
 use TencentCloud\Live\V20180801\Models\StopRecordTaskRequest;
 use TencentCloud\Live\V20180801\Models\DeleteRecordTaskRequest;
+use TencentCloud\Live\V20180801\Models\DescribeLiveStreamOnlineListRequest;
+use TencentCloud\Live\V20180801\Models\DropLiveStreamRequest;
 
 class LiveController extends Controller
 {
@@ -42,16 +44,14 @@ class LiveController extends Controller
 
             $req = new DescribeLiveRecordTemplatesRequest();
 
-            $params = array(
-            );
+            $params = array();
             $req->fromJsonString(json_encode($params));
 
 
             $resp = $client->DescribeLiveRecordTemplates($req);
 
             print_r($resp->toJsonString());
-        }
-        catch(TencentCloudSDKException $e) {
+        } catch (TencentCloudSDKException $e) {
             echo $e;
         }
     }
@@ -231,6 +231,99 @@ class LiveController extends Controller
 
             print_r($resp->toJsonString());
         } catch (TencentCloudSDKException $e) {
+            echo $e;
+        }
+    }
+
+    public function DescribeLiveStreamOnlineList(Request $request)
+    {
+        try {
+
+            $cred = new Credential($this->SecretId, $this->SecretKey);
+            $httpProfile = new HttpProfile();
+            $httpProfile->setEndpoint("live.tencentcloudapi.com");
+
+            $clientProfile = new ClientProfile();
+            $clientProfile->setHttpProfile($httpProfile);
+            $client = new LiveClient($cred, "ap-guangzhou", $clientProfile);
+
+            $req = new DescribeLiveStreamOnlineListRequest();
+
+            $params = array(
+                "DomainName" => $request->DomainName,
+                "AppName" => $request->AppName,
+                "PageNum" => $request->PageNum,
+                "PageSize" => $request->PageSize,
+                "StreamName" => $request->StreamName
+            );
+            $req->fromJsonString(json_encode($params));
+
+
+            $resp = $client->DescribeLiveStreamOnlineList($req);
+
+            print_r($resp->toJsonString());
+        } catch (TencentCloudSDKException $e) {
+            echo $e;
+        }
+    }
+
+    public function CreatePush(Request $request)
+    {
+        $time = $request->endTime ? $request->endTime : date('Y-m-d H:i:s', strtotime('+3 hours'));
+        echo $this->getPushUrl("108038.livepush.myqcloud.com", $request->streamName, "7c431981130126dda584128eaa253793", $time);
+    }
+
+    /**
+     * 获取推流地址
+     * 如果不传key和过期时间，将返回不含防盗链的url
+     * @param domain 您用来推流的域名
+     *        streamName 您用来区别不同推流地址的唯一流名称
+     *        key 安全密钥
+     *        time 过期时间 sample 2016-11-12 12:00:00
+     * @return String url
+     */
+    public function getPushUrl($domain, $streamName, $key = null, $time = null)
+    {
+        if ($key && $time) {
+            $txTime = strtoupper(base_convert(strtotime($time), 10, 16));
+            //txSecret = MD5( KEY + streamName + txTime )
+            $txSecret = md5($key . $streamName . $txTime);
+            $ext_str = "?" . http_build_query(array(
+                    "txSecret" => $txSecret,
+                    "txTime" => $txTime
+                ));
+        }
+        return "rtmp://" . $domain . "/live/" . $streamName . (isset($ext_str) ? $ext_str : "");
+    }
+
+
+    public function DropLiveStream(Request $request)
+    {
+        try {
+
+            $cred = new Credential($this->SecretId, $this->SecretKey);
+            $httpProfile = new HttpProfile();
+            $httpProfile->setEndpoint("live.tencentcloudapi.com");
+
+            $clientProfile = new ClientProfile();
+            $clientProfile->setHttpProfile($httpProfile);
+            $client = new LiveClient($cred, "", $clientProfile);
+
+            $req = new DropLiveStreamRequest();
+
+            $params = array(
+                "StreamName" => $request->StreamName,
+                "DomainName" => $request->DomainName,
+                "AppName" => $request->AppName    //推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+            );
+            $req->fromJsonString(json_encode($params));
+
+
+            $resp = $client->DropLiveStream($req);
+
+            print_r($resp->toJsonString());
+        }
+        catch(TencentCloudSDKException $e) {
             echo $e;
         }
     }

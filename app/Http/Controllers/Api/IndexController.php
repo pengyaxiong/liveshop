@@ -870,7 +870,7 @@ class IndexController extends Controller
                 //'spbill_create_ip' => '', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
                 'notify_url' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/wechat/paid', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
                 'trade_type' => 'JSAPI', // 请对应换成你的支付方式对应的值类型
-                'openid' => session('wechat.customer.openid'),
+                'openid' => $openid,
             ];
 
             //生成订单
@@ -1106,7 +1106,7 @@ class IndexController extends Controller
             $this->error_data($exception->getMessage());
         }
 
-        return $this->success_data('意见反馈', $feedback);
+        return $this->success_data('意见反馈');
     }
 
     public
