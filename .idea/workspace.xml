@@ -64,12 +64,12 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="1093" column="55" lean-forward="true" selection-start-line="1093" selection-start-column="55" selection-end-line="1093" selection-end-column="55" />
+            <state relative-caret-position="-240">
+              <caret line="1102" column="15" lean-forward="false" selection-start-line="1102" selection-start-column="10" selection-end-line="1102" selection-end-column="15" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
-                <element signature="e#16122#16735#0#PHP" expanded="false" />
-                <element signature="e#31989#33290#0#PHP" expanded="false" />
+                <element signature="e#16123#16736#0#PHP" expanded="false" />
+                <element signature="e#31990#33291#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -89,7 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>destroyThumbnail</find>
       <find>delete</find>
       <find>取消收藏</find>
       <find>retainable</find>
@@ -119,6 +118,7 @@
       <find>refund</find>
       <find>cms_categories</find>
       <find>Validator</find>
+      <find>catch</find>
     </findStrings>
     <replaceStrings>
       <replace>images</replace>
@@ -396,12 +396,12 @@
       <workItem from="1596072920948" duration="9225000" />
       <workItem from="1596157380828" duration="6991000" />
       <workItem from="1596267334011" duration="5349000" />
-      <workItem from="1596415892958" duration="3671000" />
+      <workItem from="1596415892958" duration="4079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155191000" />
+    <option name="totallyTimeSpent" value="155599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -789,12 +789,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="1093" column="55" lean-forward="true" selection-start-line="1093" selection-start-column="55" selection-end-line="1093" selection-end-column="55" />
+        <state relative-caret-position="-240">
+          <caret line="1102" column="15" lean-forward="false" selection-start-line="1102" selection-start-column="10" selection-end-line="1102" selection-end-column="15" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
-            <element signature="e#16122#16735#0#PHP" expanded="false" />
-            <element signature="e#31989#33290#0#PHP" expanded="false" />
+            <element signature="e#16123#16736#0#PHP" expanded="false" />
+            <element signature="e#31990#33291#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

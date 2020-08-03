@@ -325,6 +325,7 @@ class IndexController extends Controller
                 Customer::where('openid', $openid)->update(['address_id' => $address->id]);
             }
 
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
@@ -1095,10 +1096,7 @@ class IndexController extends Controller
                 $this->error_data($error);
             }
 
-            $feedback = Feedback::create([
-                'customer_id' => $customer->id,
-                'content' => $request['content'],
-            ]);
+            $feedback = Feedback::create($request->all());
 
             return $this->success_data('意见反馈',$feedback);
 
@@ -1135,14 +1133,7 @@ class IndexController extends Controller
                 $this->error_data($error);
             }
 
-            $join = JoinUs::create([
-                'customer_id' => $customer->id,
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'age' => $request['age'],
-                'sex' => $request['sex'],
-                'address' => $request['address'],
-            ]);
+            $join = JoinUs::create($request->all());
 
             return $this->success_data('加入我们', $join);
 
