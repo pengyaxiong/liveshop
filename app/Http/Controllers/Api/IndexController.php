@@ -1100,13 +1100,15 @@ class IndexController extends Controller
                 'content' => $request['content'],
             ]);
 
+            return $this->success_data('意见反馈',$feedback);
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
 
             $this->error_data($exception->getMessage());
         }
 
-        return $this->success_data('意见反馈');
+
     }
 
     public
@@ -1118,7 +1120,7 @@ class IndexController extends Controller
         }
         $customer = Customer::where('openid', $openid)->first();
 
-    //    try {
+        try {
             $messages = [
                 'name.required' => '姓名不能为空!',
                 'phone.required' => '电话不能为空!',
@@ -1142,12 +1144,14 @@ class IndexController extends Controller
                 'address' => $request['address'],
             ]);
 
-     //   } catch (\Exception $exception) {
-       //     Log::error($exception->getMessage());
+            return $this->success_data('加入我们', $join);
 
-      //      $this->error_data($exception->getMessage());
-     //   }
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
 
-        return $this->success_data('加入我们', $join);
+            $this->error_data($exception->getMessage());
+        }
+
+
     }
 }
