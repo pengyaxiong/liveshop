@@ -109,7 +109,7 @@ return [
         "videoFieldName" => "upfile", /* 提交的视频表单名称 */
         "videoPathFormat" => "/uploads/ueditor/php/upload/video/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "videoUrlPrefix" => "", /* 视频访问路径前缀 */
-        "videoMaxSize" => 102400000, /* 上传大小限制，单位B，默认100MB */
+        "videoMaxSize" => 512000000, /* 上传大小限制，单位B，默认100MB */
         "videoAllowFiles" => [
             ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
             ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"], /* 上传视频格式显示 */
@@ -119,7 +119,7 @@ return [
         "fileFieldName" => "upfile", /* 提交的文件表单名称 */
         "filePathFormat" => "/uploads/ueditor/php/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "fileUrlPrefix" => "", /* 文件访问路径前缀 */
-        "fileMaxSize" => 51200000, /* 上传大小限制，单位B，默认50MB */
+        "fileMaxSize" => 512000000, /* 上传大小限制，单位B，默认50MB */
         "fileAllowFiles" => [
             ".png", ".jpg", ".jpeg", ".gif", ".bmp",
             ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
