@@ -129,8 +129,8 @@ class ProductController extends AdminController
         $form->select('category_id', __('分类'))->options($select_category);
 
         $form->text('name', __('Name'))->rules('required');
-        $form->image('image', __('Image'))->rules('required|image');
-        $form->multipleImage('images', __('Images'))->removable()->sortable();
+        $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(95:95)');
+        $form->multipleImage('images', __('Images'))->removable()->sortable()->help('长宽建议比列(130:130)');
 
         $form->file('video', __('Video'))->addElementClass('video_upload')->removable()->options([
             'showPreview' => true,

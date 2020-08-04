@@ -114,7 +114,7 @@ class CategoryController extends AdminController
 
         $form->text('name_cn', __('Name cn'))->rules('required');
         $form->text('name_en', __('Name en'))->rules('required');
-        $form->image('image', __('Image'));
+        $form->image('image', __('Image'))->help('按数字大小正序长宽建议比列(178:174|177:87|177:87)');
         $form->text('description', __('Description'))->rules('required');
         $form->ueditor('content', __('Content'));
         $states = [

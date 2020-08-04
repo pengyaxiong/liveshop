@@ -79,7 +79,7 @@ class BrandController extends AdminController
     {
         $form = new Form(new Brand());
 
-        $form->image('image', __('Image'))->rules('required|image');
+        $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(227:227)');
         $form->text('description', __('Description'))->rules('required');
         $form->ueditor('content', __('Content'));
 

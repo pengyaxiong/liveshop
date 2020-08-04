@@ -80,8 +80,8 @@ class ConfigController extends AdminController
     {
         $form = new Form(new Config());
 
-        $form->multipleImage('banner', __('Banner'))->rules('required|image')->removable()->sortable();
-        $form->image('image', __('Image'))->rules('required|image');
+        $form->multipleImage('banner', __('Banner'))->rules('required|image')->removable()->sortable()->help('长宽建议比列(375:240)');
+        $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(375:240)');
         $form->text('tel', __('Tel'))->rules('required');
 
         return $form;

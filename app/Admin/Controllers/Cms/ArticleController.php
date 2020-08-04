@@ -122,7 +122,7 @@ class ArticleController extends AdminController
         );
 
         $form->text('title', __('Title'))->rules('required');
-        $form->image('image', __('Image'))->rules('required|image');
+        $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(165:130.5)');
         $form->file('video', __('Video'))->addElementClass('video_upload')->options([
             'showPreview' => false,
             'allowedFileExtensions'=>['avi','mp4','WMV','RMVB','FLV'],
@@ -136,7 +136,7 @@ class ArticleController extends AdminController
         ])->removable()->downloadable();
 
         $form->text('teacher_name', __('Teacher name'))->rules('required');
-        $form->image('teacher_image', __('Teacher image'))->rules('required|image');
+        $form->image('teacher_image', __('Teacher image'))->rules('required|image')->help('长宽建议比列(40:40)');
         $form->textarea('teacher_des', __('Teacher des'))->rules('required');
 
         $states = [
