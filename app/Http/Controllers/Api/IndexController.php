@@ -255,8 +255,8 @@ class IndexController extends Controller
 
         $cart_num = Cart::where('customer_id', $customer->id)->count();
 
-        if (!empty($customer->address)){
-            $customer['tel']=$customer->address['tel'];
+        if (!empty($customer->address)) {
+            $customer['tel'] = $customer->address['tel'];
         }
 
         $customer['cart_num'] = $cart_num;
@@ -1010,6 +1010,26 @@ class IndexController extends Controller
         return $this->success_data('课程分类详情', ['articles' => $articles]);
     }
 
+    public function cms_articles(Request $request)
+    {  //多条件查找
+        $where = function ($query) use ($request) {
+            if ($request->has('keyword') and $request->keyword != '') {
+                $query->where('keyword', 'like', '%' . $request->keyword . '%');
+            }
+        };
+
+        $articles = Article::where($where)->orderBy('sort_order')->paginate($request->total);
+
+        $page = isset($page) ? $request['page'] : 1;
+        $articles = $articles->appends(array(
+            'page' => $page,
+            'keyword' => $request->keyword,
+        ));
+
+
+        return $this->success_data('课程列表', ['articles' => $articles]);
+    }
+
     public
     function cms_article(Request $request, $id)
     {
@@ -1034,8 +1054,8 @@ class IndexController extends Controller
     {
         $chapter = Chapter::find($id);
 
-        $chapter['prev_data']=Chapter::where('sort_order','<=',$chapter->sort_order)->first();
-        $chapter['next_data']=Chapter::where('sort_order','>=',$chapter->sort_order)->first();
+        $chapter['prev_data'] = Chapter::where('sort_order', '<=', $chapter->sort_order)->first();
+        $chapter['next_data'] = Chapter::where('sort_order', '>=', $chapter->sort_order)->first();
 
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }
@@ -1107,7 +1127,7 @@ class IndexController extends Controller
                 'content' => $request['content'],
             ]);
 
-            return $this->success_data('意见反馈',$feedback);
+            return $this->success_data('意见反馈', $feedback);
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
