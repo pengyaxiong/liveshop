@@ -27,4 +27,21 @@ class Category extends Model
         return $this->hasMany('App\Models\Cms\Article');
     }
 
+    /**
+     * 删除之后
+     *
+     *@return // NO
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($model)
+        {
+            //这样可以拿到当前操作id
+            if (!empty($model->id)){
+
+            }
+        });
+    }
 }

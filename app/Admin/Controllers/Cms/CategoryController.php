@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
+use Illuminate\Support\MessageBag;
 
 class CategoryController extends AdminController
 {
@@ -39,9 +40,13 @@ class CategoryController extends AdminController
             $array = $children->toArray();
             foreach ($array as $k => $v) {
                 $url = route('admin.cms.categories.edit', $v['id']);
+                $del_url = route('admin.cms.categories.destroy', $v['id']);
                 $array[$k]['edit'] = '<div class="btn">
               <a class="btn btn-sm btn-default pull-right" href="' . $url . '" >
               <i class="fa fa-edit"></i> 编辑</a>
+                 </div><div class="btn">
+              <a class="btn btn-sm btn-danger pull-right" href="' . $del_url . '" >
+              <i class="fa fa-truck"></i> 删除</a>
                  </div>';
             }
             return new Table(['ID', __('Name'), '操作'], $array);
@@ -105,14 +110,6 @@ class CategoryController extends AdminController
         $form->text('name', __('Name'))->rules('required');
         $form->textarea('description', __('Description'));
         $form->number('sort_order', __('Sort order'))->default(99);
-
-        $form->deleting(function ($model) {
-            if (!empty($model->children))
-                return response()->json([
-                    'status' => false,
-                    'message' => '删除失败，请。。',
-                ]);
-        });
 
         return $form;
     }

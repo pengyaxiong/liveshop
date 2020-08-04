@@ -1054,8 +1054,8 @@ class IndexController extends Controller
     {
         $chapter = Chapter::find($id);
 
-        $chapter['prev_data'] = Chapter::where('sort_order', '<=', $chapter->sort_order)->first();
-        $chapter['next_data'] = Chapter::where('sort_order', '>=', $chapter->sort_order)->first();
+        $chapter['prev_data'] = Chapter::where('article_id',$chapter->article_id)->where('sort_order', '<=', $chapter->sort_order)->first();
+        $chapter['next_data'] = Chapter::where('article_id',$chapter->article_id)->where('sort_order', '>=', $chapter->sort_order)->first();
 
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }
