@@ -122,8 +122,8 @@
       <file leaf-file-name="UEditorUpload.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="522">
+              <caret line="141" column="52" lean-forward="true" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -387,7 +387,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zsg" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../companyHyt" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -445,12 +445,12 @@
       <workItem from="1596157380828" duration="6991000" />
       <workItem from="1596267334011" duration="5349000" />
       <workItem from="1596415892958" duration="12411000" />
-      <workItem from="1596502247917" duration="4438000" />
+      <workItem from="1596502247917" duration="5170000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168369000" />
+    <option name="totallyTimeSpent" value="169101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -846,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/UEditorUpload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="522">
+          <caret line="141" column="52" lean-forward="true" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
           <folding />
         </state>
       </provider>
