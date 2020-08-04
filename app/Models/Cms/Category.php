@@ -11,13 +11,20 @@ class Category extends Model
     protected $table = 'cms_category';
 
 
+    public function parent()
+    {
+        return $this->belongsTo(get_class($this));
+    }
+
+
     public function children()
     {
-        return $this->hasMany('App\Models\Cms\Category', 'parent_id', 'id');
+        return $this->hasMany(get_class($this), 'parent_id');
     }
 
     public function articles()
     {
         return $this->hasMany('App\Models\Cms\Article');
     }
+
 }

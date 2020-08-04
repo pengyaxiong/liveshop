@@ -1014,7 +1014,7 @@ class IndexController extends Controller
     {  //多条件查找
         $where = function ($query) use ($request) {
             if ($request->has('keyword') and $request->keyword != '') {
-                $query->where('keyword', 'like', '%' . $request->keyword . '%');
+                $query->where('title', 'like', '%' . $request->keyword . '%');
             }
         };
 
