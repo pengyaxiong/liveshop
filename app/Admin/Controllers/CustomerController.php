@@ -105,6 +105,7 @@ class CustomerController extends AdminController
 
         $form->text('openid', __('Openid'))->disable();
         $form->switch('sex', __('Sex'));
+        $form->select('grade', __('Grade'))->options([1 => '一级', 2 => '二级', 3 => '三级']);
         $form->text('nickname', __('Nickname'));
         $form->text('headimgurl', __('Headimgurl'));
         $form->text('tel', __('Tel'));
