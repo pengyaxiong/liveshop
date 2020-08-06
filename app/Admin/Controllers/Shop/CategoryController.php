@@ -32,11 +32,12 @@ class CategoryController extends AdminController
         $grid->column('name_cn', __('Name cn'));
         $grid->column('name_en', __('Name en'));
         $grid->column('image', __('Image'))->image('',88, 88);
+        $grid->column('top_image', __('置顶图'))->image('',88, 88);
         $grid->column('parent_id', '下级')->display(function () {
             return '点击查看下级';
         })->expand(function ($model) {
             $children = $model->children->map(function ($child) {
-                return $child->only(['id', 'name_cn']);
+                return $child->only(['id', 'name_cn','sort_order']);
             });
             $array = $children->toArray();
             foreach ($array as $k => $v) {
@@ -51,7 +52,7 @@ class CategoryController extends AdminController
                  </div>';
             }
 
-            return new Table(['ID', __('名称'), '操作'], $array);
+            return new Table(['ID', __('名称'), __('Sort order'), '操作'], $array);
         });
         $grid->column('description', __('Description'));
         $grid->column('content', __('Content'))->hide();
@@ -90,6 +91,7 @@ class CategoryController extends AdminController
         $show->field('name_cn', __('Name cn'));
         $show->field('name_en', __('Name en'));
         $show->field('image', __('Image'));
+        $show->field('top_image', __('置顶图'));
         $show->field('parent_id', __('Parent id'));
         $show->field('description', __('Description'));
         $show->field('content', __('Content'));
@@ -118,7 +120,8 @@ class CategoryController extends AdminController
 
         $form->text('name_cn', __('Name cn'))->rules('required');
         $form->text('name_en', __('Name en'))->rules('required');
-        $form->image('image', __('Image'))->help('按数字大小正序长宽建议比列(178:174|177:87|177:87)');
+        $form->image('top_image', __('置顶图'))->help('按数字大小正序长宽建议比列(178:174|177:87|177:87)');
+        $form->image('image', __('Image'))->help('按数字大小正序长宽建议比列(710:180)');
         $form->text('description', __('Description'))->rules('required');
         $form->ueditor('content', __('Content'));
         $states = [

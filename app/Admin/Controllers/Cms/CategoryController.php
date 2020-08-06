@@ -35,7 +35,7 @@ class CategoryController extends AdminController
             return '点击查看下级';
         })->expand(function ($model) {
             $children = $model->children->map(function ($child) {
-                return $child->only(['id', 'name']);
+                return $child->only(['id', 'name','sort_order']);
             });
             $array = $children->toArray();
             foreach ($array as $k => $v) {
@@ -49,7 +49,7 @@ class CategoryController extends AdminController
               <i class="fa fa-truck"></i> 删除</a>
                  </div>';
             }
-            return new Table(['ID', __('Name'), '操作'], $array);
+            return new Table(['ID', __('Name'), __('Sort order'), '操作'], $array);
         });
 
         $grid->column('name', __('Name'));

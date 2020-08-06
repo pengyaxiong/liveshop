@@ -96,7 +96,12 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         //品类
-        $categories = Category::where('parent_id', '>', 0)->orderby('sort_order', 'asc')->limit(3)->get();
+        $categories = Category::where('parent_id', '>', 0)->where('is_top', 1)->orderby('sort_order', 'asc')->limit(3)->get();
+        if (!empty($categories)) {
+            foreach ($categories as &$category) {
+                $category['image']=$category['top_image'];
+            }
+        }
         //轮播
         $banner = Config::first()->banner;
         $image = Config::first()->image;
@@ -110,14 +115,15 @@ class IndexController extends Controller
         $customer = Customer::where('openid', $openid)->first();
         $grade = $customer ? $customer->grade : 1;
         $price = 'price_' . $grade;
+        $show = 'show_' . $grade;
 
         //热销
-        $hot = Product::where('is_show', true)->where('is_hot', true)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
+        $hot = Product::where('is_show', true)->where('is_hot', true)->where($show, 1)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
             $model['price'] = $model[$price];
             return $model;
         });
         //推荐
-        $recommend = Product::where('is_show', true)->where('is_recommend', true)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
+        $recommend = Product::where('is_show', true)->where('is_recommend', true)->where($show, 1)->orderby('sort_order', 'asc')->get()->map(function ($model) use ($price) {
             $model['price'] = $model[$price];
             return $model;
         });
@@ -152,6 +158,7 @@ class IndexController extends Controller
 
         $grade = $customer ? $customer->grade : 1;
         $price = 'price_' . $grade;
+        $show = 'show_' . $grade;
         //多条件查找
         $where = function ($query) use ($request) {
             $query->where('is_show', true);
@@ -169,16 +176,16 @@ class IndexController extends Controller
             }
 
         };
-        $products = Product::where($where)->orderby('sort_order', 'asc')->paginate($request->total);
+        $products = Product::where($where)->where($show, 1)->orderby('sort_order', 'asc')->paginate($request->total);
 
         if ($request->has('sale_num') and $request->sale_num != '') {
-            $products = Product::where($where)->orderby('sale_num', 'desc')->paginate($request->total);
+            $products = Product::where($where)->where($show, 1)->orderby('sale_num', 'desc')->paginate($request->total);
         }
         if ($request->has('price_desc') and $request->price_desc != '') {
-            $products = Product::where($where)->orderby($price, 'desc')->paginate($request->total);
+            $products = Product::where($where)->where($show, 1)->orderby($price, 'desc')->paginate($request->total);
         }
         if ($request->has('price_asc') and $request->price_asc != '') {
-            $products = Product::where($where)->orderby($price, 'asc')->paginate($request->total);
+            $products = Product::where($where)->where($show, 1)->orderby($price, 'asc')->paginate($request->total);
         }
         foreach ($products as $key => $product) {
             $products[$key]['price'] = $product[$price];
@@ -205,6 +212,7 @@ class IndexController extends Controller
         $grade = $customer ? $customer->grade : 1;
         $price = 'price_' . $grade;
 
+
         $product = Product::find($id);
         $product['price'] = $product[$price];
 
@@ -223,6 +231,7 @@ class IndexController extends Controller
         $customer = Customer::where('openid', $openid)->first();
         $grade = $customer ? $customer->grade : 1;
         $price = 'price_' . $grade;
+        $show = 'show_' . $grade;
 
         $where = function ($query) use ($request) {
             $keyword = '%' . $request->keyword . '%';
@@ -230,7 +239,7 @@ class IndexController extends Controller
 
             $query->where('is_show', true);
         };
-        $products = Product::where($where)->paginate($request->total);
+        $products = Product::where($where)->where($show, 1)->paginate($request->total);
 
         foreach ($products as $key => $product) {
             $products[$key]['price'] = $product[$price];
@@ -1055,8 +1064,8 @@ class IndexController extends Controller
     {
         $chapter = Chapter::find($id);
 
-        $chapter['prev_data'] = Chapter::where('article_id',$chapter->article_id)->where('sort_order', '<=', $chapter->sort_order)->first();
-        $chapter['next_data'] = Chapter::where('article_id',$chapter->article_id)->where('sort_order', '>=', $chapter->sort_order)->first();
+        $chapter['prev_data'] = Chapter::where('article_id', $chapter->article_id)->where('sort_order', '<=', $chapter->sort_order)->first();
+        $chapter['next_data'] = Chapter::where('article_id', $chapter->article_id)->where('sort_order', '>=', $chapter->sort_order)->first();
 
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }

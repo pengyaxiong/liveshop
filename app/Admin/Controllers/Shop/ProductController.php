@@ -49,6 +49,9 @@ class ProductController extends AdminController
             'on'  => ['value' => 1, 'text' => '是', 'color' => 'success'],
             'off' => ['value' => 0, 'text' => '否', 'color' => 'danger'],
         ];
+        $grid->column('show_1', __('一级显示'))->switch($states);
+        $grid->column('show_2', __('二级显示'))->switch($states);
+        $grid->column('show_3', __('三级显示'))->switch($states);
         $grid->column('is_show', __('Is show'))->switch($states);
         $grid->column('is_hot', __('Is hot'))->switch($states);
         $grid->column('is_new', __('Is new'))->switch($states);
@@ -99,6 +102,9 @@ class ProductController extends AdminController
         $show->field('price_1', __('Price 1'));
         $show->field('price_2', __('Price 2'));
         $show->field('price_3', __('Price 3'));
+        $show->field('show_1', __('一级显示'));
+        $show->field('show_2', __('二级显示'));
+        $show->field('show_3', __('三级显示'));
         $show->field('sku', __('Sku'));
         $show->field('sale_num', __('Sale num'));
         $show->field('is_show', __('Is show'));
@@ -182,6 +188,9 @@ class ProductController extends AdminController
             'off' => ['value' => 0, 'text' => '否', 'color' => 'danger'],
         ];
         $form->switch('is_show', __('Is show'))->states($states)->default(0);
+        $form->switch('show_1', __('一级显示'))->states($states)->default(1);
+        $form->switch('show_2', __('二级显示'))->states($states)->default(1);
+        $form->switch('show_3', __('三级显示'))->states($states)->default(1);
         $form->switch('is_hot', __('Is hot'))->states($states)->default(0);
         $form->switch('is_new', __('Is new'))->states($states)->default(0);
         $form->switch('is_recommend', __('Is recommend'))->states($states)->default(0);
