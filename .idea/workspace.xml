@@ -39,22 +39,12 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="448" column="22" lean-forward="false" selection-start-line="448" selection-start-column="22" selection-end-line="448" selection-end-column="22" />
+            <state relative-caret-position="519">
+              <caret line="267" column="57" lean-forward="true" selection-start-line="267" selection-start-column="57" selection-end-line="267" selection-end-column="57" />
               <folding>
                 <element signature="e#44#81#0#PHP" expanded="true" />
-                <element signature="e#32447#33748#0#PHP" expanded="false" />
+                <element signature="e#32446#33747#0#PHP" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cart.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Shop/Cart.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="23" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -202,7 +192,6 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Cms/ChapterController.php" />
         <option value="$PROJECT_DIR$/app/Models/Customer.php" />
-        <option value="$PROJECT_DIR$/app/Models/Shop/Cart.php" />
         <option value="$PROJECT_DIR$/app/Models/About.php" />
         <option value="$PROJECT_DIR$/app/Models/Feedback.php" />
         <option value="$PROJECT_DIR$/app/Models/JoinUs.php" />
@@ -231,6 +220,7 @@
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Cms/CategoryController.php" />
         <option value="$PROJECT_DIR$/app/Admin/Controllers/Shop/CategoryController.php" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Models/Shop/Cart.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
       </list>
     </option>
@@ -488,18 +478,18 @@
       <workItem from="1596502247917" duration="15665000" />
       <workItem from="1596588873710" duration="6628000" />
       <workItem from="1596675064801" duration="9100000" />
-      <workItem from="1596791556955" duration="800000" />
+      <workItem from="1596791556955" duration="1118000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196124000" />
+    <option name="totallyTimeSpent" value="196442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16458334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1421875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -880,19 +870,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Shop/Cart.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="23" />
+        <state relative-caret-position="571">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="49" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="448" column="22" lean-forward="false" selection-start-line="448" selection-start-column="22" selection-end-line="448" selection-end-column="22" />
+        <state relative-caret-position="519">
+          <caret line="267" column="57" lean-forward="true" selection-start-line="267" selection-start-column="57" selection-end-line="267" selection-end-column="57" />
           <folding>
             <element signature="e#44#81#0#PHP" expanded="true" />
-            <element signature="e#32447#33748#0#PHP" expanded="false" />
+            <element signature="e#32446#33747#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

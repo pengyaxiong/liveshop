@@ -262,7 +262,7 @@ class IndexController extends Controller
         }
         $customer = Customer::with('address')->where('openid', $openid)->first();
 
-        $cart_num = Cart::where('customer_id', $customer->id)->count();
+        $cart_num = Cart::wherehas('product')->where('customer_id', $customer->id)->count();
 
         if (!empty($customer->address)) {
             $customer['tel'] = $customer->address['tel'];
@@ -446,7 +446,7 @@ class IndexController extends Controller
         $price = 'price_' . $grade;
 
         $carts = Cart::with('product')->where('customer_id', $customer->id)->get();
-        return $carts;
+
         foreach ($carts as $cart) {
             if (!empty($cart->product)) {
                 $cart->product['price'] = $cart->product[$price];
