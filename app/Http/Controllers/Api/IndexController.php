@@ -446,6 +446,7 @@ class IndexController extends Controller
         $price = 'price_' . $grade;
 
         $carts = Cart::with('product')->where('customer_id', $customer->id)->get();
+        return $carts;
         foreach ($carts as $cart) {
             if (!empty($cart->product)) {
                 $cart->product['price'] = $cart->product[$price];
