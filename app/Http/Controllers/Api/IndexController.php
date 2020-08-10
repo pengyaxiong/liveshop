@@ -138,7 +138,7 @@ class IndexController extends Controller
             $query->orderby('sort_order')->get();
         }])->where('parent_id', 0)->orderby('sort_order')->get();
         $banner = Config::find(1)->value('shop_banner');
-        return $this->success_data('商品分类', ['categories' => $categories, 'banner'=>$banner]);
+        return $this->success_data('商品分类', ['banner'=>$banner, 'categories' => $categories]);
     }
 
 
