@@ -136,7 +136,23 @@ class ProductController extends AdminController
 
         $form->text('name', __('Name'))->rules('required');
         $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(95:95)');
-        $form->multipleImage('images', __('Images'))->removable()->sortable()->help('长宽建议比列(130:130)');
+        /* $form->multipleImage('images', __('Images'))->options([
+            'showPreview' => true,
+            'allowedFileExtensions'=>['png,jpg,bmp,jpeg'],
+            'showUpload'=>true,
+            'uploadAsync' =>true,
+            'uploadUrl' => '/admin/file/image_upload',
+            'uploadExtraData' => [
+                '_token'    => csrf_token(),
+                '_method'   => 'POST',
+            ],
+        ])->removable()->sortable()->help('长宽建议比列(130:130)'); */
+        
+        $form->multipleImage('images', __('Images'))->addElementClass('images_upload')->options([
+            'showPreview' => true,
+            'allowedFileExtensions'=>['png,jpg,bmp,jpeg'],
+            'uploadAsync' =>true,
+        ])->removable()->sortable()->help('长宽建议比列(130:130)');
 
         $form->file('video', __('Video'))->addElementClass('video_upload')->removable()->options([
             'showPreview' => true,
