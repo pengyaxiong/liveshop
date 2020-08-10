@@ -30,6 +30,7 @@ class ConfigController extends AdminController
         $grid->column('image', __('Image'))->image();
         $grid->column('tel', __('Tel'));
         $grid->column('banner', __('Banner'))->carousel();
+        $grid->column('shop_banner', __('商城横幅'))->image();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -65,6 +66,7 @@ class ConfigController extends AdminController
         $show->field('banner', __('Banner'));
         $show->field('image', __('Image'));
         $show->field('tel', __('Tel'));
+        $show->field('shop_banner','商城横幅');
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -83,7 +85,7 @@ class ConfigController extends AdminController
         $form->multipleImage('banner', __('Banner'))->rules('required|image')->removable()->sortable()->help('长宽建议比列(375:240)');
         $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(375:240)');
         $form->text('tel', __('Tel'))->rules('required');
-
+        $form->image('shop_banner', __('商城横幅'))->rules('required|image')->help('长宽建议比列(375:240)');
         return $form;
     }
 }
