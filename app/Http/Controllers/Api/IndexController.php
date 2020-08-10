@@ -137,8 +137,8 @@ class IndexController extends Controller
         $categories = Category::with(['children' => function ($query) {
             $query->orderby('sort_order')->get();
         }])->where('parent_id', 0)->orderby('sort_order')->get();
-
-        return $this->success_data('商品分类', ['categories' => $categories]);
+        $banner = Config::find(1)->value('shop_banner');
+        return $this->success_data('商品分类', ['categories' => $categories, 'banner'=>$banner]);
     }
 
 
@@ -197,8 +197,8 @@ class IndexController extends Controller
             'sale_num' => $request->sale_num,
             'is_new' => $request->is_new,
         ));
-
-        return $this->success_data('分类商品', ['products' => $products, 'customer' => $customer]);
+        $products_banner = Category::where('id',$request->category_id)->value('top_image');
+        return $this->success_data('分类商品', ['products_banner'=>$products_banner , 'products' => $products, 'customer' => $customer]);
     }
 
     public function product(Request $request, $id)
@@ -1064,10 +1064,9 @@ class IndexController extends Controller
     function cms_chapter($id)
     {
         $chapter = Chapter::find($id);
-
-        $chapter['prev_data'] = Chapter::where('article_id', $chapter->article_id)->where('sort_order', '<=', $chapter->sort_order)->first();
-        $chapter['next_data'] = Chapter::where('article_id', $chapter->article_id)->where('sort_order', '>=', $chapter->sort_order)->first();
-
+        
+        $chapter['prev_data'] = Chapter::where('article_id', $chapter->article_id)->where('id','<',$id)->where('sort_order', '<=', $chapter->sort_order)->orderBy('id', 'asc')->first();
+        $chapter['next_data'] = Chapter::where('article_id', $chapter->article_id)->where('id','>',$id)->where('sort_order', '>=', $chapter->sort_order)->orderBy('id',' desc')->first();
         return $this->success_data('章节详情', ['chapter' => $chapter]);
     }
 
