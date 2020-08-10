@@ -980,10 +980,10 @@ class IndexController extends Controller
         $customer = Customer::where('openid', $openid)->first();
         $collects = [];
         if ($request->type == 'article') {
-            $collects = CollectArticle::with('article')->where('customer_id', $customer->id)->get();
+            $collects = CollectArticle::wherehas('article')->with('article')->where('customer_id', $customer->id)->get();
         }
         if ($request->type == 'product') {
-            $collects = CollectProduct::with('product')->where('customer_id', $customer->id)->get();
+            $collects = CollectProduct::wherehas('product')->with('product')->where('customer_id', $customer->id)->get();
         }
 
         return $this->success_data('我的收藏', ['collects' => $collects]);
