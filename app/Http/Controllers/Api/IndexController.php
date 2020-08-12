@@ -198,7 +198,8 @@ class IndexController extends Controller
             'is_new' => $request->is_new,
         ));
         $products_banner = Category::where('id',$request->category_id)->value('top_image');
-        return $this->success_data('分类商品', ['products_banner'=>$products_banner , 'products' => $products, 'customer' => $customer]);
+        $products_thumb = Category::where('id',$request->category_id)->value('image');
+        return $this->success_data('分类商品', ['products_banner'=>$products_banner, 'products_thumb'=>$products_thumb , 'products' => $products, 'customer' => $customer]);
     }
 
     public function product(Request $request, $id)
