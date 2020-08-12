@@ -100,11 +100,7 @@ class IndexController extends Controller
             $infoArr = json_decode($data,true);
             $tel = $infoArr['phoneNumber'];
             $customer->update([
-                'openid' => $openid,
-                'headimgurl' => $request->headimgurl,
-                'nickname' => $request->nickname,
-                'tel' => $tel,
-                'sex' => $request->sex,
+                'tel' => $tel
             ]);
             return $this->success_data('授权成功',$customer);
         } else {
