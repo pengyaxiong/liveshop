@@ -31,6 +31,8 @@ class ConfigController extends AdminController
         $grid->column('tel', __('Tel'));
         $grid->column('banner', __('Banner'))->carousel();
         $grid->column('shop_banner', __('商城横幅'))->image();
+        $grid->column('hot_image', __('热销列表横幅'))->image();
+        $grid->column('recommend_image', __('推荐列表横幅'))->image();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -67,6 +69,8 @@ class ConfigController extends AdminController
         $show->field('image', __('Image'));
         $show->field('tel', __('Tel'));
         $show->field('shop_banner','商城横幅');
+        $show->field('hot_image','热销列表横幅');
+        $show->field('recommend_image','推荐列表横幅');
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -86,6 +90,8 @@ class ConfigController extends AdminController
         $form->image('image', __('Image'))->rules('required|image')->help('长宽建议比列(375:240)');
         $form->text('tel', __('Tel'))->rules('required');
         $form->image('shop_banner', __('商城横幅'))->rules('required|image')->help('长宽建议比列(375:240)');
+        $form->image('hot_image', __('热销列表横幅'))->rules('required|image')->help('长宽建议比列(750:450)');
+        $form->image('recommend_image', __('推荐列表横幅'))->rules('required|image')->help('长宽建议比列(750:450)');
         return $form;
     }
 }
