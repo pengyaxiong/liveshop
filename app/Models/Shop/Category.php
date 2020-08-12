@@ -45,4 +45,16 @@ class Category extends Model
             self::where('parent_id', $id)->delete();
         });
     }
+    
+    public function setTopImageAttribute($TopImage)
+    {
+        if (is_array($TopImage)) {
+            $this->attributes['top_image'] = json_encode($TopImage);
+        }
+    }
+    
+    public function getTopImageAttribute($TopImage)
+    {
+        return json_decode($TopImage, true);
+    }
 }
