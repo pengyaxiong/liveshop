@@ -97,11 +97,11 @@ class IndexController extends Controller
     {
         //品类
         $categories = Category::where('parent_id', '>', 0)->where('is_top', 1)->orderby('sort_order', 'asc')->limit(3)->get();
-        if (!empty($categories)) {
+        /* if (!empty($categories)) {
             foreach ($categories as &$category) {
                 $category['image']=$category['top_image'];
             }
-        }
+        } */
         //轮播
         $banner = Config::first()->banner;
         $image = Config::first()->image;
