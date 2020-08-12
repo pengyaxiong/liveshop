@@ -235,7 +235,9 @@ class IndexController extends Controller
         ));
         $products_banner = Category::where('id',$request->category_id)->value('top_image');
         $products_thumb = Category::where('id',$request->category_id)->value('image');
-        return $this->success_data('分类商品', ['products_banner'=>$products_banner, 'products_thumb'=>$products_thumb , 'products' => $products, 'customer' => $customer]);
+        $hot_image = Config::first()->hot_image;
+        $recommend_image = Config::first()->hot_image;
+        return $this->success_data('分类商品', ['products_banner'=>$products_banner, 'products_thumb'=>$products_thumb , 'products' => $products, 'hot_image'=>$hot_image, 'recommend_image'=>$recommend_image,'customer' => $customer]);
     }
 
     public function product(Request $request, $id)
