@@ -56,7 +56,7 @@ class Category extends Model
     public function getTopImageAttribute($TopImage)
     {
         if(is_null(json_decode($TopImage))){
-            return '';
+            return $TopImage;
         }else{
             return json_decode($TopImage, true);
         }
