@@ -46,8 +46,8 @@ class IndexController extends Controller
         $str = json_decode($this->httpGet($api), true);
 
         $openid = $str['openid'];
-        $sessionKey = $str['session_key'];
-        session('sessionKey', $sessionKey);
+        /* $sessionKey = $str['session_key'];
+        session('sessionKey', $sessionKey); */
         $customer = Customer::where('openid', $openid)->first();
 
         if ($customer) {
@@ -82,7 +82,7 @@ class IndexController extends Controller
     public function updateCustomerPhone(Request $request){
         
         $appid = env('WECHAT_OFFICIAL_ACCOUNT_APPID', '');
-        $sessionKey = session('sessionKey');
+        
         
         $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
         if (!$openid) {
@@ -93,7 +93,7 @@ class IndexController extends Controller
         
         $encryptedData = $request->encryptedData;
         $iv = $request->iv;
-        
+        $sessionKey = $request->sessionKey;
         $pc = new WXBizDataCrypt($appid, $sessionKey);
         $errCode = $pc->decryptData($encryptedData, $iv, $data );
         if ($errCode == 0) {
