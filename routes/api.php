@@ -36,6 +36,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
     //授权
     Route::post('/auth', 'IndexController@auth');
+    //接收授权手机号算法
+    Route::post('/auth_phone', 'IndexController@updateCustomerPhone');
     //系统信息
     Route::get('configs', 'IndexController@configs');
     //首页
