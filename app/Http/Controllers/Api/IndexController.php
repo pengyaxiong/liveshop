@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-
+use App\Handlers\WXBizDataCrypt;
 class IndexController extends Controller
 {
     protected $wechat;
@@ -46,7 +46,8 @@ class IndexController extends Controller
         $str = json_decode($this->httpGet($api), true);
 
         $openid = $str['openid'];
-
+        $sessionKey = $str['session_key'];
+        session('sessionKey', $sessionKey);
         $customer = Customer::where('openid', $openid)->first();
 
         if ($customer) {
@@ -70,6 +71,45 @@ class IndexController extends Controller
         }
 
         return $this->success_data('授权成功', $str);
+    }
+    
+    
+    /**
+     * 更新获取用户绑定手机号
+     * @param Request $request
+     * @return number[]|unknown[]|string[]
+     */
+    public function updateCustomerPhone(Request $request){
+        
+        $appid = env('WECHAT_OFFICIAL_ACCOUNT_APPID', '');
+        $sessionKey = session('sessionKey');
+        
+        $openid = $request->openid ? $request->openid : 'osJCDuBE6RgIJV8lv1dDq8K4B5eU';
+        if (!$openid) {
+            return $this->error_data('用户不存在');
+        }
+        
+        $customer = Customer::where('openid', $openid)->first();
+        
+        $encryptedData = $request->encryptedData;
+        $iv = $request->iv;
+        
+        $pc = new WXBizDataCrypt($appid, $sessionKey);
+        $errCode = $pc->decryptData($encryptedData, $iv, $data );
+        if ($errCode == 0) {
+            $infoArr = json_decode($data,true);
+            $tel = $infoArr['phoneNumber'];
+            $customer->update([
+                'openid' => $openid,
+                'headimgurl' => $request->headimgurl,
+                'nickname' => $request->nickname,
+                'tel' => $tel,
+                'sex' => $request->sex,
+            ]);
+            return $this->success_data('授权成功',$data);
+        } else {
+            return $this->error_data($errCode);
+        }
     }
 
     //获取GET请求
