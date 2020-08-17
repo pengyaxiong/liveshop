@@ -132,7 +132,13 @@ class MiniliveController extends Controller
     }
     
     
-    
+    /**
+     * 直播间导入商品
+     * @param Request $request
+     *          roomid number 直播间id
+     *          ids json 要导入的商品id
+     * @return number[]|unknown[]|string[]
+     */
     public function pushGoodsToRoom(Request $request){
         $roomid = $request->roomid ? $request->roomid:'';
         $ids = $request->ids ? json_decode($request->ids, true):0;
@@ -145,7 +151,7 @@ class MiniliveController extends Controller
         $result = $this->postHttp($url, json_encode($data));
         $res = json_decode($result, true);
         if($res['errcode'] == 0){
-            return $this->success_data('导入成功，等待审核');
+            return $this->success_data('导入成功');
         }else{
             return $this->error_data('导入失败','错误码为：'.$res['errcode']);
         }

@@ -157,5 +157,15 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('CreatePush', 'LiveController@CreatePush');
     //断开直播流
     Route::post('DropLiveStream', 'LiveController@DropLiveStream');
-
+    
+    
+    //原生直播小程序接口
+    //创建直播间
+    Route::post('createroom','MiniliveController@createLiveRoom');
+    //获取直播间列表以及信息
+    Route::get('roomlist','MiniliveController@getLiveList');
+    //获取直播间回放信息
+    Route::get('getroomrelpay','MiniliveController@getLiveReplay');
+    //直播间导入商品
+    Route::post('pushgoods', 'MiniliveController@pushGoodsToRoom');
 });
