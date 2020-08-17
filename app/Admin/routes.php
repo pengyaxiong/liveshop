@@ -29,7 +29,6 @@ Route::group([
         //流水管理
         $router->resource('bills', 'BillController');
 
-
     });
     //课程管理
     Route::group(['prefix' => 'cms', 'namespace' => 'Cms', 'as' => 'cms.'], function (Router $router) {
@@ -41,7 +40,13 @@ Route::group([
         //章节管理
         $router->resource('chapters', 'ChapterController');
     });
-
+    
+    //直播管理
+    Route::group(['prefix' => 'live', 'namespace' => 'Live', 'as' => 'live.'], function (Router $router){
+        //直播间管理
+        $router->resource('rooms', 'LiveController');
+    });
+    
     //关于我们
     $router->resource('abouts', 'AboutController');
     //意见反馈
