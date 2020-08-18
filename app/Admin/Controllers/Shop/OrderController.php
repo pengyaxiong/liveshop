@@ -101,7 +101,8 @@ class OrderController extends AdminController
         $grid->filter(function ($filter) {
 
             $customers=Customer::all()->pluck('nickname','id');
-
+            $filter->disableIdFilter();
+            $filter->equal('order_sn','订单编号');
             $filter->equal('customer_id', __('Nickname'))->select($customers);
 
             $filter->equal('status', __('Status'))->select($this->status);
