@@ -248,7 +248,7 @@ class MiniliveController extends Controller
                 return $this->error_data('创建聊天室失败',$res);
             }
         }else{
-            return $this->error_data('创建失败，错误码为',$res);
+            return $this->error_data('创建失败，错误码为',$resLive);
         }
     }
     
@@ -278,30 +278,40 @@ class MiniliveController extends Controller
     }
 
     public function getFirstRoom(){
-        $start =  0;
-        $limit =  1;
-        $access_token = $this->getAccessToken();
-        $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=".$access_token;
-        $data = ['start'=>$start, 'limit'=>$limit];
-        $result = $this->postHttp($url, json_encode($data));
-        $res = json_decode($result,true);
-        if($res['errcode'] ==0) {
-            if ($res['room_info'][0]['live_status'] == 101) {
-                $status = 'living';
-            } else if ($res['room_info'][0]['live_status'] == 102) {
-                $status = 'pre_living';
-            } else if ($res['room_info'][0]['live_status'] == 103) {
-                $status = 'ended';
-            } else if($res['room_info'][0]['live_status'] == 107){
-                $status = 'ended';
-            }else{
-                $status = 'other';
+        $room_info = [];
+        $has_living = false;
+        $goon = true;
+        $offset = 0;
+        $n = 0;
+        $stopn = 3;
+        $len = 99;
+        while ($goon){
+            $start =  $offset;
+             $limit=  $len;
+            $access_token = $this->getAccessToken();
+            $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=".$access_token;
+            $data = ['start'=>$start, 'limit'=>$limit];
+            $result = $this->postHttp($url, json_encode($data));
+            $res = json_decode($result,true);
+            if($res['errcode'] ==0) {
+                foreach ($res['room_info'] as $key=> $val){
+                    if($val['live_status'] == 101){
+                        $room_info = $val;
+                        $has_living = true;
+                        $goon = false;
+                        break;
+                    }else if($val['live_status'] == 103){
+                        $room_info = $val;
+                    }
+                }
             }
-            $res['room_info'][0]['group_id'] = Live::where('room_id', $res['room_info'][0]['roomid'])->value('group_id');
-            return $this->success_data('直播间列表',['room_info'=>$res['room_info'][0],'status' => $status]);
-        }else{
-            return $this->error_data('直播间列表错误信息',$res);
+            $n++;
+            $offset = $n*$len;
+            if($n ==$stopn){
+                $goon = false;
+            }
         }
+        return $this->success_data('直播首页',['has_living'=>$has_living, 'room_info'=>$room_info]);
     }
 
     
