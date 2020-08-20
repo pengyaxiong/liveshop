@@ -179,7 +179,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     //创建聊天室
     Route::post('createchatroom','MiniliveController@createChatRoomByReqest');
     //获取最新一个聊天室
-    Route::post('getlatestroom', 'MiniliveController@getFirstRoom');
+    Route::get('getlatestroom', 'MiniliveController@getFirstRoom');
     //查询聊天室信息
     Route::post('getchatroominfo','MiniliveController@getChatRoomInfo');
     //查询聊天室成员信息
