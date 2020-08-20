@@ -273,7 +273,31 @@ class MiniliveController extends Controller
             return $this->error_data('直播间列表错误信息',$res);
         }
     }
-    
+
+    public function getFirstRoom(Request $request){
+        $start =  0;
+        $limit =  1;
+        $access_token = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=".$access_token;
+        $data = ['start'=>$start, 'limit'=>$limit];
+        $result = $this->postHttp($url, json_encode($data));
+        $res = json_decode($result,true);
+        if($res['errcode'] ==0){
+            if($res['room_info'][0]['live_status'] == 101){
+                $status = 'living';
+            }else if($res['room_info'][0]['live_status'] == 102){
+                $status = 'pre_living';
+            }else if($res['room_info'][0]['live_status'] == 103){
+                $status = 'ended';
+            }else{
+                $status = 'other';
+            }
+            return $this->success_data('直播间列表',['room_info'=>$res['room_info'][0],'status' => $status]);
+        }else{
+            return $this->error_data('直播间列表错误信息',$res);
+        }
+    }
+
     
     /**
      * 获取直播间回放信息
