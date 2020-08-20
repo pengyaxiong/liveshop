@@ -168,6 +168,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::get('getroomrelpay','MiniliveController@getLiveReplay');
     //直播间导入商品
     Route::post('pushgoods', 'MiniliveController@pushGoodsToRoom');
+    //获取商品列表
+    Route::get('getgoods','MiniliveController@getGoodsList');
     //上传图片
     Route::post('uploadimg', 'MiniliveController@uploadImgToWexin');
 
@@ -176,6 +178,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('importuser','MiniliveController@exportChaterRequest');
     //创建聊天室
     Route::post('createchatroom','MiniliveController@createChatRoomByReqest');
+    //获取最新一个聊天室
+    Route::post('getlatestroom', 'MiniliveController@getFirstRoom');
     //查询聊天室信息
     Route::post('getchatroominfo','MiniliveController@getChatRoomInfo');
     //查询聊天室成员信息
