@@ -268,6 +268,9 @@ class MiniliveController extends Controller
         $result = $this->postHttp($url, json_encode($data));
         $res = json_decode($result,true);
         if($res['errcode'] ==0){
+            foreach ($res['room_info'] as $key => $value){
+                $res['room_info'][$key]['group_id'] = Live::where('room_id', $res['room_info'][0]['roomid'])->value('group_id');
+            }
             return $this->success_data('直播间列表',['list'=>$res['room_info']]);
         }else{
             return $this->error_data('直播间列表错误信息',$res);
@@ -282,16 +285,19 @@ class MiniliveController extends Controller
         $data = ['start'=>$start, 'limit'=>$limit];
         $result = $this->postHttp($url, json_encode($data));
         $res = json_decode($result,true);
-        if($res['errcode'] ==0){
-            if($res['room_info'][0]['live_status'] == 101){
+        if($res['errcode'] ==0) {
+            if ($res['room_info'][0]['live_status'] == 101) {
                 $status = 'living';
-            }else if($res['room_info'][0]['live_status'] == 102){
+            } else if ($res['room_info'][0]['live_status'] == 102) {
                 $status = 'pre_living';
-            }else if($res['room_info'][0]['live_status'] == 103){
+            } else if ($res['room_info'][0]['live_status'] == 103) {
+                $status = 'ended';
+            } else if($res['room_info'][0]['live_status'] == 107){
                 $status = 'ended';
             }else{
                 $status = 'other';
             }
+            $res['room_info'][0]['group_id'] = Live::where('room_id', $res['room_info'][0]['roomid'])->value('group_id');
             return $this->success_data('直播间列表',['room_info'=>$res['room_info'][0],'status' => $status]);
         }else{
             return $this->error_data('直播间列表错误信息',$res);
