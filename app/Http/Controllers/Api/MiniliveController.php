@@ -277,7 +277,7 @@ class MiniliveController extends Controller
         }
     }
 
-    public function getFirstRoom(Request $request){
+    public function getFirstRoom(){
         $start =  0;
         $limit =  1;
         $access_token = $this->getAccessToken();
