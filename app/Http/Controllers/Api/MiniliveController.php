@@ -66,7 +66,7 @@ class MiniliveController extends Controller
         curl_close($curl);
         return $output;
     }
-    
+
     
     /**
      * 获取access_token 令牌
@@ -122,7 +122,7 @@ class MiniliveController extends Controller
             return $this->error_data('直播间名字不能为空');
         }
         if(isset($request->coverimg) && ($request->coverimg != '')){
-            $data['coverImg'] = $request->coverimg;
+            $data['cover_img'] = $request->coverimg;
         }else{
             return $this->error_data('直播间背景图片id不能为空');
         }
@@ -156,20 +156,11 @@ class MiniliveController extends Controller
             return $this->error_data('主播微信不能为空');
         }
         if(isset($request->shareimg) && ($request->shareimg != '')){
-            $data['shareImg'] = $request->shareimg;
+            $data['share_img'] = $request->shareimg;
         }else{
             return $this->error_data('直播间分享图片id不能为空');
         }
-        //$coverImg = $request->coverimg?$request->coverimg:$media_id; //* 直播间背景图，图片规则：建议像素1080*1920，大小不超过2M,背景图，填入mediaID
-        //$startTime = $request->starttime?$request->starttime:strtotime('+10minutes');// * 直播计划开始时间（开播时间需要在当前时间的10分钟后 并且 开始时间不能在 6 个月后）
-        //$endTime = $request->endtime?$request->endtime:strtotime('+181minutes');// * 直播计划结束时间（开播时间和结束时间间隔不得短于30分钟，不得超过24小时）
-        //$anchorName = $request->anchorname?$request->anchorname:'火登网主播'; //* 主播昵称，最短2个汉字，最长15个汉字
-        //(mb_strlen($anchorName)>15){
-        //   return $this->error_data('主播昵称超长');
-        //}
-        //$anchorWechat = $request->anchorwechat?$request->anchorwechat:''; //* 主播微信号，如果未实名认证，需要先前往“小程序直播”小程序进行实名验证,
-        //$shareImg = $request->shareimg?$request->shareimg:$media_id; //* 直播间分享图，图片规则：建议像素800*640，大小不超过1M；
-        //$feedsImg = $request->feedsimg?$request->feedsimg:$media_id; // 购物直播频道封面图，图片规则：建议像素800*800，大小不超过100KB；
+
         $data['isFeedsPublic'] = $request->isfeedspublic?$request->isfeedspublic:1;//是否开启官方收录 【1: 开启，0：关闭】，默认开启收录
         $data['type'] = $request->type?$request->type:0;//* 直播间类型 【1: 推流，0：手机直播】
         $data['screenType'] = $request->screentype?$request->screentype:0; //* 横屏、竖屏 【1：横屏，0：竖屏】（横屏：视频宽高比为16:9、4:3、1.85:1 ；竖屏：视频宽高比为9:16、2:3）
@@ -180,7 +171,38 @@ class MiniliveController extends Controller
         $data['closeShare'] = $request->closeshare?$request->closeshare:0; //是否关闭分享 【0：开启，1：关闭】默认开启分享（直播开始后不允许修改）
         $data['closeKf'] = $request->closekf?$request->closekf:1; //是否关闭客服 【0：开启，1：关闭】 默认关闭客服
         $data['group_id'] = $request->group_id?$request->group_id:'';
-        $data['feedsImg'] = $request->feedsimg?$request->feedsimg:'';
+        $data['feeds_img'] = $request->feedsimg?$request->feedsimg:'';
+
+        //封面图片
+        $realfile = $this->uploadImg($data['cover_img']);
+        $result = $this->uploadToWechat($_SERVER['DOCUMENT_ROOT'].$realfile);
+        if(isset($result['errcode'])){
+            return $this->error_data('图片上传到微信失败',$result['errmsg']);
+        }else{
+            $data['coverImg'] = $result['media_id'];
+            $data['cover_img'] = $realfile;
+        }
+        //分享图片
+        $realfile = $this->uploadImg($data['share_img']);
+        $result = $this->uploadToWechat($_SERVER['DOCUMENT_ROOT'].$realfile);
+        if(isset($result['errcode'])){
+            return $this->error_data('图片上传到微信失败',$result['errmsg']);
+        }else{
+            $data['shareImg'] = $result['media_id'];
+            $data['share_img'] = $realfile;
+        }
+        //购物封面图
+        if($data['feeds_img'] != ''){
+            $realfile = $this->uploadImg($data['feeds_img']);
+            $result = $this->uploadToWechat($_SERVER['DOCUMENT_ROOT'].$realfile);
+            if(isset($result['errcode'])){
+                return $this->error_data('图片上传到微信失败',$result['errmsg']);
+            }else{
+                $data['feedsImg'] = $result['media_id'];
+                $data['feeds_img'] = $realfile;
+            }
+        }
+
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/room/create?access_token=".$access_token;
         $header = array("Content-Type: application/json","Accept:application/json");
         $result = $this->postHttp($url, json_encode($data),$header);
@@ -194,12 +216,15 @@ class MiniliveController extends Controller
                     'room_id' => $resLive['roomId'],
                     'name' => $data['name'],
                     'coverimg' => $data['coverImg'],
+                    'cover_img' => $data['cover_img'],
                     'start_time' =>$data['startTime'],
                     'end_time' => $data['endTime'],
                     'anchor_name' => $data['anchorName'],
                     'anchor_wechat' => $data['anchorWechat'],
                     'shareimg' => $data['shareImg'],
+                    'share_img' => $data['share_img'],
                     'feedsimg' => $data['feedsImg'],
+                    'feeds_img' => $data['feeds_img'],
                     'isfeedspublic' => $data['isFeedsPublic'],
                     'type' => $data['type'],
                     'screentype' => $data['screenType'],
@@ -302,9 +327,59 @@ class MiniliveController extends Controller
         }
     }
 
+    public function getGoodsList(Request $request){
+        if(isset($request->offset) && ($request->offset != '')){
+            $data['offset'] = $request->offset;
+        }else{
+            return $this->error_data('分页条数起点不能为空');
+        }
+        if(isset($request->limit) && ($request->limit !='')){
+            $data['limit'] = $request->limit;
+        }else{
+            $data['limit'] = 30;
+        }
+        if(isset($request->status) && ($request->status != '')){
+            $data['status'] = $request->status;
+        }else{
+            $data['status'] = 2;
+        }
+        $access_token = $this->getAccessToken();
+        $paramers = http_build_query($data);
+        $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/getapproved?access_token={$access_token}&{$paramers}";
+        $result = $this->getHttp($url);
+        $res = json_decode($result, true);
+        return $res;
+    }
+
+
+    public function uploadImg($file){
+        $filename = $file->getClientOriginalName();
+        $allowed_extensions = ["png", "jpg", "gif", "bmp"];
+        $ext = $file->getClientOriginalExtension();
+        $size = $file->getSize();
+        if($ext && !in_array($ext, $allowed_extensions)){
+            return $this->error('只允许上传png,jpg,gif,bmp格式的图片');
+        }
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $path = '/uploads/wechat';
+        $filename = str_random(32).'.'.$ext;
+        $file->move($root.$path, $filename);
+        $real_path_img = $path.'/'.$filename;
+        $real_path_img = str_replace('\\','/',$real_path_img);
+        return $real_path_img;
+    }
+
+    public function uploadToWechat($file){
+        $access_token = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token={$access_token}&type=image";
+        $data = array('media'=>new \CURLFile($file));
+        $result = $this->postHttp($url, $data);
+        $res = json_decode($result, true);
+        return $res;
+    }
 
     /**
-     * 上传图片
+     * 上传图片到微信
      * @param Request $request
      *      file file 上传的图片
      */
@@ -324,11 +399,6 @@ class MiniliveController extends Controller
         $real_path_img = str_replace('\\','/',$real_path_img);
         $access_token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token={$access_token}&type=image";
-        $file_info=array(
-            'filename'=>$real_path_img,  //图片相对于网站根目录的路径
-            'content-type'=>'image/'.$ext,  //文件类型
-            'filelength'=>$size         //图文大小
-        );
         $data = array('media'=>new \CURLFile($real_path_img));
         $result = $this->postHttp($url, $data);
         $res = json_decode($result, true);
