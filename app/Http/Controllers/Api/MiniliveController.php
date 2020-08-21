@@ -223,8 +223,8 @@ class MiniliveController extends Controller
                     'anchor_wechat' => $data['anchorWechat'],
                     'shareimg' => $data['shareImg'],
                     'share_img' => $data['share_img'],
-                    'feedsimg' => $data['feedsImg'],
-                    'feeds_img' => $data['feeds_img'],
+                    //'feedsimg' => $data['feedsImg'],
+                    //'feeds_img' => $data['feeds_img'],
                     'isfeedspublic' => $data['isFeedsPublic'],
                     'type' => $data['type'],
                     'screentype' => $data['screenType'],
@@ -238,6 +238,10 @@ class MiniliveController extends Controller
                     'created_at' => time(),
                     'updated_at' => time()
                 ];
+                if($data['feeds_img'] != ''){
+                    $insertData['feedsimg'] = $data['feedsImg'];
+                    $insertData['feeds_img'] = $data['feeds_img'];
+                }
                 $r = Live::insert($insertData);
                 if (isset($res['qrcode_url'])) {
                     return $this->success_data('直播间创建成功，但主播微信号为实名认证', ['info' => $res]);
