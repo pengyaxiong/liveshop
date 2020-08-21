@@ -273,7 +273,7 @@ class MiniliveController extends Controller
         $res = json_decode($result,true);
         if($res['errcode'] ==0){
             foreach ($res['room_info'] as $key => $value){
-                $res['room_info'][$key]['group_id'] = Live::where('room_id', $res['room_info'][0]['roomid'])->value('group_id');
+                $res['room_info'][$key]['group_id'] = Live::where('room_id', $value['roomid'])->value('group_id');
             }
             return $this->success_data('直播间列表',['list'=>$res['room_info']]);
         }else{
