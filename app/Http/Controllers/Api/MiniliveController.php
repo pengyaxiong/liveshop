@@ -3,10 +3,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Config;
 use App\Models\Live\Live;
 use App\Handlers\TLSSigAPIv2;
-use TencentCloud\Scf\V20180416\Models\LayerVersionInfo;
+use App\Handlers\WeChat;
+
 
 class MiniliveController extends Controller
 {
@@ -25,6 +25,7 @@ class MiniliveController extends Controller
         $this->Imappid = env('IM_SDK_APPID','');
         $this->Imkey = env('IM_SDK_KEY','');
         $this->Imadmin = env('IM_ADMIN','');
+
     }
     
     //获取GET请求
@@ -255,7 +256,7 @@ class MiniliveController extends Controller
             return $this->error_data('创建失败，错误码为',$resLive);
         }
     }
-    
+
     /**
      * 获取直播间列表信息
      * @param Request $request
@@ -264,25 +265,37 @@ class MiniliveController extends Controller
      * @return array 
      */
     public function getLiveList(Request $request){
-        $start = $request->start ? $request->start : 0;
+        /*$start = $request->start ? $request->start : 0;
         $limit = $request->limit ? $request->limit : 50;
         $access_token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxa/business/getliveinfo?access_token=".$access_token;
         $data = ['start'=>$start, 'limit'=>$limit];
         $result = $this->postHttp($url, json_encode($data));
         $res = json_decode($result,true);
+        $liveList = [];
         if($res['errcode'] ==0){
             foreach ($res['room_info'] as $key => $value){
-                $res['room_info'][$key]['group_id'] = Live::where('room_id', $value['roomid'])->value('group_id');
+                if($value['live_status'] == 101){
+                    $res['room_info'][$key]['group_id'] = Live::where('room_id', $value['roomid'])->value('group_id');
+                    $liveList[] = $res[$key];
+                }
             }
-            return $this->success_data('直播间列表',['list'=>$res['room_info']]);
+            return $this->success_data('直播间列表',['list'=>$liveList]);
         }else{
-            return $this->success_data('直播间列表错误信息',['list'=>[]]);
-        }
+            return $this->success_data('直播间列表',['list'=>[]]);
+        }*/
+        $start = $request->start ? $request->start : 0;
+        $limit = $request->limit ? $request->limit : 20;
+        $list = Live::where('live_status','101')->orderBy('room_id','desc')
+            ->offset($start)->limit($limit)->get(['name','room_id','cover_img','share_img','live_status', 'start_time', 'end_time','anchor_name','goods','rtmp','group_id'])
+            ->toArray(true);
+        return $this->success_data('直播间列表',['list'=>$list]);
     }
 
     public function getFirstRoom(){
-        $room_info = [];
+        $Wechat = new WeChat();
+        $Wechat->updateLives();
+        /*$room_info = [];
         $has_living = false;
         $goon = true;
         $offset = 0;
@@ -314,6 +327,12 @@ class MiniliveController extends Controller
             if($n ==$stopn){
                 $goon = false;
             }
+        }*/
+        $has_living = true;
+        $room_info = Live::where('live_status',101)->select(['name','room_id','cover_img','share_img','live_status', 'start_time', 'end_time','anchor_name','goods','rtmp','group_id'])->first();
+        if(empty($room_info)){
+            $has_living = false;
+            $room_info = Live::where('live_status',101)->select(['name','room_id','cover_img','share_img','live_status', 'start_time', 'end_time','anchor_name','goods','rtmp','group_id'])->first();
         }
         return $this->success_data('直播首页',['has_living'=>$has_living, 'room_info'=>$room_info]);
     }
@@ -342,7 +361,7 @@ class MiniliveController extends Controller
         if($res['errcode'] == 0){
             return $this->success_data('直播间回放',['info'=>$res['live_replay'], 'total'=>$res['total']]);
         }else{
-            return $this->success_data('直播间回放',[]);
+            return $this->success_data('直播间回放',['info'=>[],'total'=>0]);
         }
     }
 
@@ -461,6 +480,17 @@ class MiniliveController extends Controller
         $TLSSig = new TLSSigAPIv2($this->Imappid, $this->Imkey);
         $genSign = $TLSSig->genSig($userId);
         return $genSign;
+    }
+
+    /**生成genSig
+     * @param Request $request
+     * @return array
+     */
+    public function makeGenSigForRequest(Request $request){
+        $userId = $request->userid;
+        $TLSSig = new TLSSigAPIv2($this->Imappid, $this->Imkey);
+        $genSign = $TLSSig->genSig($userId);
+        return $this->success_data('UserSig',['userID'=>$userId, 'UserSig'=>$genSign]);
     }
 
 

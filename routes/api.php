@@ -176,6 +176,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
     //导入账号
     Route::post('importuser','MiniliveController@exportChaterRequest');
+    //登陆鉴权
+    Route::post('userlog','MiniliveController@makeGenSigForRequest');
     //创建聊天室
     Route::post('createchatroom','MiniliveController@createChatRoomByReqest');
     //获取最新一个聊天室

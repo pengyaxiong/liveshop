@@ -45,6 +45,9 @@ Route::group([
     Route::group(['prefix' => 'live', 'namespace' => 'Live', 'as' => 'live.'], function (Router $router){
         //直播间管理
         $router->resource('rooms', 'LiveController');
+        $router->resource('goods', 'LivegoodsController');
+
+        $router->get('getproducts', 'ApiController@getProducts');
     });
     
     //关于我们
