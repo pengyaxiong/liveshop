@@ -277,7 +277,7 @@ class MiniliveController extends Controller
             }
             return $this->success_data('直播间列表',['list'=>$res['room_info']]);
         }else{
-            return $this->success_data('直播间列表错误信息',[]);
+            return $this->success_data('直播间列表错误信息',['list'=>[]]);
         }
     }
 
@@ -342,7 +342,7 @@ class MiniliveController extends Controller
         if($res['errcode'] == 0){
             return $this->success_data('直播间回放',['info'=>$res['live_replay'], 'total'=>$res['total']]);
         }else{
-            return $this->error_data('直播间回放获取错误',$res['errmsg']);
+            return $this->success_data('直播间回放',[]);
         }
     }
 
