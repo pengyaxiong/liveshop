@@ -277,7 +277,7 @@ class MiniliveController extends Controller
             }
             return $this->success_data('直播间列表',['list'=>$res['room_info']]);
         }else{
-            return $this->error_data('直播间列表错误信息',$res);
+            return $this->success_data('直播间列表错误信息',[]);
         }
     }
 
