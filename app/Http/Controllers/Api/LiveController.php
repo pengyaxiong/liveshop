@@ -288,8 +288,8 @@ class LiveController extends Controller
             $params = array(
                 "DomainName" => $request->DomainName?$request->DomainName:$this->PushDomain,
                 "AppName" => $request->AppName,
-                "StartTime" => $request->StartTime,
-                "EndTime" => $request->EndTime,
+                "StartTime" => date('Y-m-dTH:i:s\Z',strtotime($request->StartTime)),
+                "EndTime" => date('Y-m-dTH:i:s\Z',strtotime($request->EndTime)),
                 "StreamName" => $request->StreamName
             );
             $req->fromJsonString(json_encode($params));
