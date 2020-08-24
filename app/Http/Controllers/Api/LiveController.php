@@ -293,6 +293,8 @@ class LiveController extends Controller
                 "EndTime" => time($request->EndTime),
                 "StreamName" => $request->StreamName
             );
+            var_dump($params);
+            exit;
             $req->fromJsonString(json_encode($params));
 
 
