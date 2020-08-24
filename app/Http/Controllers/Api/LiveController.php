@@ -28,6 +28,7 @@ class LiveController extends Controller
     protected $PushDomain = '109990.livepush.myqcloud.com';
     protected $PlayDomain = 'play.hotlantern.com';
     protected $CurrentProtocol = 'http://';
+    protected $Key = '4f864e3f67bcddd527275d910fe630ad';
     public function __construct()
     {
         $this->SecretId = env('SecretId');
@@ -239,7 +240,42 @@ class LiveController extends Controller
         }
     }
 
-    /**获取直播中的流，即查询直播中的直播间
+    public function DescribeLiveStreamOnlineListFirst(Request $request){
+        try {
+
+            $cred = new Credential($this->SecretId, $this->SecretKey);
+            $httpProfile = new HttpProfile();
+            $httpProfile->setEndpoint("live.tencentcloudapi.com");
+
+            $clientProfile = new ClientProfile();
+            $clientProfile->setHttpProfile($httpProfile);
+            $client = new LiveClient($cred, "ap-guangzhou", $clientProfile);
+
+            $req = new DescribeLiveStreamOnlineListRequest();
+
+            $params = array(
+                "DomainName" => $request->DomainName,
+                "AppName" => $request->AppName,
+                "PageNum" => $request->PageNum,
+                "PageSize" => $request->PageSize,
+                "StreamName" => $request->StreamName
+            );
+            $req->fromJsonString(json_encode($params));
+
+
+            $resp = $client->DescribeLiveStreamOnlineList($req);
+
+            $respArr = json_decode($resp->toJsonString(), true);
+            foreach ($respArr['OnlineInfo'] as $key=>$value){
+                $respArr['OnlineInfo'][$key]['playUrl'] = $this->getPlayUrl($this->PlayDomain,$value['StreamName']);
+            }
+            return json_encode($respArr);
+        } catch (TencentCloudSDKException $e) {
+            echo $e;
+        }
+    }
+
+    /**获取直播中的流列表，即查询直播中的直播间列表
      * @param Request $request
      */
     public function DescribeLiveStreamOnlineList(Request $request)
@@ -307,8 +343,20 @@ class LiveController extends Controller
 
     public function CreatePush(Request $request)
     {
+        $roomTitle = $request->roomTitle;
+        $openId = $request->openId;
+        $nickName = $request->nickName;
+        $vataor = $request->vataor;
         $time = $request->endTime ? $request->endTime : date('Y-m-d H:i:s', strtotime('+3 hours'));
-        echo $this->getPushUrl("108038.livepush.myqcloud.com", $request->streamName, "7c431981130126dda584128eaa253793", $time);
+        $pushUrl = $this->getPushUrl($this->PushDomain, $openId, $this->Key, $time);
+        $playUrl = $this->getPlayUrl($this->PlayDomain, $openId);
+        $info = DB::table('live_rooms')->where('openid',$openId)->find();
+        if(empty($info)){
+            $data = ['openid'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'vataor'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
+            $result = DB::table('live_rooms')->insert($data);
+        }else{
+            $data = ['openid'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'vataor'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'update_at'=>time()];
+        }
     }
 
     /**
@@ -351,7 +399,7 @@ class LiveController extends Controller
                     "txTime" => $txTime
                 ));
         }
-        return "http://" . $domain . "/live/" . $streamName .'.flv'. (isset($ext_str) ? $ext_str : "");
+        return "rtmp://" . $domain . "/live/" . $streamName .'.flv'. (isset($ext_str) ? $ext_str : "");
     }
 
     public function DropLiveStream(Request $request)
