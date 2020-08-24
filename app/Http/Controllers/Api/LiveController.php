@@ -285,7 +285,8 @@ class LiveController extends Controller
             $client = new LiveClient($cred, "ap-guangzhou", $clientProfile);
 
             $req = new DescribeLiveStreamPublishedListRequest();
-            var_dump($request);
+            var_dump($request->StartTime);
+            var_dump($request->EndTime);
             $params = array(
                 "DomainName" => $request->DomainName?$request->DomainName:$this->PushDomain,
                 "AppName" => $request->AppName,
