@@ -12,6 +12,8 @@ use TencentCloud\Live\V20180801\LiveClient;
 use TencentCloud\Live\V20180801\Models\DescribeLiveRecordTemplatesRequest;
 use TencentCloud\Live\V20180801\Models\CreateLiveRecordTemplateRequest;
 use TencentCloud\Live\V20180801\Models\DeleteLiveRecordTemplateRequest;
+use TencentCloud\Live\V20180801\Models\DescribeLiveStreamPublishedListRequest;
+use TencentCloud\Live\V20180801\Models\DescribeStreamPlayInfoListRequest;
 use TencentCloud\Live\V20180801\Models\ModifyLiveRecordTemplateRequest;
 use TencentCloud\Live\V20180801\Models\CreateRecordTaskRequest;
 use TencentCloud\Live\V20180801\Models\StopRecordTaskRequest;
@@ -235,6 +237,9 @@ class LiveController extends Controller
         }
     }
 
+    /**获取直播中的流，即查询直播中的直播间
+     * @param Request $request
+     */
     public function DescribeLiveStreamOnlineList(Request $request)
     {
         try {
@@ -262,6 +267,34 @@ class LiveController extends Controller
             $resp = $client->DescribeLiveStreamOnlineList($req);
 
             print_r($resp->toJsonString());
+        } catch (TencentCloudSDKException $e) {
+            echo $e;
+        }
+    }
+
+    public function DescribeLiveStreamPublishedList(Request $request){
+        try {
+
+            $cred = new Credential($this->SecretId, $this->SecretKey);
+            $httpProfile = new HttpProfile();
+            $httpProfile->setEndpoint("live.tencentcloudapi.com");
+
+            $clientProfile = new ClientProfile();
+            $clientProfile->setHttpProfile($httpProfile);
+            $client = new LiveClient($cred, "ap-guangzhou", $clientProfile);
+
+            $req = new DescribeLiveStreamPublishedListRequest();
+
+            $params = array(
+                'StartTime' => '2020-08-24 12:00:00',
+                'EndTime' => '2020-08-24 24:00:00'
+            );
+            $req->fromJsonString(json_encode($params));
+
+
+            $resp = $client->DescribeLiveStreamPublishedList($req);
+
+            return $resp->toJsonString();
         } catch (TencentCloudSDKException $e) {
             echo $e;
         }
@@ -327,4 +360,5 @@ class LiveController extends Controller
             echo $e;
         }
     }
+
 }
