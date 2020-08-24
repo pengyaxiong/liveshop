@@ -157,8 +157,11 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('CreatePush', 'LiveController@CreatePush');
     //断开直播流
     Route::post('DropLiveStream', 'LiveController@DropLiveStream');
-    
-    
+    //查询历史流状态
+    Route::post('DescribeLiveStreamPublishedList', 'LiveController@DescribeLiveStreamPublishedList');
+
+
+
     //原生直播小程序接口
     //创建直播间
     Route::post('createroom','MiniliveController@createLiveRoom');
