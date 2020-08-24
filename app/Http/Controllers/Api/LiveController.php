@@ -26,7 +26,7 @@ class LiveController extends Controller
     protected $SecretId;
     protected $SecretKey;
     protected $PushDomain = '109990.livepush.myqcloud.com';
-    protected $PlayDomain = '109990.liveplay.myqcloud.com';
+    protected $PlayDomain = 'play.hotlantern.com';
     protected $CurrentProtocol = 'http://';
     public function __construct()
     {
@@ -354,7 +354,7 @@ class LiveController extends Controller
                     "txTime" => $txTime
                 ));
         }
-        return "https://" . $domain . "/live/" . $streamName .'.flv'. (isset($ext_str) ? $ext_str : "");
+        return "http://" . $domain . "/live/" . $streamName .'.flv'. (isset($ext_str) ? $ext_str : "");
     }
 
     public function DropLiveStream(Request $request)
