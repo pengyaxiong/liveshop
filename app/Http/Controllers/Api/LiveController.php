@@ -26,6 +26,7 @@ class LiveController extends Controller
     protected $SecretId;
     protected $SecretKey;
     protected $PushDomain = '109990.livepush.myqcloud.com';
+    protected $PlayDomain = '109990.liveplay.myqcloud.com';
     protected $CurrentProtocol = 'http://';
     public function __construct()
     {
@@ -267,7 +268,7 @@ class LiveController extends Controller
 
             $resp = $client->DescribeLiveStreamOnlineList($req);
             foreach ($resp->OnlineInfo as $key=>$value){
-                $resp->OnlineInfo[$key]->playUrl = $this->getPlayUrl($this->PushDomain,'testlive');
+                $value->playUrl = $this->getPlayUrl($this->PlayDomain,'testlive');
             }
             print_r($resp->toJsonString());
         } catch (TencentCloudSDKException $e) {
