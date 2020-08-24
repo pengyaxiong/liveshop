@@ -270,7 +270,7 @@ class LiveController extends Controller
 
             $respArr = json_decode($resp->toJsonString(), true);
             foreach ($respArr['OnlineInfo'] as $key=>$value){
-                $respArr['OnlineInfo'][$key]['playUrl'] = $this->getPlayUrl($this->PlayDomain,'testlive');
+                $respArr['OnlineInfo'][$key]['playUrl'] = $this->getPlayUrl($this->PlayDomain,$value['StreamName']);
             }
             return json_encode($respArr);
         } catch (TencentCloudSDKException $e) {
