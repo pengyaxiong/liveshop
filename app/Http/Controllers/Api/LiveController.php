@@ -307,9 +307,11 @@ class LiveController extends Controller
             foreach ($respArr['OnlineInfo'] as $key=>$value){
                 $roomInfo = DB::table('live_rooms')->where('streamname',$value['StreamName'])->first();
                 $respArr['OnlineInfo'][$key]['playUrl'] = $this->getPlayUrl($this->PlayDomain,$value['StreamName']);
-                $respArr['OnlineInfo'][$key]['title'] = $roomInfo['title'];
-                $respArr['OnlineInfo'][$key]['nickname'] = $roomInfo['nickname'];
-                $respArr['OnlineInfo'][$key]['avator'] = $roomInfo['avator'];
+                if(!empty($roomInfo)){
+                    $respArr['OnlineInfo'][$key]['title'] = $roomInfo['title'];
+                    $respArr['OnlineInfo'][$key]['nickname'] = $roomInfo['nickname'];
+                    $respArr['OnlineInfo'][$key]['avator'] = $roomInfo['avator'];
+                }
             }
             return $this->success_data('直播列表',['lists'=>$respArr]);
         } catch (TencentCloudSDKException $e) {
