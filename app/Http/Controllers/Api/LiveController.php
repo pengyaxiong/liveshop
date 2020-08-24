@@ -266,7 +266,8 @@ class LiveController extends Controller
 
 
             $resp = $client->DescribeLiveStreamOnlineList($req);
-
+            var_dump($resp);
+            //foreach ($resp[''])
             print_r($resp->toJsonString());
         } catch (TencentCloudSDKException $e) {
             echo $e;
@@ -277,7 +278,7 @@ class LiveController extends Controller
         try {
 
             $cred = new Credential($this->SecretId, $this->SecretKey);
-            $httpProfile = new HttpProfile();
+            $httpProfile = new HttpProfile($this->CurrentProtocol);
             $httpProfile->setEndpoint("live.tencentcloudapi.com");
 
             $clientProfile = new ClientProfile();
@@ -292,7 +293,6 @@ class LiveController extends Controller
                 "EndTime" => date('c',strtotime($request->EndTime)),
                 "StreamName" => $request->StreamName
             );
-            var_dump($params);
             $req->fromJsonString(json_encode($params));
 
 
@@ -333,6 +333,25 @@ class LiveController extends Controller
         return "rtmp://" . $domain . "/live/" . $streamName . (isset($ext_str) ? $ext_str : "");
     }
 
+    /**
+     * @param $domain 您用来推流的域名
+     * @param $streamName 您用来区别不同推流地址的唯一流名称
+     * @param null $key 安全密钥
+     * @param null $time 过期时间 sample 2016-11-12 12:00:00
+     * @return string string url
+     */
+    public function getPlayUrl($domain, $streamName, $key = null, $time= null){
+        if ($key && $time) {
+            $txTime = strtoupper(base_convert(strtotime($time), 10, 16));
+            //txSecret = MD5( KEY + streamName + txTime )
+            $txSecret = md5($key . $streamName . $txTime);
+            $ext_str = "?" . http_build_query(array(
+                    "txSecret" => $txSecret,
+                    "txTime" => $txTime
+                ));
+        }
+        return "https://" . $domain . "/live/" . $streamName .'flv'. (isset($ext_str) ? $ext_str : "");
+    }
 
     public function DropLiveStream(Request $request)
     {
