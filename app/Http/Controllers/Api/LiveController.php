@@ -282,7 +282,7 @@ class LiveController extends Controller
         try {
 
             $cred = new Credential($this->SecretId, $this->SecretKey);
-            $httpProfile = new HttpProfile($this->CurrentProtocol);
+            $httpProfile = new HttpProfile();
             $httpProfile->setEndpoint("live.tencentcloudapi.com");
 
             $clientProfile = new ClientProfile();
@@ -298,10 +298,7 @@ class LiveController extends Controller
                 "StreamName" => $request->StreamName
             );
             $req->fromJsonString(json_encode($params));
-
-
             $resp = $client->DescribeLiveStreamPublishedList($req);
-
             return $resp->toJsonString();
         } catch (TencentCloudSDKException $e) {
             echo $e;
