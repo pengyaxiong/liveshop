@@ -267,7 +267,7 @@ class LiveController extends Controller
 
             $resp = $client->DescribeLiveStreamOnlineList($req);
             foreach ($resp->OnlineInfo as $key=>$value){
-                $resp->OnlineInfo->$key->playUrl = $this->getPlayUrl($this->PushDomain,'testlive');
+                $resp->OnlineInfo[$key]->playUrl = $this->getPlayUrl($this->PushDomain,'testlive');
             }
             print_r($resp->toJsonString());
         } catch (TencentCloudSDKException $e) {
