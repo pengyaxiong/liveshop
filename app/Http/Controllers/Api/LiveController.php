@@ -25,7 +25,8 @@ class LiveController extends Controller
 {
     protected $SecretId;
     protected $SecretKey;
-    protected $pushDomain = '109990.livepush.myqcloud.com';
+    protected $PushDomain = '109990.livepush.myqcloud.com';
+    protected $CurrentProtocol = 'http://';
     public function __construct()
     {
         $this->SecretId = env('SecretId');
@@ -286,10 +287,10 @@ class LiveController extends Controller
             $req = new DescribeLiveStreamPublishedListRequest();
 
             $params = array(
-                "DomainName" => $request->DomainName?$request->DomainName:$this->pushDomain,
+                "DomainName" => $request->DomainName?$request->DomainName:$this->PushDomain,
                 "AppName" => $request->AppName,
-                "EndTime" => $request->EndTime,
-                "StartTime" => $request->StartTime,
+                "StartTime" => time($request->StartTime),
+                "EndTime" => time($request->EndTime),
                 "StreamName" => $request->StreamName
             );
             $req->fromJsonString(json_encode($params));
