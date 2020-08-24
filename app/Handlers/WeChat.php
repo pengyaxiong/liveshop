@@ -126,8 +126,7 @@ class WeChat
         $json=json_encode($datas);
         $access_token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/add?access_token={$access_token}";
-        var_dump($access_token);
-        exit;
+        var_dump($json);
         $headers = ['content-type'=>'application/json'];
         $result = $this->postHttp($url, $json, $headers);
         var_dump($result);
@@ -271,23 +270,27 @@ class WeChat
             $res = json_decode($result, true);
             if(isset($res['errcode']) && ($res['errcode'] == 0) && !empty($res['room_info'])){
                 foreach ($res['room_info'] as $key=>$val){
+                    $data = [
+                        'room_id' => $val['roomid'],
+                        'name' => $val['name'],
+                        'cover_img' => $val['cover_img'],
+                        'share_img'=> $val['share_img'],
+                        'live_status' => $val['live_status'],
+                        'start_time' => $val['start_time'],
+                        'end_time' => $val['end_time'],
+                        'anchor_name' => $val['anchor_name'],
+                        'goods' => $val['goods']?json_encode($val['goods']):''
+                    ];
+                    $info = DB::table('live_rooms')->where('room_id', $val['roomid'])->first();
+                    if($info){
+                        DB::table('live_rooms')->where('room_id', $val['roomid'])->update($data);
+                    }
                     if($val['roomid'] == $latestRoom_id){
                         $goon = false;
                         break;
                     }else{
-                        $data = [
-                            'room_id' => $val['roomid'],
-                            'name' => $val['name'],
-                            'cover_img' => $val['cover_img'],
-                            'share_img'=> $val['share_img'],
-                            'live_status' => $val['live_status'],
-                            'start_time' => $val['start_time'],
-                            'end_time' => $val['end_time'],
-                            'anchor_name' => $val['anchor_name'],
-                            'goods' => $val['goods']?json_encode($val['goods']):''
-                        ];
+
                        $s =  DB::table('live_rooms')->insert($data);
-                       var_dump($s);
                     }
                 }
             }else{
