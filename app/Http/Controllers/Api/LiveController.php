@@ -26,14 +26,16 @@ class LiveController extends Controller
 {
     protected $SecretId;
     protected $SecretKey;
-    protected $PushDomain = '109990.livepush.myqcloud.com';
-    protected $PlayDomain = 'play.hotlantern.com';
-    protected $CurrentProtocol = 'http://';
-    protected $Key = '4f864e3f67bcddd527275d910fe630ad';
+    protected $PushDomain ;
+    protected $PlayDomain ;
+    protected $Key ;
     public function __construct()
     {
         $this->SecretId = env('SecretId');
         $this->SecretKey = env('SecretKey');
+        $this->PushDomain = env('LIVE_PUSH_DOMAIN');
+        $this->PlayDomain = env('LIVE_PLAY_DOMAIN');
+        $this->Key = env('LIVE_KEY');
     }
 
     public function DescribeLiveRecordTemplates(Request $request)
