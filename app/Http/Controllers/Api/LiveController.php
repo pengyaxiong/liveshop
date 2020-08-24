@@ -301,14 +301,17 @@ class LiveController extends Controller
             );
             $req->fromJsonString(json_encode($params));
 
-
             $resp = $client->DescribeLiveStreamOnlineList($req);
 
             $respArr = json_decode($resp->toJsonString(), true);
             foreach ($respArr['OnlineInfo'] as $key=>$value){
+                $roomInfo = DB::table('live_rooms')->where('streamname',$value['StreamName'])->first();
                 $respArr['OnlineInfo'][$key]['playUrl'] = $this->getPlayUrl($this->PlayDomain,$value['StreamName']);
+                $respArr['OnlineInfo'][$key]['title'] = $roomInfo['title'];
+                $respArr['OnlineInfo'][$key]['nickname'] = $roomInfo['nickname'];
+                $respArr['OnlineInfo'][$key]['avator'] = $roomInfo['avator'];
             }
-            return json_encode($respArr);
+            return $this->success_data('直播列表',['lists'=>$respArr]);
         } catch (TencentCloudSDKException $e) {
             echo $e;
         }
@@ -352,11 +355,13 @@ class LiveController extends Controller
         $playUrl = $this->getPlayUrl($this->PlayDomain, $openId);
         $info = DB::table('live_rooms')->where('openid',$openId)->find();
         if(empty($info)){
-            $data = ['openid'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'vataor'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
+            $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
             $result = DB::table('live_rooms')->insert($data);
         }else{
-            $data = ['openid'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'vataor'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'update_at'=>time()];
+            $data = ['openid'=>$openId,'streamname'=>$openId, 'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'update_at'=>time()];
+            $result = DB::table('live_rooms')->where('openid', $openId)->update($data);
         }
+        return $this->success_data('开播',$data);
     }
 
     /**
