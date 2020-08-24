@@ -354,7 +354,7 @@ class LiveController extends Controller
                     "txTime" => $txTime
                 ));
         }
-        return "https://" . $domain . "/live/" . $streamName .'flv'. (isset($ext_str) ? $ext_str : "");
+        return "https://" . $domain . "/live/" . $streamName .'.flv'. (isset($ext_str) ? $ext_str : "");
     }
 
     public function DropLiveStream(Request $request)
