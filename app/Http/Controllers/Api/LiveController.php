@@ -286,6 +286,7 @@ class LiveController extends Controller
             $req = new DescribeLiveStreamPublishedListRequest();
 
             $params = array(
+                'DomainName' => $request->DomainName,
                 'StartTime' => '2020-08-24 12:00:00',
                 'EndTime' => '2020-08-24 24:00:00'
             );
