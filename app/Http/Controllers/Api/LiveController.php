@@ -401,7 +401,7 @@ class LiveController extends Controller
 
         $info = DB::table('live_rooms')->where('openid',$openId)->first();
         if(empty($info)){
-            $group_id = $this->createChatRoom(['userid'=>$userId, 'name'=> $nickName]);
+            $group_id = $this->createChatRoom(['userId'=>$userId, 'name'=> $nickName]);
             $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
             $result = DB::table('live_rooms')->insert($data);
         }else{
