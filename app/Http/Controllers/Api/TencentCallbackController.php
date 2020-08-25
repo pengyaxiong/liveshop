@@ -21,18 +21,23 @@ class TencentCallbackController extends Controller
         $callbackData = json_decode($data, true);
         switch ($data['event_type']){
             case 0://断流通知
+            case '0':
                 $data_['StreamState'] = 'inactive';
                 $result = DB::table('live_rooms')->where('streamname', $data['stream_id'])->update($data_);
                 break;
             case 1://推流通知
+            case '1':
                 $data_['StreamState'] = 'active';
                 $result = DB::table('live_rooms')->where('streamname', $data['stream_id'])->update($data_);
                 break;
             case 100://录制通知
+            case '100':
                 break;
             case 200://直播截图
+            case '200':
                 break;
             case 317://鉴黄通知
+            case '317':
                 break;
             default:
                 break;
