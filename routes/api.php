@@ -153,7 +153,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
     //查询直播中的流
     Route::post('DescribeLiveStreamOnlineList', 'LiveController@DescribeLiveStreamOnlineList');
-    //创建推流地址
+    //创建或者修改推流地址
     Route::post('CreatePush', 'LiveController@CreatePush');
     //断开直播流
     Route::post('DropLiveStream', 'LiveController@DropLiveStream');
