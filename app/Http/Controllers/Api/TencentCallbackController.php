@@ -15,8 +15,9 @@ class TencentCallbackController extends Controller
     /*
      * 接收腾讯回调
      */
-    public function LiveCallback(Request $request){
-        $callbackData = json_decode($request->data);
+    public function LiveCallback(){
+        $data = file_get_contents("php://input");
+        $callbackData = json_decode($data);
         switch ($callbackData['event_type']){
             case 0://断流通知
                 $data['StreamState'] = 'inactive';
@@ -35,13 +36,5 @@ class TencentCallbackController extends Controller
             default:
                 break;
         }
-        /*if($callbackData['event_type'] == 0){//断流通知
-            $data['StreamState'] = 'inactive';
-        }else if($callbackData['event_type'] == 1){//推流通知
-            $data['StreamState'] = 'active';
-        }else{
-            $data['StreamState'] = 'forbid';
-        }
-        $result = DB::table('live_rooms')->where('streamname', $callbackData['stream_id'])->update($data);*/
     }
 }
