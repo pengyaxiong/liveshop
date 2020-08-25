@@ -529,7 +529,7 @@ class LiveController extends Controller
             'Name' => $data['name'],
             'ApplyJoinOption' => 'FreeAccess'
         ];
-        if($data['group_id']){
+        if(isset($data['group_id'])){
             $groupData['GroupId'] = $data['group_id'];
         }
         $result = $this->exportChater(['userId'=>$data['userId'],'name'=>$data['name']]);
