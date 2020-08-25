@@ -32,6 +32,11 @@ class TencentCallbackController extends Controller
                 break;
             case 100://录制通知
             case '100':
+                $data_['start_time'] = $callbackData->start_time;
+                if(isset($callbackData->end_time)){
+                    $data_['end_time'] = $callbackData->end_time;
+                }
+                $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 break;
             case 200://直播截图
             case '200':
