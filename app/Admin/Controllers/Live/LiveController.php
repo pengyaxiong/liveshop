@@ -44,7 +44,7 @@ class LiveController extends AdminController{
         });
         $grid->column('操作')->display(function(){
             return '<button class="btn btn-primary btn-xs">添加商品</button>';
-        })->modal('添加商品','/admin/live/api/getproducts');
+        })->modal('/admin/live/api/getproducts');
         $grid->disableActions();
         $grid->disableExport();
         $grid->disableColumnSelector();
