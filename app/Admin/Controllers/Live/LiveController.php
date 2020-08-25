@@ -7,6 +7,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\Live\Live;
 use App\Handlers\WeChat;
+use Encore\Admin\Widgets\Table;
 
 class LiveController extends AdminController{
     protected $title = '直播管理';
