@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Handlers\TLSSigAPIv2;
+use App\Handlers\TencentIM;
 use App\Http\Controllers\Controller;
 use TencentCloud\Common\Credential;
 use TencentCloud\Common\Profile\ClientProfile;
@@ -34,6 +35,7 @@ class LiveController extends Controller
     protected $Imappid;
     protected $Imkey;
     protected $Imadmin;
+    protected $TencentIm;
     public function __construct()
     {
         $this->SecretId = env('SecretId');
@@ -46,6 +48,7 @@ class LiveController extends Controller
         $this->Imappid = env('IM_SDK_APPID','');
         $this->Imkey = env('IM_SDK_KEY','');
         $this->Imadmin = env('IM_ADMIN','');
+        $this->TencentIm = new TencentIM();
     }
 
     public function DescribeLiveRecordTemplates(Request $request)
@@ -623,6 +626,12 @@ class LiveController extends Controller
         if(empty($info)){
             $status = 'replay';
             $info = DB::table('live_rooms')->where('StreamState','inactive')->first();
+            if($info['groupid']){
+                $res = $this->TencentIm->getChatRoomInfo($info['groupid']);
+                if($res['ErrorCode'] == 0){
+                    $info['viewnum'] = $res['GroupInfo'][0]['MemberNum'];
+                }
+            }
         }
 
         return $this->success_data('首页直播',['data'=>$info,'status'=>$status]);
