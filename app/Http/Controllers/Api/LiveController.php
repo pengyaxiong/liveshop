@@ -404,7 +404,7 @@ class LiveController extends Controller
             $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
             $chatr = $this->createChatRoom(['userId'=>$userId, 'name'=> $nickName]);
             if($chatr['ErrorCode'] == 0){
-                $data['group_id'] = $chatr['GroupId'];
+                $data['groupid'] = $chatr['GroupId'];
             }
             $result = DB::table('live_rooms')->insert($data);
         }else{
