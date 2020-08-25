@@ -18,7 +18,7 @@ class TencentCallbackController extends Controller
     public function LiveCallback(){
         $data = file_get_contents("php://input");
         file_put_contents(storage_path('logs/callback.log'),$data);
-        $callbackData = json_decode($data);
+        $callbackData = json_decode($data, true);
         switch ($callbackData['event_type']){
             case 0://断流通知
                 $data['StreamState'] = 'inactive';
