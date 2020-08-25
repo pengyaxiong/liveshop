@@ -31,11 +31,13 @@ class LiveController extends AdminController{
         $grid->column('goods','货架商品')->display(function(){
             return '查看';
         })->expand(function($model){
-            $goods = json_decode($this->goods, true);
             $list = [];
-            foreach ($goods as $key=>$goodid){
-                $info = Product::find($goodid);
-                $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>$info['image'],'action'=>''];
+            if(!empty($this->goods)){
+                $goods = json_decode($this->goods, true);
+                foreach ($goods as $key=>$goodid){
+                    $info = Product::find($goodid);
+                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>$info['image'],'action'=>''];
+                }
             }
             return new Table(['ID','名称','图片','操作'], $list);
         });
