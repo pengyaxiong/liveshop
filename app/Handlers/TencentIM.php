@@ -63,6 +63,20 @@ class TencentIM
         return $output;
     }
 
+    /**
+     * @param $apiurl api接口
+     * @param $data 传递的数据
+     * @return mixed
+     */
+    public function requestDom($apiurl, $data){
+        $usersig = $this->makeGenSig($this->Imadmin);
+        //$usersig = eJyrVgrxCdYrSy1SslIy0jNQ0gHzM1NS80oy0zLBwokpuZl5UInilOzEgoLMFCUrQxMDAxNDUwNLc4hMakVBZlEqUNzU1NTIwMAAIlqSmQsWszS3MDIxMIOqLc5MB5rrkRMamRVa5Oseo59rWhngY2BSVZZkFhxZWBiQ5W9aElxa4FyZV*zo5lFZ7GmrVAsAZqoygA__
+        $random = rand(100000000,99999999).rand(100000000,99999999).rand(100000000,99999999);
+        $url = "https://console.tim.qq.com/{$apiurl}?sdkappid={$this->Imappid}&identifier={$this->Imadmin}&usersig={$usersig}&random={$random}&contenttype=json";
+        $res = $this->postHttp($url, json_encode($data));
+        return $res;
+    }
+
     /**生成genSig
      * @param Request $request
      * @return array
