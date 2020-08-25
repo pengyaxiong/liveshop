@@ -611,4 +611,51 @@ class LiveController extends Controller
         curl_close($curl);
         return $output;
     }
+
+
+    /**
+     * 获取第一条正在直播的记录，如果没有，则获取第一条录播
+     */
+    public function getFirstLive(){
+        $status = 'living';
+        $info = DB::table('live_rooms')->where('StreamState','active')->first();
+        if(empty($info)){
+            $status = 'replay';
+            $info = DB::table('live_rooms')->where('StreamState','inactive')->first();
+        }
+        $this->success_data('首页直播',['data'=>$info,'status'=>$status]);
+    }
+
+    /**正在直播的流列表
+     * @param Request $request
+     * @return array
+     */
+    public function getLiveList(Request $request){
+        $start = $request->start?$request->start:0;
+        $limit = $request->limit?$request->limit:20;
+        $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray();
+        return $this->success_data('直播列表',['list'=>$list]);
+    }
+
+    /**录播列表
+     * @param Request $request
+     * @return array
+     */
+    public function getReplayList(Request $request){
+        $start = $request->start?$request->start:0;
+        $limit = $request->limit?$request->limit:20;
+        $starttime = strtotime($request->start_time);
+        $endtime = strtotime($request->end_time);
+        $list = DB::table('live_rooms')->where('StreamState','active')->where('end_time','>',$starttime)->where('end_time','<',$endtime)->offset($start)->limit($limit)->get()->toArray();
+        return $this->success_data('录播列表',['list'=>$list]);
+    }
+
+    public function getStreamInfo(Request $request){
+        $stream = $request->stream_name;
+        if(empty($stream)){
+            return $this->error_data('获取失败，未提交必要的数据');
+        }
+        $info = DB::table('live_rooms')->where('streamname', $stream)->first();
+        return $this->success_data('直播间信息', ['info'=>$info]);
+    }
 }
