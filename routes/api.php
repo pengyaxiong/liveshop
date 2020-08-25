@@ -202,5 +202,5 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
     //接收回调
     //接收推断流回调
-    Route::post('LiveCallback','TencentCallback');
+    Route::post('LiveCallback','TencentCallbackController@LiveCallback');
 });
