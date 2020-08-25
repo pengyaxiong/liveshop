@@ -628,7 +628,7 @@ class LiveController extends Controller
             $info = DB::table('live_rooms')->where('StreamState','inactive')->first();
             $info->viewnum = 0;
             if($info['groupid']){
-                $res = $this->TencentIm->getChatRoomInfo($info['groupid']);
+                $res = $this->TencentIm->getChatRoomInfo($info->groupid);
                 if($res['ErrorCode'] == 0){
                     $info->viewnum = $res['GroupInfo'][0]['MemberNum'];
                 }
