@@ -619,10 +619,13 @@ class LiveController extends Controller
     public function getFirstLive(){
         $status = 'living';
         $info = DB::table('live_rooms')->where('StreamState','active')->first();
+
         if(empty($info)){
             $status = 'replay';
             $info = DB::table('live_rooms')->where('StreamState','inactive')->first();
         }
+        var_dump($status);
+        var_dump($info);
         $this->success_data('首页直播',['data'=>$info,'status'=>$status]);
     }
 
