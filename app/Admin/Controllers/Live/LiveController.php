@@ -22,11 +22,15 @@ class LiveController extends AdminController{
         $grid->column('nickname','主播昵称');
         $grid->column('avator','主播头像')->image('',50,50);
         $grid->column('title','直播间标题');
-        $grid->column('pushurl','推流地址');
-        $grid->column('playurl','播放地址');
+        $grid->column('pushurl','推流地址')->width(150);
+        $grid->column('playurl','播放地址')->width(150);
         $grid->column('StreamState','状态');
         $grid->column('group_id','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
-        $grid->column('goods','货架商品');
+        $grid->column('goods','货架商品')->display(function(){
+            return '查看';
+        })->expand(function(){
+
+        });
         $grid->disableActions();
         $grid->disableExport();
         $grid->disableColumnSelector();
