@@ -648,7 +648,7 @@ class LiveController extends Controller
         $limit = $request->limit?$request->limit:20;
         $starttime = strtotime($request->start_time);
         $endtime = strtotime($request->end_time);
-        $list = DB::table('live_rooms')->where('StreamState','active')->where('end_time','>',$starttime)->where('end_time','<',$endtime)->offset($start)->limit($limit)->get()->toArray();
+        $list = DB::table('live_rooms')->where('StreamState','inactive')->where('end_time','>',$starttime)->where('end_time','<',$endtime)->offset($start)->limit($limit)->get()->toArray();
         return $this->success_data('录播列表',['list'=>$list]);
     }
 
