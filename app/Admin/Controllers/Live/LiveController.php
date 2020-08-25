@@ -33,6 +33,11 @@ class LiveController extends AdminController{
         })->expand(function(){
 
         });
+        $grid->column('操作')->display(function(){
+            return '<button class="btn btn-primary btn-xs">添加商品</button>';
+        })->modal(function(){
+            
+        });
         $grid->disableActions();
         $grid->disableExport();
         $grid->disableColumnSelector();
