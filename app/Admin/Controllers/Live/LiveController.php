@@ -30,8 +30,14 @@ class LiveController extends AdminController{
         $grid->column('group_id','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
         $grid->column('goods','货架商品')->display(function(){
             return '查看';
-        })->expand(function(){
-
+        })->expand(function($model){
+            $goods = json_decode($this->goods, true);
+            $list = [];
+            foreach ($goods as $key=>$goodid){
+                $info = Product::find($goodid);
+                $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>$info['image'],'action'=>''];
+            }
+            return new Table(['ID','名称','图片','操作'], $list);
         });
         $grid->column('操作')->display(function(){
             return '<button class="btn btn-primary btn-xs">添加商品</button>';
