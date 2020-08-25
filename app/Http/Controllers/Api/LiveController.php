@@ -399,7 +399,7 @@ class LiveController extends Controller
         $pushUrl = $this->getPushUrl($this->PushDomain, $openId, $this->Key, $time);
         $playUrl = $this->getPlayUrl($this->PlayDomain, $openId);
 
-        $info = DB::table('live_rooms')->where('openid',$openId)->find();
+        $info = DB::table('live_rooms')->where('openid',$openId)->first();
         if(empty($info)){
             $group_id = $this->createChatRoom(['userid'=>$userId, 'name'=> $nickName]);
             $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
