@@ -162,7 +162,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
 
 
 
-    //原生直播小程序接口
+    /*//原生直播小程序接口
     //创建直播间
     Route::post('createroom','MiniliveController@createLiveRoom');
     //获取直播间列表以及信息
@@ -174,7 +174,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     //获取商品列表
     Route::get('getgoods','MiniliveController@getGoodsList');
     //上传图片
-    Route::post('uploadimg', 'MiniliveController@uploadImgToWexin');
+    Route::post('uploadimg', 'MiniliveController@uploadImgToWexin');*/
 
 
     //导入账号
@@ -199,4 +199,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('changechatroommember','MiniliveController@changeChatRoomMemberRole');
     //删除聊天室
     Route::post('delchatroom','MiniliveController@destroyChatRoom');
+
+    //接收回调
+    //接收推断流回调
+    Route::post('LiveCallback','TencentCallback');
 });
