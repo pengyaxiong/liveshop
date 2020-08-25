@@ -397,7 +397,7 @@ class LiveController extends Controller
         $userId = $request->userId;
         $time = $request->endTime ? $request->endTime : date('Y-m-d H:i:s', strtotime('+3 hours'));
         $pushUrl = $this->getPushUrl($this->PushDomain, $openId, $this->Key, $time);
-        $playUrl = $this->getPlayUrl($this->PlayDomain, $openId);
+        $playUrl = $this->getPlayUrl($this->PlayDomain, $openId, $this->Key, $time);
 
         $info = DB::table('live_rooms')->where('openid',$openId)->first();
         if(empty($info)){
@@ -408,8 +408,9 @@ class LiveController extends Controller
             }
             $result = DB::table('live_rooms')->insert($data);
         }else{
-            $data = ['openid'=>$openId,'streamname'=>$openId, 'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'update_at'=>time()];
+            $data = ['openid'=>$openId,'streamname'=>$openId, 'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'updated_at'=>time()];
             $result = DB::table('live_rooms')->where('openid', $openId)->update($data);
+            $data = DB::table('live_rooms')->where('openid', $openId)->first();
         }
         return $this->success_data('开播',$data);
     }
