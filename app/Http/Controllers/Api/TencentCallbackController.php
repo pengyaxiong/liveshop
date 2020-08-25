@@ -36,6 +36,9 @@ class TencentCallbackController extends Controller
                 if(isset($callbackData->end_time)){
                     $data_['end_time'] = $callbackData->end_time;
                 }
+                if(isset($callbackData->video_url)){
+                    $data_['video_url'] = $callbackData->video_url;
+                }
                 $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 break;
             case 200://直播截图
@@ -43,6 +46,11 @@ class TencentCallbackController extends Controller
                 break;
             case 317://鉴黄通知
             case '317':
+                if(!empty($callbackData->abductionRisk)){
+                    $data_['AbductionRisktype'] = $callbackData->abductionRisk['type'];
+                    $data_['AbductionRisklevel'] = $callbackData->abductionRisk['level'];
+                    $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
+                }
                 break;
             default:
                 break;
