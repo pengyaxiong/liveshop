@@ -625,7 +625,7 @@ class LiveController extends Controller
 
         if(empty($info)){
             $status = 'replay';
-            $info = DB::table('live_rooms')->where('StreamState','inactive')->first();
+            $info = DB::table('live_rooms')->where('StreamState','inactive')->first()->toArray();
             $info['viewnum'] = 0;
             if($info['groupid']){
                 $res = $this->TencentIm->getChatRoomInfo($info['groupid']);
