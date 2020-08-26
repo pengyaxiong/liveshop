@@ -712,4 +712,33 @@ class LiveController extends Controller
         return $this->success_data('橱窗商品',['goods'=>$goodsList, 'coupon'=>$couponList]);
     }
 
+    /** 发送群通知
+     * @param Request $request
+     *          group_id 群组ID
+     *          message 消息内容
+     * @return array
+     */
+    public function sendNotification(Request $request){
+        $group_id = $request->group_id;
+        $content = $request->message;
+        $result = $this->TencentIm->sendRoomNotification($group_id, $content);
+        return $this->success_data('发送群消息', []);
+    }
+
+    /**
+     * @param Request $request
+     *          group_id 群组ID
+     *          members 需要操作的对象
+     *          shut_up 禁言时间，0取消禁言
+     * @return array
+     */
+    public function shutUp(Request $request){
+        $group_id = $request->group_id;
+        $memberStr = $request->members;
+        $shutUp = $request->shut_up;
+        $memberList = explode(',',$memberStr);
+        $result = $this->TencentIm->sendOrShutUp($group_id, $memberList, $shutUp);
+        return $this->success_data('禁言操作',[]);
+    }
+
 }
