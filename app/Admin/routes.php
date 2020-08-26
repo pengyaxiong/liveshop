@@ -50,7 +50,7 @@ Route::group([
         $router->get('getproducts', 'ApiController@getProducts');
         $router->get('getcoupons', 'ApiController@getCoupons');
         $router->get('editgoods','OtherController@editGoods');
-        $router->post('setgoods','ApiController@setGoods');
+        $router->post('setgoods','OtherController@setGoods');
     });
     
     //关于我们
