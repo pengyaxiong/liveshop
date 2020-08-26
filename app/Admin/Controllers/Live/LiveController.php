@@ -29,7 +29,7 @@ class LiveController extends AdminController{
         $grid->column('playurl','播放地址')->width(150);
         $state = ['active'=>'直播中','inactive'=>'关播'];
         $grid->column('StreamState','状态')->using($state);
-        $grid->column('group_id','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
+        $grid->column('groupid','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
         $grid->column('goods','上架商品')->display(function(){
             return '查看';
         })->expand(function($model){
