@@ -6,9 +6,9 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\Live\Live;
-use App\Handlers\WeChat;
+use App\Models\Shop\Product;
 use Encore\Admin\Widgets\Table;
-use Illuminate\Http\Request;
+
 
 class LiveController extends AdminController{
     protected $title = '直播管理';
@@ -35,17 +35,16 @@ class LiveController extends AdminController{
         })->expand(function($model){
             $list = [];
             if(!empty($this->goods)){
-                $goods = json_decode($this->goods, true);
+                $goods = explode(',', $this->goods);
                 foreach ($goods as $key=>$goodid){
                     $info = Product::find($goodid);
-                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>$info['image'],'action'=>''];
+                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>'<img src="storage/'.$info['image'].'" width="50" >'];
                 }
             }
-            return new Table(['ID','名称','图片','操作'], $list);
+            return new Table(['ID','名称','图片'], $list);
         });
         $grid->column('操作')->display(function(){
-            $url = route('admin.live.editgoods',$this->id);
-            return '<a href="'.$url.'" class="btn btn-primary btn-xs">添加商品</a>';
+            return '<a href="/admin/live/editgoods?id='.$this->id.'" class="btn btn-primary">添加商品</a>';
         });
         $grid->disableActions();
         $grid->disableExport();
@@ -64,7 +63,4 @@ class LiveController extends AdminController{
         return $form;
     }
 
-    protected function editGoods(Request $request){
-        var_dump($request->id);
-    }
 }
