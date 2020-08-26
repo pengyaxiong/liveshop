@@ -48,6 +48,7 @@ Route::group([
         $router->resource('goods', 'LivegoodsController');
 
         $router->get('getproducts', 'ApiController@getProducts');
+        $router->get('getcoupons', 'ApiController@getCoupons');
         $router->get('editgoods','OtherController@editGoods');
         $router->post('setgoods','ApiController@setGoods');
     });
