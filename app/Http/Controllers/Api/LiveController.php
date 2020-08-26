@@ -686,7 +686,7 @@ class LiveController extends Controller
         $goodsArr = explode(',',$goodsString);
         $goodsList = [];
         foreach ($goodsArr as $key=>$id){
-            $info = Product::find($id);
+            $info = Product::find($id)->toArray(true);
             $info['image'] = env('APP_URL').'/storage/'.$info['image'];
             foreach ($info['images'] as $k => $item){
                 var_dump($item);
