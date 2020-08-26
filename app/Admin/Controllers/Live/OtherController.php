@@ -14,6 +14,8 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Widgets\Form;
 use Encore\Admin\Layout\Content;
 use App\Models\Live\Live;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class OtherController extends AdminController
 {
     public function editGoods(Content $content){
@@ -44,6 +46,19 @@ class OtherController extends AdminController
         })->ajax('/admin/live/getcoupons');
         $content->body($form);
         return $content;
+    }
+
+    public function setGoods(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $goods = array_filter($request->goods);
+            $data['goods'] = join(',',$goods);
+            $coupon = array_filter($request->coupon);
+            $data['coupon'] = join(',',$coupon);
+            $result = Live::where('id', $id)->update($data);
+            admin_toastr('添加成功','success');
+            return redirect('/admin/live/rooms');
+        }
     }
 
 }
