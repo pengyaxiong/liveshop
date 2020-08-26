@@ -648,6 +648,15 @@ class LiveController extends Controller
         $start = $request->start?$request->start:0;
         $limit = $request->limit?$request->limit:20;
         $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray();
+        foreach ($list as $key=>$val){
+            $list[$key]['viewnum'] = 0;
+            if($val['groupid'] !=''){
+                $res = $this->TencentIm->getChatRoomInfo($val['groupid']);
+                if($res['ErrorCode'] == 0){
+                    $list[$key]['viewnum'] = $res['GroupInfo'][0]['MemberNum'];
+                }
+            }
+        }
         return $this->success_data('直播列表',['list'=>$list]);
     }
 
