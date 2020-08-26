@@ -685,8 +685,8 @@ class LiveController extends Controller
         }
         $shelves = DB::table('live_rooms')->where('streamname', $stream)->get(['goods','coupon'])->first();
         var_dump($shelves);
-        $goodsArr = explode(',',$shelves['goods']);
-        $couponArr = explode(',',$shelves['coupon']);
+        $goodsArr = explode(',',$shelves->goods);
+        $couponArr = explode(',',$shelves->coupon);
         $goodsList = [];
         $couponList = [];
         foreach ($goodsArr as $key=>$id){
