@@ -690,7 +690,7 @@ class LiveController extends Controller
             $info['image'] = env('APP_URL').'/storage/'.$info['image'];
             foreach ($info['images'] as $k => $item){
                 var_dump($item);
-                $info['images'][$k] = env('APP_URL').'/storage/'.$item[$k];
+                $info['images'][$k] = env('APP_URL').'/storage/'.$item;
             }
             $goodsList[] = $info;
         }
