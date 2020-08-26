@@ -630,10 +630,9 @@ class LiveController extends Controller
             $info = DB::table('live_rooms')->where('StreamState','inactive')->orderBy('end_time','desc')->first();
             $info->viewnum = 0;
             if($info->groupid){
-                $res = $this->TencentIm->getChatRoomInfo($info->groupid);
-                if($res['ErrorCode'] == 0){
-                    $info->viewnum = $res['GroupInfo'][0]['MemberNum'];
-                }
+                $members = $this->TencentIm->getRoomMembers($info->groupid);
+                $onlinenum = $this->TencentIm->getRoomUserStatus($$members);
+                    $info->viewnum = $onlinenum;
             }
         }
 
@@ -651,10 +650,9 @@ class LiveController extends Controller
         foreach ($list as $key=>$val){
             $val->view = 0;
             if($val->groupid !=''){
-                $res = $this->TencentIm->getChatRoomInfo($val->groupid);
-                if($res['ErrorCode'] == 0){
-                    $val->view = $res['GroupInfo'][0]['MemberNum'];
-                }
+                $members = $this->TencentIm->getRoomMembers($val->groupid);
+                $onlinenum = $this->TencentIm->getRoomUserStatus($$members);
+                $val->view = $onlinenum;
             }
         }
         return $this->success_data('直播列表',['list'=>$list]);
