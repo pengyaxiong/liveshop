@@ -18,6 +18,7 @@ class LiveController extends AdminController{
         $grid = new Grid(new Live());
         $grid->filter(function($filter){
             $filter->disableIdFilter();
+            $filter->like('streamname','直播间标识');
             $filter->like('title','直播间标题');
             $filter->like('nickname','主播昵称');
         });
