@@ -650,8 +650,8 @@ class LiveController extends Controller
         $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray(true);
         foreach ($list as $key=>$val){
             $val->view = 0;
-            if($val['groupid'] !=''){
-                $res = $this->TencentIm->getChatRoomInfo($val['groupid']);
+            if($val->groupid !=''){
+                $res = $this->TencentIm->getChatRoomInfo($val->groupid);
                 if($res['ErrorCode'] == 0){
                     $val->view = $res['GroupInfo'][0]['MemberNum'];
                 }
