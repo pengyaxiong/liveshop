@@ -118,8 +118,7 @@ class TencentIM
         $res = json_decode($result, true);
         $members = [];
         if($res['ErrorCode'] == 0){
-            var_dump($res['GroupInfo']);
-            $memberList = $res['GroupInfo']['MemberList'];
+            $memberList = $res['GroupInfo'][0]['MemberList'];
             if(!empty($memberList)){
                 foreach ($memberList as $key=>$val){
                     $members[] = $val['Member_Account'];
