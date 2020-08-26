@@ -113,15 +113,27 @@ class TencentIM
             return $this->error_data('缺少查询的群组ID');
         }
         $group_ids = explode(',',$group_id);
+        $len = sizeof($group_ids);
         $data = ['GroupIdList'=> $group_ids];
         $result = $this->requestDom($url, $data);
         $res = json_decode($result, true);
         $members = [];
         if($res['ErrorCode'] == 0){
-            $memberList = $res['GroupInfo'][0]['MemberList'];
-            if(!empty($memberList)){
-                foreach ($memberList as $key=>$val){
-                    $members[] = $val['Member_Account'];
+            if($len == 1) {
+                $memberList = $res['GroupInfo'][0]['MemberList'];
+                if (!empty($memberList)) {
+                    foreach ($memberList as $key => $val) {
+                        $members[] = $val['Member_Account'];
+                    }
+                }
+            }else{
+                $memberList = $res['GroupInfo'];
+                foreach ($memberList as $key=>$value){
+                    if (!empty($value)) {
+                        foreach ($value as $key => $val) {
+                            $members[$key] = $val['Member_Account'];
+                        }
+                    }
                 }
             }
         }
