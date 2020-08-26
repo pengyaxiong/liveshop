@@ -648,6 +648,7 @@ class LiveController extends Controller
         $start = $request->start?$request->start:0;
         $limit = $request->limit?$request->limit:20;
         $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray(true);
+        var_dump($list);
         foreach ($list as $key=>$val){
             $list[$key]['viewnum'] = 0;
             if($val['groupid'] !=''){
