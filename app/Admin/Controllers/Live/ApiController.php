@@ -12,50 +12,24 @@ use Encore\Admin\Controllers\AdminController;
 use App\Models\Shop\Product;
 use Illuminate\Http\Request;
 use App\Models\Live\Live;
-use App\Handlers\WeChat;
 class ApiController extends AdminController{
     public function getProducts(Request $request){
         $q = $request->q;
-        $lists = Product::where('name','like','%'.$q.'%')->paginate(null,['id','name as text']);
+        $lists = Product::where('name','like','%'.$q.'%')->where('is_show',1)->paginate(null,['id','name as text']);
         return $lists;
     }
     public function rollBackGoods(Request $request){
         $id = $request->id;
     }
 
-    public function updateLives(){
-        $latestRoom =Live::orderBy('room_id', 'desc')->frist();
-        $latestRoom_id = $latestRoom['room_id'];
-        $goon = true;
-        $WeChat = new WeChat();
-        $start = 0;
-        $limit = 20;
-        while ($goon){
-            $result = $WeChat->getRoomList($start, $limit);
-            $res = json_encode($result);
-            if(isset($res['errcode']) && ($res['errcode'] == 0) && !empty($res['room_info'])){
-                foreach ($res['room_info'] as $key=>$val){
-                    if($val['roomid'] == $latestRoom_id){
-                        $goon = false;
-                        break;
-                    }else{
-                        $data = [
-                            'room_id' => $val['roomid'],
-                            'name' => $val['name'],
-                            'cover_img' => $val['cover_img'],
-                            'share_img'=> $val['share_img'],
-                            'live_status' => $val['live_status'],
-                            'start_time' => $val['start_time'],
-                            'end_time' => $val['end_time'],
-                            'anchor_name' => $val['anchor_name'],
-                        ];
-                        Live::insert($data);
-                    }
-                }
-            }else{
-                break;
-            }
+    public function setGoods(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $goods = array_filter($request->goods);
+            $data['goods'] = join(',',$goods);
+            $result = Live::where('id', $id)->update($data);
+            admin_toastr('添加成功','success');
+            return redirect('/admin/live/rooms');
         }
-        return true;
     }
 }
