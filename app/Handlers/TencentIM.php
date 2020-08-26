@@ -155,4 +155,38 @@ class TencentIM
         }
         return $onLineNum;
     }
+
+    /**发送群通知
+     * @param $group_id
+     * @param $content
+     * @return mixed
+     *          ActionStatus	String	请求处理的结果，OK 表示处理成功，FAIL 表示失败
+     *          ErrorCode	Integer	错误码，0表示成功，非0表示失败
+     *          ErrorInfo	String	错误信息
+     */
+    public function sendRoomNotification($group_id, $content){
+        $url = 'v4/group_open_http_svc/send_group_system_notification';
+        $data = ['GroupId'=>$group_id, 'Content'=>$content];
+        $result = $this->requestDom($url, $data);
+        $res = json_decode($result, true);
+        return $res;
+    }
+
+    /**禁言或者取消禁言
+     * @param $group_id
+     * @param $memberList
+     * @param int $shutup_time 禁言时间，0取消禁言
+     * @return mixed
+     *          ActionStatus	String	请求处理的结果，OK 表示处理成功，FAIL 表示失败
+     *          ErrorCode	Integer	错误码，0表示成功，非0表示失败
+     *          ErrorInfo	String	错误信息
+     *          ShuttedUinList	Array	返回结果为禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间）
+     */
+    public function sendOrShutUp($group_id, $memberList, $shutup_time = 0){
+        $url = 'v4/group_open_http_svc/forbid_send_msg';
+        $data = ['GroupId'=> $group_id, 'Members_Account'=> $memberList, 'ShutUpTime'=>$shutup_time];
+        $result = $this->requestDom($url, $data);
+        $res = json_decode($result, true);
+        return $res;
+    }
 }
