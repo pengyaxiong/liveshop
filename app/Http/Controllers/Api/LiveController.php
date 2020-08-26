@@ -687,6 +687,10 @@ class LiveController extends Controller
         $goodsList = [];
         foreach ($goodsArr as $key=>$id){
             $info = Product::find($id);
+            $info['image'] = env('APP_URL').'/storage/'.$info['image'];
+            foreach ($info['images'] as $k => $item){
+                $info['images'][$k] = env('APP_URL').'/storage/'.$item;
+            }
             $goodsList[] = $info;
         }
         return $this->success_data('橱窗商品',['list'=>$goodsList]);
