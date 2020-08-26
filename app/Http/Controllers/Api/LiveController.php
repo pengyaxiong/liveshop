@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Shop\Coupon;
 use App\Models\Shop\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -677,14 +678,16 @@ class LiveController extends Controller
         return $this->success_data('直播间信息', ['info'=>$info]);
     }
 
-    public function getStreamGoods(Request $request){
+    public function getStreamGoodsShelves(Request $request){
         $stream = $request->stream_name;
         if(empty($stream)){
             return $this->error_data('获取失败，未提交必要的数据');
         }
-        $goodsString = DB::table('live_rooms')->where('streamname', $stream)->value('goods');
-        $goodsArr = explode(',',$goodsString);
+        $shelves = DB::table('live_rooms')->where('streamname', $stream)->get(['goods','coupon'])->toArray(true);
+        $goodsArr = explode(',',$shelves['goods']);
+        $couponArr = explode(',',$shelves['coupon']);
         $goodsList = [];
+        $couponList = [];
         foreach ($goodsArr as $key=>$id){
             $info = Product::find($id)->toArray(true);
             $info['image'] = env('APP_URL').'/storage/'.$info['image'];
@@ -696,7 +699,14 @@ class LiveController extends Controller
             }
             $goodsList[] = $info;
         }
+        foreach ($couponArr as $key=>$id){
+            $info = Coupon::find($id)->toArray(true);
+            $couponList[] = $info;
+        }
         return $this->success_data('橱窗商品',['list'=>$goodsList]);
+    }
+
+    public function getStreamCoupon(Request $request){
 
     }
 }
