@@ -722,7 +722,7 @@ class LiveController extends Controller
         $group_id = $request->group_id;
         $content = $request->message;
         $result = $this->TencentIm->sendRoomNotification($group_id, $content);
-        return $this->success_data('发送群消息', []);
+        return $this->success_data('发送群消息', [$result]);
     }
 
     /**
@@ -738,7 +738,7 @@ class LiveController extends Controller
         $shutUp = $request->shut_up;
         $memberList = explode(',',$memberStr);
         $result = $this->TencentIm->sendOrShutUp($group_id, $memberList, $shutUp);
-        return $this->success_data('禁言操作',[]);
+        return $this->success_data('禁言操作',[$result]);
     }
 
 }
