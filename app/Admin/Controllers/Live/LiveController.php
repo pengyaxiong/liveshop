@@ -18,12 +18,11 @@ class LiveController extends AdminController{
         $grid = new Grid(new Live());
         $grid->filter(function($filter){
             $filter->disableIdFilter();
-            $filter->like('streamname','直播间标识');
             $filter->like('title','直播间标题');
             $filter->like('nickname','主播昵称');
         });
-        $grid->column('openid','openid');
-        $grid->column('streamname','直播间标识');
+        $grid->column('openid','openid')->hide();
+        $grid->column('streamname','直播间标识')->hide();
         $grid->column('nickname','主播昵称');
         $grid->column('avator','主播头像')->image('',50,50);
         $grid->column('title','直播间标题');
