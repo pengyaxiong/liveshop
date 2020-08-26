@@ -118,17 +118,17 @@ class TencentIM
         $result = $this->requestDom($url, $data);
         $res = json_decode($result, true);
         $members = [];
-        if($res['ErrorCode'] == 0){
-            if($len == 1) {
+        if($res['ErrorCode'] == 0) {
+            if ($len == 1) {
                 $memberList = $res['GroupInfo'][0]['MemberList'];
                 if (!empty($memberList)) {
                     foreach ($memberList as $key => $val) {
                         $members[] = $val['Member_Account'];
                     }
                 }
-            }else{
+            } else {
                 $memberList = $res['GroupInfo'];
-                foreach ($memberList as $key=>$value){
+                foreach ($memberList as $key => $value) {
                     if (!empty($value)) {
                         foreach ($value as $key => $val) {
                             $members[$key] = $val['Member_Account'];
