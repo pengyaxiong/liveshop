@@ -209,6 +209,9 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('changechatroommember','MiniliveController@changeChatRoomMemberRole');
     //删除聊天室
     Route::post('delchatroom','MiniliveController@destroyChatRoom');
+    Route::post('sendroommsg','LiveController@sendNotification');
+    //禁言或者取消禁言
+    Route::post('shutupornot','LiveController@shutUp');
 
     //接收回调
     //接收推断流回调
