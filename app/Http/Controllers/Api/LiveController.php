@@ -651,7 +651,7 @@ class LiveController extends Controller
             $val->view = 0;
             if($val->groupid !=''){
                 $members = $this->TencentIm->getRoomMembers($val->groupid);
-                $onlinenum = $this->TencentIm->getRoomUserStatus($$members);
+                $onlinenum = $this->TencentIm->getRoomUserStatus($members);
                 $val->view = $onlinenum;
             }
         }
