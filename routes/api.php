@@ -170,7 +170,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::get('getreplaylist', 'LiveController@getReplayList');
     //获取直播间信息
     Route::get('getroominfo', 'LiveController@getStreamInfo');
-    Route::get('getroomgoodslist','LiveController@getStreamGoods');
+    Route::get('getroomshelves','LiveController@getStreamGoodsShelves');
 
     /*//原生直播小程序接口
     //创建直播间
