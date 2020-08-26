@@ -8,13 +8,12 @@
 
 namespace App\Admin\Controllers\Live;
 
+use App\Models\Shop\Coupon;
 use App\Models\Shop\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Widgets\Form;
-use Illuminate\Http\Request;
 use Encore\Admin\Layout\Content;
 use App\Models\Live\Live;
-use Illuminate\Support\Facades\DB;
 class OtherController extends AdminController
 {
     public function editGoods(Content $content){
@@ -36,7 +35,15 @@ class OtherController extends AdminController
                 return $lists;
             }
         })->ajax('/admin/live/getproducts');
+        $form->multipleSelect('coupon','优惠券')->options(function($coupon){
+            if(empty($coupon)){
+                return [];
+            }else{
+                return Coupon::whereIn('id', $coupon)->pluck('name','id');
+            }
+        })->ajax('/admin/live/getcoupons');
         $content->body($form);
         return $content;
     }
+
 }
