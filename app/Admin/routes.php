@@ -48,6 +48,8 @@ Route::group([
         $router->resource('goods', 'LivegoodsController');
 
         $router->get('getproducts', 'ApiController@getProducts');
+        $router->get('editgoods','OtherController@editGoods');
+        $router->post('setgoods','ApiController@setGoods');
     });
     
     //关于我们
