@@ -684,7 +684,6 @@ class LiveController extends Controller
             return $this->error_data('获取失败，未提交必要的数据');
         }
         $shelves = DB::table('live_rooms')->where('streamname', $stream)->get(['goods','coupon'])->first();
-        var_dump($shelves);
         $goodsArr = explode(',',$shelves->goods);
         $couponArr = explode(',',$shelves->coupon);
         $goodsList = [];
@@ -704,10 +703,7 @@ class LiveController extends Controller
             $info = Coupon::find($id)->toArray(true);
             $couponList[] = $info;
         }
-        return $this->success_data('橱窗商品',['list'=>$goodsList]);
+        return $this->success_data('橱窗商品',['goods'=>$goodsList, 'coupon'=>$couponList]);
     }
 
-    public function getStreamCoupon(Request $request){
-
-    }
 }
