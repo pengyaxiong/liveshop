@@ -119,8 +119,10 @@ class TencentIM
         $members = [];
         if($res['ErrorCode'] == 0){
             $memberList = $res['GroupInfo']['MemberList'];
-            foreach ($memberList as $key=>$val){
-                $members[] = $val['Member_Account'];
+            if(!empty($memberList)){
+                foreach ($memberList as $key=>$val){
+                    $members[] = $val['Member_Account'];
+                }
             }
         }
         return $members;
