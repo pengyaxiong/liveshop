@@ -8,6 +8,7 @@ use Encore\Admin\Show;
 use App\Models\Live\Live;
 use App\Handlers\WeChat;
 use Encore\Admin\Widgets\Table;
+use Illuminate\Http\Request;
 
 class LiveController extends AdminController{
     protected $title = '直播管理';
@@ -43,8 +44,8 @@ class LiveController extends AdminController{
             return new Table(['ID','名称','图片','操作'], $list);
         });
         $grid->column('操作')->display(function(){
-            $url = route('admin.live.live',$this->id);
-            return '<a href="''" class="btn btn-primary btn-xs">添加商品</a>';
+            $url = route('admin.live.editgoods',$this->id);
+            return '<a href="'.$url.'" class="btn btn-primary btn-xs">添加商品</a>';
         });
         $grid->disableActions();
         $grid->disableExport();
@@ -63,5 +64,7 @@ class LiveController extends AdminController{
         return $form;
     }
 
-    protected function edit
+    protected function editGoods(Request $request){
+        var_dump($request->id);
+    }
 }
