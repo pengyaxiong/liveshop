@@ -106,4 +106,39 @@ class TencentIM
         $res = json_decode($result, true);
         return $res;
     }
+
+    public function getRoomMembers($group_id){
+        $url = 'v4/group_open_http_svc/get_group_info';
+        if(!$group_id){
+            return $this->error_data('缺少查询的群组ID');
+        }
+        $group_ids = explode(',',$group_id);
+        $data = ['GroupIdList'=> $group_ids];
+        $result = $this->requestDom($url, $data);
+        $res = json_decode($result, true);
+        $members = [];
+        if($res['ErrorCode'] == 0){
+            $memberList = $res['GroupInfo']['MemberList'];
+            foreach ($memberList as $key=>$val){
+                $members[] = $val['Member_Account'];
+            }
+        }
+        return $members;
+    }
+
+    public function getRoomUserStatus($members){
+        $url = 'v4/openim/querystate';
+        $result = $this->requestDom($url, $members);
+        $res = json_decode($result, true);
+        $onLineNum = 0;
+        if($res['ErrorCode'] == 0){
+            $result = $res['QueryResult'];
+            foreach ($result as $res=>$item){
+                if($item['Status'] == 'Online'){
+                    $onLineNum++;
+                }
+            }
+        }
+        return $onLineNum;
+    }
 }
