@@ -23,13 +23,13 @@ class TencentCallbackController extends Controller
             case 0://断流通知
             case '0':
                 $data_['StreamState'] = 'inactive';
-                $data_['created_at'] = time();
+                $data_['updated_at'] = time();
                 $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 break;
             case 1://推流通知
             case '1':
                 $data_['StreamState'] = 'active';
-                $data_['created_at'] = time();
+                $data_['updated_at'] = time();
                 $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 break;
             case 100://录制通知
@@ -41,7 +41,7 @@ class TencentCallbackController extends Controller
                 if(isset($callbackData->video_url)){
                     $data_['video_url'] = $callbackData->video_url;
                 }
-                $data_['created_at'] = time();
+                $data_['updated_at'] = time();
                 $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 break;
             case 200://直播截图
@@ -52,7 +52,7 @@ class TencentCallbackController extends Controller
                 if(!empty($callbackData->abductionRisk)){
                     $data_['AbductionRisktype'] = $callbackData->abductionRisk['type'];
                     $data_['AbductionRisklevel'] = $callbackData->abductionRisk['level'];
-                    $data_['created_at'] = time();
+                    $data_['updated_at'] = time();
                     $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
                 }
                 break;
