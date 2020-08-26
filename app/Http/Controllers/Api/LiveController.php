@@ -647,7 +647,7 @@ class LiveController extends Controller
     public function getLiveList(Request $request){
         $start = $request->start?$request->start:0;
         $limit = $request->limit?$request->limit:20;
-        $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray();
+        $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray(true);
         foreach ($list as $key=>$val){
             $list[$key]['viewnum'] = 0;
             if($val['groupid'] !=''){
