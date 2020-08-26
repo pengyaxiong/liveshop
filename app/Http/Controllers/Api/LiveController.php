@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Shop\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Handlers\TLSSigAPIv2;
@@ -674,5 +675,21 @@ class LiveController extends Controller
         }
         $info = DB::table('live_rooms')->where('streamname', $stream)->first();
         return $this->success_data('直播间信息', ['info'=>$info]);
+    }
+
+    public function getStreamGoods(Request $request){
+        $stream = $request->stream_name;
+        if(empty($stream)){
+            return $this->error_data('获取失败，未提交必要的数据');
+        }
+        $goodsString = DB::table('live_rooms')->where('streamname', $stream)->value('goods');
+        $goodsArr = explode(',',$goodsString);
+        $goodsList = [];
+        foreach ($goodsArr as $key=>$id){
+            $info = Product::find($id);
+            $goodsList[] = $info;
+        }
+        return $this->success_data('橱窗商品',['list'=>$goodsList]);
+
     }
 }
