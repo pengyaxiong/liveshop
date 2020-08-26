@@ -63,6 +63,7 @@ class LiveController extends AdminController{
         });
         $grid->disableActions();
         $grid->disableExport();
+        $grid->disableCreateButton();
         $grid->disableColumnSelector();
         return $grid;
     }
