@@ -38,7 +38,7 @@ class LiveController extends AdminController{
                 $goods = explode(',', $this->goods);
                 foreach ($goods as $key=>$goodid){
                     $info = Product::find($goodid);
-                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>'<img src="storage/'.$info['image'].'" width="50" >'];
+                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'],'image'=>'<img src="/storage/'.$info['image'].'" width="50" >'];
                 }
             }
             return new Table(['ID','名称','图片'], $list);
