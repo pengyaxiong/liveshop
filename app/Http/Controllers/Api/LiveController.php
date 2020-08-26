@@ -688,8 +688,8 @@ class LiveController extends Controller
         foreach ($goodsArr as $key=>$id){
             $info = Product::find($id);
             $info['image'] = env('APP_URL').'/storage/'.$info['image'];
-            var_dump($info['images']);
-            foreach (json_decode($info['images'], true) as $k => $item){
+            foreach ($info['images'] as $k => $item){
+                var_dump($item);
                 $info['images'][$k] = env('APP_URL').'/storage/'.$item;
             }
             $goodsList[] = $info;
