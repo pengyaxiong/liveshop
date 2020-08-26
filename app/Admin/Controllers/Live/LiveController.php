@@ -1,6 +1,7 @@
 <?php
 namespace App\Admin\Controllers\Live;
 
+use App\Models\Shop\Coupon;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -30,7 +31,7 @@ class LiveController extends AdminController{
         $state = ['active'=>'直播中','inactive'=>'关播'];
         $grid->column('StreamState','状态')->using($state);
         $grid->column('groupid','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
-        $grid->column('goods','上架商品')->display(function(){
+        $grid->column('goods','商品')->display(function(){
             return '查看';
         })->expand(function($model){
             $list = [];
@@ -43,8 +44,21 @@ class LiveController extends AdminController{
             }
             return new Table(['ID','名称','图片'], $list);
         });
+        $grid->column('coupon','优惠券')->display(function(){
+            return '查看';
+        })->expand(function(){
+            $list = [];
+            if(!empty($this->coupon)){
+                $coupons = explode(',',$this->coupon);
+                foreach ($coupons as $key=>$val){
+                    $info = Coupon::find($val);
+                    $list[] = ['id'=>$info['id'], 'name'=>$info['name'], 'price'=>$info['price'], 'cut'=>$info['cut']];
+                }
+            }
+            return new Table(['ID','名称', '门槛', '优惠'],$list);
+        });
         $grid->column('操作')->display(function(){
-            return '<a href="/admin/live/editgoods?id='.$this->id.'" class="btn btn-primary">添加商品</a>';
+            return '<a href="/admin/live/editgoods?id='.$this->id.'" class="btn btn-primary">货架</a>';
         });
         $grid->disableActions();
         $grid->disableExport();
