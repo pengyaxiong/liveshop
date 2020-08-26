@@ -628,14 +628,13 @@ class LiveController extends Controller
         if(empty($info)){
             $status = 'replay';
             $info = DB::table('live_rooms')->where('StreamState','inactive')->orderBy('end_time','desc')->first()->toArray(true);
-            $info->viewnum = 0;
-            if($info->groupid){
-                $members = $this->TencentIm->getRoomMembers($info->groupid);
-                $onlinenum = $this->TencentIm->getRoomUserStatus($members);
-                $info->viewnum = $onlinenum;
-            }
         }
-
+        $info->viewnum = 0;
+        if($info->groupid){
+            $members = $this->TencentIm->getRoomMembers($info->groupid);
+            $onlinenum = $this->TencentIm->getRoomUserStatus($members);
+            $info->viewnum = $onlinenum;
+        }
         return $this->success_data('首页直播',['data'=>$info,'status'=>$status]);
     }
 
