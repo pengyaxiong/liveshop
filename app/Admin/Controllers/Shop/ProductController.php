@@ -35,7 +35,7 @@ class ProductController extends AdminController
         $grid->column('name', __('Name'));
         $grid->column('image', __('Image'))->image('',88,88);
         $grid->column('images', __('Images'))->carousel();
-        $grid->column('video', __('Video'))->downloadable();
+        $grid->column('video', __('Video'))->width(88)->downloadable();
         $grid->column('description', __('Description'));
         $grid->column('info_images', __('产品展示'))->carousel()->hide();
         $grid->column('info_video', __('视频展示'))->downloadable()->hide();
