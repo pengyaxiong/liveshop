@@ -31,6 +31,8 @@ class LiveController extends AdminController{
         $state = ['active'=>'直播中','inactive'=>'关播'];
         $grid->column('StreamState','状态')->using($state);
         $grid->column('groupid','聊天室id')->editable()->help('请前往腾讯IM控制台获取');
+        $grid->column('intro','直播详情')->editable('textarea');
+        $grid->column('notice','通告')->editable('textarea');
         $grid->column('goods','商品')->display(function(){
             return '查看';
         })->expand(function($model){
@@ -75,6 +77,8 @@ class LiveController extends AdminController{
     protected function Form(){
         $form = new Form(new Live());
         $form->text('group_id','聊天室ID');
+        $form->textarea('intro','直播详情');
+        $form->textarea('notice','通告');
         return $form;
     }
 
