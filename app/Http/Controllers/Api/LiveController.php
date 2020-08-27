@@ -681,6 +681,12 @@ class LiveController extends Controller
             return $this->error_data('获取失败，未提交必要的数据');
         }
         $info = DB::table('live_rooms')->where('streamname', $stream)->first();
+        $info->viewnum = 0;
+        if($info->groupid){
+            $members = $this->TencentIm->getRoomMembers($info->groupid);
+            $onlinenum = $this->TencentIm->getRoomUserStatus($members);
+            $info->viewnum = $onlinenum;
+        }
         return $this->success_data('直播间信息', ['info'=>$info]);
     }
 
