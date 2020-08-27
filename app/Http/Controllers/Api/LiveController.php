@@ -647,11 +647,11 @@ class LiveController extends Controller
         $limit = $request->limit?$request->limit:20;
         $list = DB::table('live_rooms')->where('StreamState','active')->offset($start)->limit($limit)->get()->toArray(true);
         foreach ($list as $key=>$val){
-            $val->view = 0;
+            $val->viewnum = 0;
             if($val->groupid !=''){
                 $members = $this->TencentIm->getRoomMembers($val->groupid);
                 $onlinenum = $this->TencentIm->getRoomUserStatus($members);
-                $val->view = $onlinenum;
+                $val->viewnum = $onlinenum;
             }
         }
         return $this->success_data('直播列表',['list'=>$list]);
