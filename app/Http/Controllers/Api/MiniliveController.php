@@ -512,7 +512,7 @@ class MiniliveController extends Controller
         $url = "https://console.tim.qq.com/v4/group_open_http_svc/create_group?sdkappid={$this->Imappid}&identifier={$this->Imadmin}&usersig={$usersig}&random={$random}&contenttype=json";
         $groupData = [
             'Owner_Account' => $data['anchor_wechat'],
-            'Type' => 'Public',
+            'Type' => 'AVChatRoom',
             'Name' => $data['name'],
             'ApplyJoinOption' => 'FreeAccess'
 
@@ -634,7 +634,7 @@ class MiniliveController extends Controller
         }
         $groupData = [
             'Owner_Account' => $data['anchor_wechat'],
-            'Type' => 'Public', //public
+            'Type' => 'AVChatRoom', //public
             'Name' => $data['name'],
             'ApplyJoinOption' => 'FreeAccess'
 
