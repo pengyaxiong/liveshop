@@ -85,6 +85,34 @@ class VisualizationController extends Controller
     }
 
     /**
+     * 直播室一周详情
+     */
+    function live_room_aount(Request $request){
+        $id = $request;
+        $origin = DB::table('live_rooms')->where('id', $id)->value('streamname');
+        $amount = [];
+        for ($i = 0; $i < 7; $i++) {
+            $start = date('Y-m-d H:i:s', strtotime("+" . $i . " day", $this->week_start));
+            $end = date('Y-m-d H:i:s', strtotime("+" . ($i + 1) . " day", $this->week_start));
+            $date = date('Ymd', strtotime("+" . $i . " day", $this->week_start));
+            $amount['live_rooms_view'][] = DB::table('live_rooms_view')->where([['view_date', $date],['room_id',$id]])->value('view_num');
+            $amount['live_rooms_product_view'][] = DB::table('live_rooms_product_view')->where([['view_date', $date],['room_id',$id]])->sum('view_num');
+            $orders =  Order::whereBetween('pay_time', [$start, $end])->where('status', '>', 1)->pluck('id');
+            $_t = 0;
+            foreach ($orders as $key=>$id){
+                $_t += DB::table('shop_order_product')->where([['origin',$origin]])->groupBy('order_id')->count('*');
+            }
+            $amount['buy'][] =$_t;
+        }
+        $data = [
+            'week_start' => date("Y年m月d日", $this->week_start),
+            'week_end' => date("Y年m月d日", $this->week_end),
+            'amount' => $amount,
+        ];
+        return $data;
+    }
+
+    /**
      * 本月热门销量
      * @return mixed
      */
