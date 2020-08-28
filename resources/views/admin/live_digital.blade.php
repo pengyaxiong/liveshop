@@ -3,7 +3,7 @@
 <script src="/vendor/echarts/macarons.js"></script>
 <script src="/vendor/echarts/china.js"></script>
 <script>
-    var stream = "{{$stream}}";
+    var id = "{{room_id}}";
     $(function () {
 
     });
