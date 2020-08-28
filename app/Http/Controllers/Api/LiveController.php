@@ -687,6 +687,18 @@ class LiveController extends Controller
             $onlinenum = $this->TencentIm->getRoomUserStatus($members);
             $info->viewnum = $onlinenum;
         }
+        //添加计算直播间观看人数
+        $room_id = DB::table('live_rooms')->where('streamname', $stream)->value('id');
+        $date = date('Ymd', time());
+        $has_stream = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->exists();
+        if($has_stream){
+            $result = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->increment('view_num');
+        }else{
+            $data = ['room_id'=>$room_id,'view_num'=>1,'view_date'=>$date,'created_at'=>date('Y-m-d H:i:s', time())];
+            $result = DB::table('live_rooms_view')->insert($data);
+        }
+
+
         return $this->success_data('直播间信息', ['info'=>$info]);
     }
 
