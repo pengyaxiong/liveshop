@@ -260,9 +260,9 @@ class IndexController extends Controller
 
         //添加计算直播间观看人数
         if(isset($request->origin) && !empty($request->origin)){
+            var_dump($request->origin);
             $stream = $request->origin;
             $room_id = DB::table('live_rooms')->where('streamname', $stream)->value('id');
-            var_dump($stream);
             $date = date('Ymd', time());
             $has_stream = DB::table('live_rooms_product_view')->where([['room_id',$room_id],['view_date',$date]])->exists();
             if($has_stream){
