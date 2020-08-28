@@ -42,6 +42,11 @@ class CustomerController extends AdminController
         ], 'warning');
         $grid->column('tel', __('Tel'));
         $grid->column('grade', __('Grade'))->editable('select', [1 => '一级', 2 => '二级', 3 => '三级']);
+        $state = [
+            'on'=>['value'=>1, 'text'=>'是', 'color'=>'success'],
+            'off'=>['value'=>0,'text'=>'否', 'color'=>'danger']
+        ];
+        $grid->column('is_live','允许直播')->using($state);
 //        $grid->column('money', __('Money'));
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
