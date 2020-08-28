@@ -23,6 +23,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Handlers\WXBizDataCrypt;
+use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     protected $wechat;
