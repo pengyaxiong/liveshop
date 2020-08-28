@@ -17,7 +17,7 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['在线人数', '浏览商品人数','购买人数']
+                    data: ['观看数量', '浏览商品数量','下单数量']
                 },
                 toolbox: {
                     show: true,
@@ -42,7 +42,7 @@
                 },
                 series: [
                     {
-                        name: '在线人数',
+                        name: '观看数量',
                         type: 'line',
                         data: data.amount.live_rooms_view,
                         markLine: {
@@ -52,7 +52,7 @@
                         }
                     },
                     {
-                        name: '浏览商品人数',
+                        name: '浏览商品数量',
                         type: 'line',
                         data: data.amount.live_rooms_product_view,
                         markLine: {
@@ -62,7 +62,7 @@
                         }
                     },
                     {
-                        name: '购买人数',
+                        name: '下单数量',
                         type: 'line',
                         data: data.amount.buy,
                         markLine: {
