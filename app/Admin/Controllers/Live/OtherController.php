@@ -61,4 +61,15 @@ class OtherController extends AdminController
         }
     }
 
+    public function digital(Content $content){
+        $request = request();
+        $id = $request->id;
+        $stream = Live::where('id', $id)->value('streamname');
+        $livetitle = Live::where('id', $id)->value('title');
+        $content->title($livetitle.'数据统计');
+
+        $content->body(view('admin.live_digital',[])->render());
+        return $content;
+    }
+
 }
