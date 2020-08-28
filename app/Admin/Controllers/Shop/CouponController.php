@@ -30,6 +30,10 @@ class CouponController extends AdminController
         $grid->column('name', __('Name'));
         $grid->column('price', __('满'));
         $grid->column('cut', __('减'));
+        $grid->column('totalnum','总数量');
+        $grid->column('residue', '剩余数量');
+        $grid->column('takenum','每人限领数量');
+        $gird->column('invalidate','有效期');
 
         return $grid;
     }
@@ -64,7 +68,9 @@ class CouponController extends AdminController
         $form->text('name', __('Name'))->rules('required');
         $form->decimal('price', __('满'))->rules('required');
         $form->decimal('cut', __('减'))->rules('required');
-
+        $form->number('totalnum','总数量');
+        $form->number('takenum', '每人限领');
+        $form->date('invalidate','有效期');
         return $form;
     }
 }
