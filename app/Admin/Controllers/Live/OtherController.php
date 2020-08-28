@@ -16,6 +16,8 @@ use Encore\Admin\Layout\Content;
 use App\Models\Live\Live;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Encore\Admin\Layout\Row;
+use Encore\Admin\Widgets\Box;
 class OtherController extends AdminController
 {
     public function editGoods(Content $content){
@@ -67,8 +69,12 @@ class OtherController extends AdminController
         $livetitle = Live::where('id', $id)->value('title');
         $content->title($livetitle.'数据统计');
 
-        $content->body(view('admin.live_digital',['room_id'=>$id]))->render();
-        return $content;
+        //$content->body(view('admin.live_digital',['room_id'=>$id]))->render();
+        return $content->row(function(Row $row) use($livetitle,$id){
+            $row->column(12, function(Cloumn $cloumn) use($livetitle, $id){
+                $cloumn->append(new Box($livetitle.'数据统计', view('admin.live_digital',['id'=>$id])));
+            });
+        });
     }
 
 }
