@@ -262,7 +262,7 @@ class IndexController extends Controller
         if(isset($request->origin) && !empty($request->origin)){
             $stream = $request->origin;
             $room_id = DB::table('live_rooms')->where('streamname', $stream)->value('id');
-            var_dump($room_id);
+            var_dump($stream);
             $date = date('Ymd', time());
             $has_stream = DB::table('live_rooms_product_view')->where([['room_id',$room_id],['view_date',$date]])->exists();
             if($has_stream){
