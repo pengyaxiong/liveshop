@@ -88,7 +88,7 @@ class VisualizationController extends Controller
      * 直播室一周详情
      */
     function live_room_aount(Request $request){
-        $id = $request;
+        $id = $request->id;
         $origin = DB::table('live_rooms')->where('id', $id)->value('streamname');
         $amount = [];
         for ($i = 0; $i < 7; $i++) {
