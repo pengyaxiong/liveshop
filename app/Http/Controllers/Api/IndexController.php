@@ -259,7 +259,7 @@ class IndexController extends Controller
         $product['is_collect'] = CollectProduct::where(['product_id' => $id, 'customer_id' => $customer->id])->exists();
 
         //添加计算直播间观看人数
-        if(isset($request->origin) && !empty($request->origin)){
+        if(isset($request->origin) && ($request->origin != undefined)){
             $stream = $request->origin;
             $room_id = DB::table('live_rooms')->where('streamname', $stream)->value('id');
             $date = date('Ymd', time());
