@@ -5,6 +5,8 @@
 <script>
     var id = "{{$room_id}}";
     $(function () {
-
+        $.get('/api/live_room_aount?id='+id).done(function (data) {
+            console.log(data);
+        });
     });
 </script>
