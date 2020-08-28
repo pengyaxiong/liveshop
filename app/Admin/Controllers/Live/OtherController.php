@@ -68,7 +68,7 @@ class OtherController extends AdminController
         $livetitle = Live::where('id', $id)->value('title');
         $content->title($livetitle.'数据统计');
 
-        $content->body(view('admin.live_digital',[])->render());
+        $content->body(view('admin.live_digital',[]))->render();
         return $content;
     }
 
