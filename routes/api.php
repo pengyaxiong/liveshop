@@ -29,6 +29,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('sales_count', 'VisualizationController@sales_count');
     //会员注册量
     Route::get('statistics_customer', 'VisualizationController@statistics_customer');
+    //直播间本周销售以及观看
+    Route::get('live_room_aount', 'VisualizationController@live_room_aount');
 
 });
 
