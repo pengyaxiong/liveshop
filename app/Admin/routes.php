@@ -45,12 +45,15 @@ Route::group([
     Route::group(['prefix' => 'live', 'namespace' => 'Live', 'as' => 'live.'], function (Router $router){
         //直播间管理
         $router->resource('rooms', 'LiveController');
-        $router->resource('goods', 'LivegoodsController');
-
+        //获取商品接口
         $router->get('getproducts', 'ApiController@getProducts');
+        //获取优惠券接口
         $router->get('getcoupons', 'ApiController@getCoupons');
+        //直播间商品和优惠券
         $router->get('editgoods','OtherController@editGoods');
+        //直播间数据统计
         $router->get('digital','OtherController@digital');
+        //接收设置直播间商品和优惠券数据
         $router->post('setgoods','OtherController@setGoods');
     });
     
