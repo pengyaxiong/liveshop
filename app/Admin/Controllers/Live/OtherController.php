@@ -71,7 +71,6 @@ class OtherController extends AdminController
 
         $content->body(view('admin.live_digital',['room_id'=>$id]))->render();
         return $content;
-        });
     }
 
 }
