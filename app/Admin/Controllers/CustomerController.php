@@ -46,7 +46,7 @@ class CustomerController extends AdminController
             'on'=>['value'=>1, 'text'=>'是', 'color'=>'success'],
             'off'=>['value'=>0,'text'=>'否', 'color'=>'danger']
         ];
-        $grid->column('is_live','允许直播')->using($state);
+        $grid->column('is_live','允许直播')->switch($state);
 //        $grid->column('money', __('Money'));
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
