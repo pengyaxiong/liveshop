@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Shop\Coupon;
+use App\Models\Shop\CustomerCoupon;
 use App\Models\Shop\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -534,7 +535,7 @@ class LiveController extends Controller
         $url = "https://console.tim.qq.com/v4/group_open_http_svc/create_group?sdkappid={$this->Imappid}&identifier={$this->Imadmin}&usersig={$usersig}&random={$random}&contenttype=json";
         $groupData = [
             'Owner_Account' => $data['userId'],
-            'Type' => 'Public',
+            'Type' => 'AVChatRoom',
             'Name' => $data['name'],
             'ApplyJoinOption' => 'FreeAccess'
         ];
@@ -704,6 +705,7 @@ class LiveController extends Controller
 
     public function getStreamGoodsShelves(Request $request){
         $stream = $request->stream_name;
+        $openid = $request->openid;
         if(empty($stream)){
             return $this->error_data('获取失败，未提交必要的数据');
         }
@@ -714,17 +716,15 @@ class LiveController extends Controller
         $couponList = [];
         foreach ($goodsArr as $key=>$id){
             $info = Product::find($id)->toArray(true);
-            /*$info['image'] = env('APP_URL').'/storage/'.$info['image'];
-            foreach ($info['images'] as $k => $v){
-                $info['images'][$k] = env('APP_URL').'/storage/'.$v;
-            }
-            foreach ($info['info_images'] as $k=>$v){
-                $info['info_images'][$k] = env('APP_URL').'/storage/'.$v;
-            }*/
             $goodsList[] = $info;
         }
         foreach ($couponArr as $key=>$id){
             $info = Coupon::find($id)->toArray(true);
+            $info['status'] = 0;
+            $is_get = CustomerCoupon::where([['coupon_id'=>$id],['customer_id'=>$openid]])->exists();
+            if($is_get){
+                $info['status'] = CustomerCoupon::where([['coupon_id'=>$id],['customer_id'=>$openid]])->value('status');
+            }
             $couponList[] = $info;
         }
         return $this->success_data('橱窗商品',['goods'=>$goodsList, 'coupon'=>$couponList]);
