@@ -59,7 +59,9 @@
                             data: [
                                 {type: 'average', name: '平均值'}
                             ]
-                        },
+                        }
+                    },
+                    {
                         name: '购买人数',
                         type: 'line',
                         data: data.amount.buy,
