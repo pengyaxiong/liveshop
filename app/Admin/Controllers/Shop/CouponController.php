@@ -71,6 +71,9 @@ class CouponController extends AdminController
         $form->number('totalnum','总数量');
         $form->number('takenum', '每人限领');
         $form->date('invalidate','有效期');
+        $form->saving(function($model){
+            $model->residue = $model->totalnum;
+        });
         return $form;
     }
 }
