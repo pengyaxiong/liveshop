@@ -521,7 +521,7 @@ class IndexController extends Controller
                 'product_id' => $request->product_id,
                 'num' => $request->num,
                 'sku' => $request->sku,
-                'customer_id' => $customer->id,
+                'customer_id' => $customer->id
             ]);
         }
 
@@ -770,7 +770,7 @@ class IndexController extends Controller
 
         $product_id = $request->product_id;
         $cart_id = $request->cart_id;
-
+        $origin = $request->origin?$request->origin:'';
         $order_sn = date('YmdHms', time()) . '_' . $customer->id;
 
         if ($product_id) {
@@ -799,7 +799,7 @@ class IndexController extends Controller
                 'name' => $address->name
             ]);
 
-            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'price' => $total_price, 'sku' => $request->sku]);
+            $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'price' => $total_price, 'sku' => $request->sku, 'origin'=>$origin]);
             $result = Order::with('order_products.product', 'address')->find($order->id);
         }
 
