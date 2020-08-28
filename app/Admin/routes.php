@@ -50,6 +50,7 @@ Route::group([
         $router->get('getproducts', 'ApiController@getProducts');
         $router->get('getcoupons', 'ApiController@getCoupons');
         $router->get('editgoods','OtherController@editGoods');
+        $router->get('digital','OtherController@digital');
         $router->post('setgoods','OtherController@setGoods');
     });
     
