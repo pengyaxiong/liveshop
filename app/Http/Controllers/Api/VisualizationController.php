@@ -95,7 +95,8 @@ class VisualizationController extends Controller
             $start = date('Y-m-d H:i:s', strtotime("+" . $i . " day", $this->week_start));
             $end = date('Y-m-d H:i:s', strtotime("+" . ($i + 1) . " day", $this->week_start));
             $date = date('Ymd', strtotime("+" . $i . " day", $this->week_start));
-            $amount['live_rooms_view'][] = DB::table('live_rooms_view')->where([['view_date', $date],['room_id',$id]])->value('view_num');
+            $room_view = DB::table('live_rooms_view')->where([['view_date', $date],['room_id',$id]])->value('view_num');
+            $amount['live_rooms_view'][] = empty($room_view)?0:$room_view;
             $amount['live_rooms_product_view'][] = DB::table('live_rooms_product_view')->where([['view_date', $date],['room_id',$id]])->sum('view_num');
             $orders =  Order::whereBetween('pay_time', [$start, $end])->where('status', '>', 1)->pluck('id');
             $_t = 0;
