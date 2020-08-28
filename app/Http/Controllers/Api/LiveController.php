@@ -692,7 +692,7 @@ class LiveController extends Controller
         $date = date('Ymd', time());
         $has_stream = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->exists();
         if($has_stream){
-            $result = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->increment('view_num',1,['updated_at'=>date('Y-m-d H:i:s', time()]);
+            $result = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->increment('view_num',1,['updated_at'=>date('Y-m-d H:i:s', time())]);
         }else{
             $data = ['room_id'=>$room_id,'view_num'=>1,'view_date'=>$date,'created_at'=>date('Y-m-d H:i:s', time())];
             $result = DB::table('live_rooms_view')->insert($data);
