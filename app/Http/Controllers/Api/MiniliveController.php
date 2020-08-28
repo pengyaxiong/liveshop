@@ -490,18 +490,6 @@ class MiniliveController extends Controller
         $userId = $request->userid;
         $TLSSig = new TLSSigAPIv2($this->Imappid, $this->Imkey);
         $genSign = $TLSSig->genSig($userId);
-        if(isset($request->streamname)){//添加记录直播间观看人数
-            $stream_name = $request->stream_name;
-            $room_id = DB::table('live_rooms')->where('streamname', $stream_name)->value('id');
-            $date = date('Ymd', time());
-            $has_stream = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->exists();
-            if($has_stream){
-                $result = DB::table('live_rooms_view')->where([['room_id',$room_id],['view_date',$date]])->increment('view_num');
-            }else{
-                $data = ['room_id'=>$room_id,'view_num'=>1,'view_date'=>$date,'created_at'=>date('Y-m-d H:i:s', time())];
-                $result = DB::table('live_rooms_view')->insert($data);
-            }
-        }
         return $this->success_data('UserSig',['userID'=>$userId, 'UserSig'=>$genSign]);
     }
 
