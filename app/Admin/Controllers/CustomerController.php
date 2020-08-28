@@ -118,7 +118,7 @@ class CustomerController extends AdminController
             'on'=>['value'=>1, 'text'=>'是', 'color'=>'success'],
             'off'=>['value'=>0,'text'=>'否', 'color'=>'danger']
         ];
-        $form->switch('is_live','允许直播')->options($state);
+        $form->switch('is_live','允许直播')->options($state)->default(0);
         $form->decimal('money', __('Money'))->default(0.00)->disable();
 
         return $form;
