@@ -33,7 +33,7 @@ class CouponController extends AdminController
         $grid->column('totalnum','总数量');
         $grid->column('residue', '剩余数量');
         $grid->column('takenum','每人限领数量');
-        $gird->column('invalidate','有效期');
+        $grid->column('invalidate','有效期');
 
         return $grid;
     }
