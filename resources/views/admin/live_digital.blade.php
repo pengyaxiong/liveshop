@@ -17,7 +17,7 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['直播间观看人数', '浏览商品人数','购买商品人数']
+                    data: ['在线人数', '浏览商品人数','购买人数']
                 },
                 toolbox: {
                     show: true,
