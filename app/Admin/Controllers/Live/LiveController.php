@@ -61,7 +61,7 @@ class LiveController extends AdminController{
         });
         $grid->column('操作')->display(function(){
             return '<a href="/admin/live/editgoods?id='.$this->id.'" class="btn btn-primary">货架</a>
-                    <a href="/admin/live/digital?id="'.$this->id.' class="btn btn-primary">数据统计</a> ';
+                    <a href="/admin/live/digital?id='.$this->id.'" class="btn btn-primary">数据统计</a> ';
         });
         $grid->disableActions();
         $grid->disableExport();
