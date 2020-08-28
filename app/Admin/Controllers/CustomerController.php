@@ -114,6 +114,11 @@ class CustomerController extends AdminController
         $form->text('nickname', __('Nickname'));
         $form->text('headimgurl', __('Headimgurl'));
         $form->text('tel', __('Tel'));
+        $state = [
+            'on'=>['value'=>1, 'text'=>'是', 'color'=>'success'],
+            'off'=>['value'=>0,'text'=>'否', 'color'=>'danger']
+        ];
+        $form->switch('is_live','允许直播')->options($state);
         $form->decimal('money', __('Money'))->default(0.00)->disable();
 
         return $form;
