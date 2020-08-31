@@ -816,8 +816,8 @@ class LiveController extends Controller
         $coupon_status3 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',3]])->get()->toArray(true);
         foreach ($coupon_status3 as $key=>$val){
             $couponinfo = Coupon::find($val->coupon_id);
-            $coupon_status2[$key]->price = $couponinfo->price;
-            $coupon_status2[$key]->cut = $couponinfo->cut;
+            $coupon_status3[$key]->price = $couponinfo->price;
+            $coupon_status3[$key]->cut = $couponinfo->cut;
         }
         return $this->success_data('优惠券列表',['no_used'=>$coupon_status1, 'used'=>$coupon_status2, 'invalidate'=>$coupon_status3]);
     }
