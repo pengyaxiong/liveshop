@@ -722,7 +722,7 @@ class LiveController extends Controller
         foreach ($couponArr as $key=>$id){
             $info = Coupon::find($id)->toArray(true);
             $info['status'] = 0;//未领取
-            if($info['totalnum' == $info['takenum']]){
+            if($info['totalnum'] == $info['takenum']){
                 $info['status'] = 4;
             }
 
