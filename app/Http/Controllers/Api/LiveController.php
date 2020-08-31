@@ -829,6 +829,7 @@ class LiveController extends Controller
             $couponinfo = Coupon::find($val->coupon_id);
             $coupons[$key]->price = $couponinfo->price;
             $coupons[$key]->cut = $couponinfo->cut;
+            $coupons[$key]->status = 5;
         }
         return $this->success_data('可用优惠券列表',['list'=>$coupons]);
     }
