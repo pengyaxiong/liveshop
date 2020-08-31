@@ -706,6 +706,7 @@ class LiveController extends Controller
     public function getStreamGoodsShelves(Request $request){
         $stream = $request->stream_name;
         $openid = $request->openid;
+        $customerid = DB::table('mini_customer')->where('openid', $openid)->value('id');
         if(empty($stream)){
             return $this->error_data('获取失败，未提交必要的数据');
         }
@@ -721,7 +722,7 @@ class LiveController extends Controller
         foreach ($couponArr as $key=>$id){
             $info = Coupon::find($id)->toArray(true);
             $info['status'] = 0;//未领取
-            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$openid]])->exists();
+            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$customerid]])->exists();
             if($is_get){
                 $info['status'] = 1;//已经领取
             }
