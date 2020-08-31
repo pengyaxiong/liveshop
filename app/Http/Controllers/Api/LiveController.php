@@ -766,6 +766,8 @@ class LiveController extends Controller
     public function getCoupon(Request $request){
         $openid = $request->openid;
         $couponid = $request->couponid;
+        var_dump($openid);
+        exit;
         $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
         $limit_get = DB::table('shop_coupon')->where('id',$couponid)->value('limitnum');//领取限制
         $num_get = DB::table('shop_customer_coupon')->where([['coupon_id',$couponid],['customer_id',$coustmerid]])->count('*');
