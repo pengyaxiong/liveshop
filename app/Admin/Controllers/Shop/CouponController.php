@@ -29,7 +29,7 @@ class CouponController extends AdminController
         $now =time();
         $coupon_status3_id = Coupon::where('invalidate','<', $now)->get(['id'])->toArray(true);
         var_dump($coupon_status3_id);
-        DB::table('shop_customer_coupon')->where('coupon_id','in', $coupon_status3_id)->where('status','!=',3)->update(['status'=>3]);
+        DB::table('shop_customer_coupon')->whereIn('coupon_id', $coupon_status3_id)->where('status','!=',3)->update(['status'=>3]);
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('price', __('满'));
