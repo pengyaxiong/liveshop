@@ -720,9 +720,10 @@ class LiveController extends Controller
             $goodsList[] = $info;
         }
         foreach ($couponArr as $key=>$id){
+            var_dump($id);
             $info = Coupon::find($id)->toArray(true);
             $info['status'] = 0;//未领取
-            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$customerid]])->first();
+            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$customerid]])->exists();
             var_dump($is_get);
             if($is_get){
                 $info['status'] = 1;//已经领取
