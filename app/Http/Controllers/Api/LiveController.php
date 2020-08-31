@@ -794,8 +794,18 @@ class LiveController extends Controller
         $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
         //未使用
         $coupon_status1 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',1]])->get()->toArray(true);
+        foreach ($coupon_status1 as $key=>$val){
+            $couponinfo = Coupon::find($val['coupon_id']);
+            $coupon_status1[$key]['price'] = $couponinfo['price'];
+            $coupon_status1[$key]['cut'] = $couponinfo['cut'];
+        }
         //已使用
         $coupon_status2 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',2]])->get()->toArray(true);
+        foreach ($coupon_status2 as $key=>$val){
+            $couponinfo = Coupon::find($val['coupon_id']);
+            $coupon_status2[$key]['price'] = $couponinfo['price'];
+            $coupon_status2[$key]['cut'] = $couponinfo['cut'];
+        }
         //修改已过期优惠券状态
         $now =time();
         $coupon_status3_id = Coupon::where('invalidate','<', $now)->pluck('id');
@@ -803,7 +813,11 @@ class LiveController extends Controller
             DB::table('shop_customer_coupon')->whereIn('coupon_id', $coupon_status3_id)->where('customer_id',$coustmerid)->update(['status'=>3]);
         }
         $coupon_status3 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',3]])->get()->toArray(true);
-
+        foreach ($coupon_status3 as $key=>$val){
+            $couponinfo = Coupon::find($val['coupon_id']);
+            $coupon_status3[$key]['price'] = $couponinfo['price'];
+            $coupon_status3[$key]['cut'] = $couponinfo['cut'];
+        }
         return $this->success_data('优惠券列表',['no_used'=>$coupon_status1, 'used'=>$coupon_status2, 'invalidate'=>$coupon_status3]);
     }
 }
