@@ -723,7 +723,7 @@ class LiveController extends Controller
             $info['status'] = 0;
             $is_get = DB::table('shop_customer_coupon')->where([['coupon_id'=>$id],['customer_id'=>$openid]])->exists();
             if($is_get){
-                $info['status'] = CustomerCoupon::where([['coupon_id'=>$id],['customer_id'=>$openid]])->value('status');
+                $info['status'] = DB::table('shop_customer_coupon')->where([['coupon_id'=>$id],['customer_id'=>$openid]])->value('status');
             }
             $couponList[] = $info;
         }
