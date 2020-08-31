@@ -16,6 +16,7 @@ use App\Models\Shop\Brand;
 use App\Models\Shop\Cart;
 use App\Models\Shop\Category;
 use App\Models\Shop\CollectProduct;
+use App\Models\Shop\Coupon;
 use App\Models\Shop\Order;
 use App\Models\Shop\Product;
 use Illuminate\Http\Request;
@@ -785,12 +786,16 @@ class IndexController extends Controller
         $product_id = $request->product_id;
         $cart_id = $request->cart_id;
         $origin = $request->origin?$request->origin:'';
-        $order_sn = date('YmdHms', time()) . '_' . $customer->id;
 
+        $order_sn = date('YmdHms', time()) . '_' . $customer->id;
+        $coupon_cut = 0;
+        if(isset($request->coupon_id)){
+            $coupon_id = $request->coupon_id;
+            $coupon_cut = Coupon::where('id', $coupon_id)->value('cut');
+        }
         if ($product_id) {
             $product = Product::find($product_id);
             $total_price = $product[$price];
-
 
             $num = $request->num ? $request->num : 1;
             $product->sale_num += $num;
@@ -800,7 +805,7 @@ class IndexController extends Controller
                 'customer_id' => $customer->id,
                 'order_sn' => $order_sn,
                 'address_id' => $request->address_id,
-                'total_price' => $total_price * $num,
+                'total_price' => $total_price * $num-$coupon_cut,
                 'remark' => $request->remark,
             ]);
             $address = Address::find($request->address_id);
@@ -810,8 +815,10 @@ class IndexController extends Controller
                 'area' => $address->area,
                 'detail' => $address->detail,
                 'tel' => $address->tel,
-                'name' => $address->name
+                'name' => $address->name,
+                'coupon_id' =>isset($coupon_id)?$coupon_id:null
             ]);
+
 
             $order->order_products()->create(['product_id' => $product_id, 'num' => $request->num, 'price' => $total_price, 'sku' => $request->sku, 'origin'=>$origin]);
             $result = Order::with('order_products.product', 'address')->find($order->id);
@@ -833,8 +840,9 @@ class IndexController extends Controller
                 'customer_id' => $customer->id,
                 'order_sn' => $order_sn,
                 'address_id' => $request->address_id,
-                'total_price' => $total_price,
+                'total_price' => $total_price-$coupon_cut,
                 'remark' => $request->remark,
+                'coupon_id' =>isset($coupon_id)?$coupon_id:null
             ]);
             $address = Address::find($request->address_id);
             $order->address()->create([
