@@ -178,6 +178,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::get('takecoupon','LiveController@getCoupon');
     //我的优惠券
     Route::get('coupons', 'LiveController@getCoupons');
+    //确认订单页面优惠券列表
+    Route::get('mycoupon', 'LiveController@getMyCouponNoUsed');
 
     /*//原生直播小程序接口
     //创建直播间
