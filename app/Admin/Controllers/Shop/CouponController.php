@@ -27,7 +27,7 @@ class CouponController extends AdminController
         $grid = new Grid(new Coupon());
         //处理优惠券过期
         $now =time();
-        $coupon_status3_id = Coupon::where('invalidate','<', $now)->where('status','<',3)->get(['id'])->toArray(true);
+        $coupon_status3_id = Coupon::where('invalidate','<', $now)->get(['id'])->toArray(true);
         if(!empty($coupon_status3_id)){
             DB::table('shop_customer_coupon')->whereIn('coupon_id', $coupon_status3_id)->where('status','!=',3)->update(['status'=>3]);
         }
