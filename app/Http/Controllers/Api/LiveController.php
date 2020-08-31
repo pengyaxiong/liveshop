@@ -798,7 +798,7 @@ class LiveController extends Controller
         $coupon_status2 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',2]])->get()->toArray(true);
         //修改已过期优惠券状态
         $now =time();
-        $coupon_status3_id = Coupon::where('invalidate','<', $now)->get(['id'])->toArray(true);
+        $coupon_status3_id = Coupon::where('invalidate','<', $now)->pluck('id');
         if(!empty($$coupon_status3_id)){
             DB::table('shop_customer_coupon')->whereIn('coupon_id', $coupon_status3_id)->where('customer_id',$coustmerid)->update(['status'=>3]);
         }
