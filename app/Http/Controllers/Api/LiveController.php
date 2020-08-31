@@ -759,4 +759,21 @@ class LiveController extends Controller
         return $this->success_data('禁言操作',[$result]);
     }
 
+    /**领取优惠券
+     * @param Request $request
+     * @return array
+     */
+    public function getCoupon(Request $request){
+        $openid = $request->openid;
+        $couponid = $request->couponid;
+        $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
+        $limit_get = DB::table('shop_coupon')->where('id',$couponid)->value('limitnum');//领取限制
+        $num_get = DB::table('shop_customer_coupon')->where([['coupon_id',$couponid],['customer_id',$coustmerid]])->count('*');
+        if($limit_get ==$num_get){
+            return $this->success_data('领取优惠券已达上限,无法继续领取',[]);
+        }
+        $data = ['customer_id'=>$coustmerid,'coupon_id'=>$couponid,'status'=>1];
+        $result = DB::table('shop_customer_coupon')->insert($data);
+        return $this->success_data('领取优惠券成功',[]);
+    }
 }
