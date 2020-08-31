@@ -73,6 +73,7 @@ class CouponController extends AdminController
         $form->date('invalidate','有效期');
         $form->saving(function($model){
             $model->residue = $model->totalnum;
+            $model->invalidate = date('Y-m-d H:i:s',(strtotime($model->invalidate)+3600*24-1));
         });
         return $form;
     }
