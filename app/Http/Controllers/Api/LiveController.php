@@ -772,7 +772,7 @@ class LiveController extends Controller
         $limit_get = DB::table('shop_coupon')->where('id',$couponid)->value('limitnum');//领取限制
         $num_get = DB::table('shop_customer_coupon')->where([['coupon_id',$couponid],['customer_id',$coustmerid]])->count('*');
         if($limit_get ==$num_get){
-            return $this->success_data('领取优惠券已达上限,无法继续领取',[]);
+            return $this->success_data('领取优惠券已达上限,无法继续领取',['status'=>1]);
         }
         $data = ['customer_id'=>$coustmerid,'coupon_id'=>$couponid,'status'=>1];
         $result = DB::table('shop_customer_coupon')->insert($data);
