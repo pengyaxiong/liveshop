@@ -17,6 +17,7 @@ use App\Models\Shop\Cart;
 use App\Models\Shop\Category;
 use App\Models\Shop\CollectProduct;
 use App\Models\Shop\Coupon;
+use App\Models\Shop\CustomerCoupon;
 use App\Models\Shop\Order;
 use App\Models\Shop\Product;
 use Illuminate\Http\Request;
@@ -790,6 +791,7 @@ class IndexController extends Controller
         $order_sn = date('YmdHms', time()) . '_' . $customer->id;
         $coupon_cut = 0;
         if(isset($request->coupon_id)){
+            $customer_coupon_id = $request->customer_coupon_id;
             $coupon_id = $request->coupon_id;
             $coupon_cut = Coupon::where('id', $coupon_id)->value('cut');
         }
@@ -807,6 +809,7 @@ class IndexController extends Controller
                 'address_id' => $request->address_id,
                 'total_price' => $total_price * $num-$coupon_cut,
                 'remark' => $request->remark,
+                'coupon_id' =>isset($coupon_id)?$coupon_id:null
             ]);
             $address = Address::find($request->address_id);
             $order->address()->create([
@@ -815,8 +818,8 @@ class IndexController extends Controller
                 'area' => $address->area,
                 'detail' => $address->detail,
                 'tel' => $address->tel,
-                'name' => $address->name,
-                'coupon_id' =>isset($coupon_id)?$coupon_id:null
+                'name' => $address->name
+
             ]);
 
 
@@ -867,6 +870,9 @@ class IndexController extends Controller
                 }
             }
             $result = Order::with('order_products.product', 'address')->find($order->id);
+        }
+        if(isset($request->coupon_id)) {
+            CustomerCoupon::where('id', $customer_coupon_id)->update(['status'=>2]);
         }
         return $this->success_data('下单成功', $result);
 
