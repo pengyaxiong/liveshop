@@ -794,7 +794,6 @@ class LiveController extends Controller
         $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
         //未使用
         $coupon_status1 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',1]])->get()->toArray(true);
-        var_dump($coupon_status1);
         foreach ($coupon_status1 as $key=>$val){
             $couponinfo = Coupon::find($val->coupon_id);
             $coupon_status1[$key]->price = $couponinfo->price;
