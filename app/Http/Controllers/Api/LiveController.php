@@ -795,14 +795,14 @@ class LiveController extends Controller
         //未使用
         $coupon_status1 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',1]])->get()->toArray(true);
         foreach ($coupon_status1 as $key=>$val){
-            $couponinfo = Coupon::find($val['coupon_id']);
+            $couponinfo = Coupon::find($val->coupon_id);
             $coupon_status1[$key]['price'] = $couponinfo->price;
             $coupon_status1[$key]['cut'] = $couponinfo->cut;
         }
         //已使用
         $coupon_status2 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',2]])->get()->toArray(true);
         foreach ($coupon_status2 as $key=>$val){
-            $couponinfo = Coupon::find($val['coupon_id']);
+            $couponinfo = Coupon::find($val->coupon_id);
             $coupon_status2[$key]['price'] = $couponinfo->price;
             $coupon_status2[$key]['cut'] = $couponinfo->cut;
         }
@@ -814,7 +814,7 @@ class LiveController extends Controller
         }
         $coupon_status3 = DB::table('shop_customer_coupon')->where([['customer_id',$coustmerid],['status',3]])->get()->toArray(true);
         foreach ($coupon_status3 as $key=>$val){
-            $couponinfo = Coupon::find($val['coupon_id']);
+            $couponinfo = Coupon::find($val->coupon_id);
             $coupon_status3[$key]['price'] = $couponinfo->price;
             $coupon_status3[$key]['cut'] = $couponinfo->cut;
         }
