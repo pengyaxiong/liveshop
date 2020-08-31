@@ -175,7 +175,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     //获取直播间橱窗货架商品和优惠券
     Route::get('getroomshelves','LiveController@getStreamGoodsShelves');
     //直播间领取优惠券
-    Route::post('takecoupon','LiveController@getCoupon');
+    Route::get('takecoupon','LiveController@getCoupon');
 
     /*//原生直播小程序接口
     //创建直播间
