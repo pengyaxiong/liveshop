@@ -872,7 +872,7 @@ class IndexController extends Controller
             $result = Order::with('order_products.product', 'address')->find($order->id);
         }
         if(isset($request->coupon_id)) {
-            DB::table('shop_customer_coupon')->where('id', $customer_coupon_id)->update(['status'=>2]);
+            DB::table('shop_customer_coupon')->where('id', $customer_coupon_id)->update(['status'=>2,'used_time'=>time()]);
         }
         return $this->success_data('下单成功', $result);
 
