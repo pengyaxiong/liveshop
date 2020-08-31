@@ -7,7 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-
+use Illuminate\Support\Facades\DB;
 class CouponController extends AdminController
 {
     /**
@@ -25,7 +25,10 @@ class CouponController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Coupon());
-
+        //处理优惠券过期
+        $now =time();
+        $coupon_status3_id = Coupon::where('invalidate','<', $now)->get(['id'])->toArray(true);
+        DB::table('shop_customer_coupon')->where('coupon_id','in', $coupon_status3_id)->update(['status'=>3]);
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('price', __('满'));
