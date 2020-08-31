@@ -772,7 +772,7 @@ class LiveController extends Controller
         $openid = $request->openid;
         $couponid = $request->couponid;
         $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
-        $limit = DB::table('shop_coupon')->where('id',$couponid)->get(['limitnum','totalnum','takenum'])->first()->toArray(true);//领取限制
+        $limit = DB::table('shop_coupon')->where('id',$couponid)->get(['limitnum','totalnum','takenum'])->first();//领取限制
         $num_get = DB::table('shop_customer_coupon')->where([['coupon_id',$couponid],['customer_id',$coustmerid]])->count('*');
         if($limit['totalnum'] == $limit['takenum']){
             return $this->success_data('优惠券已被领完',['status'=>1]);
