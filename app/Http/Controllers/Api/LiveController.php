@@ -722,9 +722,12 @@ class LiveController extends Controller
         foreach ($couponArr as $key=>$id){
             $info = Coupon::find($id)->toArray(true);
             $info['status'] = 0;//未领取
-            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$customerid]])->value('id');
+            if($info['totalnum' == $info['takenum']]){
+                $info['status'] = 4;
+            }
 
-            if($is_get){
+            $is_get = DB::table('shop_customer_coupon')->where([['coupon_id',$id],['customer_id',$customerid]])->count('id');
+            if($is_get == $info['limitnum']){
                 $info['status'] = 1;//已经领取
             }
             $couponList[] = $info;
@@ -769,13 +772,17 @@ class LiveController extends Controller
         $openid = $request->openid;
         $couponid = $request->couponid;
         $coustmerid = DB::table('mini_customer')->where('openid',$openid)->value('id');
-        $limit_get = DB::table('shop_coupon')->where('id',$couponid)->value('limitnum');//领取限制
+        $limit = DB::table('shop_coupon')->where('id',$couponid)->get(['limitnum','totalnum','takenum'])->first()->toArray(true);//领取限制
         $num_get = DB::table('shop_customer_coupon')->where([['coupon_id',$couponid],['customer_id',$coustmerid]])->count('*');
-        if($limit_get ==$num_get){
+        if($limit['totalnum'] == $limit['takenum']){
+            return $this->success_data('优惠券已被领完',['status'=>1]);
+        }
+        if($limit['limitnum'] ==$num_get){
             return $this->success_data('领取优惠券已达上限,无法继续领取',['status'=>1]);
         }
         $data = ['customer_id'=>$coustmerid,'coupon_id'=>$couponid,'status'=>1];
         $result = DB::table('shop_customer_coupon')->insert($data);
+        DB::table('shop_coupon')->where('id',$couponid)->increment('takenum');
         return $this->success_data('领取优惠券成功',[]);
     }
 }
