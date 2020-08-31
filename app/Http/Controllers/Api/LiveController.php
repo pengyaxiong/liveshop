@@ -721,7 +721,7 @@ class LiveController extends Controller
         foreach ($couponArr as $key=>$id){
             $info = Coupon::find($id)->toArray(true);
             $info['status'] = 0;
-            $is_get = CustomerCoupon::where([['coupon_id'=>$id],['customer_id'=>$openid]])->exists();
+            $is_get = DB::table('shop_customer_coupons')->where([['coupon_id'=>$id],['customer_id'=>$openid]])->exists();
             if($is_get){
                 $info['status'] = CustomerCoupon::where([['coupon_id'=>$id],['customer_id'=>$openid]])->value('status');
             }
