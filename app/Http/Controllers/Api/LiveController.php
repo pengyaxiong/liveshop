@@ -783,6 +783,9 @@ class LiveController extends Controller
         $data = ['customer_id'=>$coustmerid,'coupon_id'=>$couponid,'status'=>1, 'take_time'=>time()];
         $result = DB::table('shop_customer_coupon')->insert($data);
         DB::table('shop_coupon')->where('id',$couponid)->increment('takenum');
+        if($limit->limitnum == ($num_get+1)){
+            return $this->success_data('领取优惠券成功',['status' => 1]);
+        }
         return $this->success_data('领取优惠券成功',[]);
     }
 }
