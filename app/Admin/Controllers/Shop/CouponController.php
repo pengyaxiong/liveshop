@@ -33,8 +33,8 @@ class CouponController extends AdminController
         $grid->column('totalnum','总数量');
         $grid->column('limitnum', '限领数量');
         $grid->column('takenum','已领数量');
-        $grid->column('invalidate','有效期')->display(function(){
-            return date('Y-m-d H:i:s', $this->invalidate)?date('Y-m-d H:i:s', $this->invalidate):$this->invalidate;
+        $grid->column('invalidate','有效期')->display(function($invalidate){
+            return date('Y-m-d H:i:s', $invalidate);
         });
 
         return $grid;
