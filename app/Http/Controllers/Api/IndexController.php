@@ -510,7 +510,7 @@ class IndexController extends Controller
         $count = Cart::count_cart($carts, $customer->id);
 
 
-        return $this->success_data('购物车列表', ['customer' => $customer, 'carts' => (array)$carts, 'count' => $count,]);
+        return $this->success_data('购物车列表', ['customer' => $customer, 'carts' => $carts, 'count' => $count,]);
     }
 
     function add_cart(Request $request)
