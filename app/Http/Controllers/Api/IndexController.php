@@ -809,7 +809,7 @@ class IndexController extends Controller
                 'address_id' => $request->address_id,
                 'total_price' => $total_price * $num-$coupon_cut,
                 'remark' => $request->remark,
-                'coupon_id' =>isset($coupon_id)?$coupon_id:null
+                'coupon_id' =>isset($customer_coupon_id)?$customer_coupon_id:null
             ]);
             $address = Address::find($request->address_id);
             $order->address()->create([
@@ -845,7 +845,7 @@ class IndexController extends Controller
                 'address_id' => $request->address_id,
                 'total_price' => $total_price-$coupon_cut,
                 'remark' => $request->remark,
-                'coupon_id' =>isset($coupon_id)?$coupon_id:null
+                'coupon_id' =>isset($customer_coupon_id)?$customer_coupon_id:null
             ]);
             $address = Address::find($request->address_id);
             $order->address()->create([
