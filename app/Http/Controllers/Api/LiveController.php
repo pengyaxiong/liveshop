@@ -394,6 +394,23 @@ class LiveController extends Controller
 
     }
 
+    public function uploadImg($file){
+        $filename = $file->getClientOriginalName();
+        $allowed_extensions = ["png", "jpg", "gif", "bmp"];
+        $exts = explode('.',$filename);
+        $ext = $exts['1'];
+        if($ext && !in_array($ext, $allowed_extensions)){
+            return $this->error('只允许上传png,jpg,gif,bmp格式的图片');
+        }
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $path = '/uploads/wechat';
+        $filename = str_random(32).'.'.$ext;
+        $file->move($root.$path, $filename);
+        $real_path_img = $path.'/'.$filename;
+        $real_path_img = str_replace('\\','/',$real_path_img);
+        return $real_path_img;
+    }
+
     public function CreatePush(Request $request)
     {
         $roomTitle = $request->roomTitle;
@@ -401,20 +418,22 @@ class LiveController extends Controller
         $nickName = $request->nickName;
         $vataor = $request->vataor;
         $userId = $request->userId;
+        $Cover = $request->file('cover');
+        $cover = $this->uploadImg($Cover);
         $time = $request->endTime ? $request->endTime : date('Y-m-d H:i:s', strtotime('+3 hours'));
         $pushUrl = $this->getPushUrl($this->PushDomain, $openId, $this->Key, $time);
         $playUrl = $this->getPlayUrl($this->PlayDomain, $openId, $this->Key, $time);
 
         $info = DB::table('live_rooms')->where('openid',$openId)->first();
         if(empty($info)){
-            $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'created_at'=>time()];
+            $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'coverimg'=>$cover,'avator'=>$vataor, 'pushurl'=>$pushUrl, 'StreamState'=>'inactive','playurl'=>$playUrl,'created_at'=>time()];
             $chatr = $this->createChatRoom(['userId'=>$userId, 'name'=> $nickName]);
             if($chatr['ErrorCode'] == 0){
                 $data['groupid'] = $chatr['GroupId'];
             }
             $result = DB::table('live_rooms')->insert($data);
         }else{
-            $data = ['openid'=>$openId,'streamname'=>$openId, 'nickname'=>$nickName, 'title'=>$roomTitle, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'playurl'=>$playUrl,'updated_at'=>time()];
+            $data = ['openid'=>$openId,'streamname'=>$openId, 'nickname'=>$nickName, 'title'=>$roomTitle, 'coverimg'=>$cover, 'avator'=>$vataor, 'pushurl'=>$pushUrl, 'StreamState'=>'inactive','playurl'=>$playUrl,'updated_at'=>time()];
             $result = DB::table('live_rooms')->where('openid', $openId)->update($data);
             $data = DB::table('live_rooms')->where('openid', $openId)->first();
         }
