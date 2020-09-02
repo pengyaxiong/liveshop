@@ -418,8 +418,9 @@ class LiveController extends Controller
         $nickName = $request->nickName;
         $vataor = $request->vataor;
         $userId = $request->userId;
-        $Cover = $request->file('cover');
-        $cover = $this->uploadImg($Cover);
+        //$Cover = $request->file('cover');
+        //$cover = $this->uploadImg($Cover);
+        $cover = null;
         $time = $request->endTime ? $request->endTime : date('Y-m-d H:i:s', strtotime('+3 hours'));
         $pushUrl = $this->getPushUrl($this->PushDomain, $openId, $this->Key, $time);
         $playUrl = $this->getPlayUrl($this->PlayDomain, $openId, $this->Key, $time);
