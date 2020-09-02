@@ -859,9 +859,26 @@ class LiveController extends Controller
 
     public function addFollow(Request $request){
         $openid = $request->openid;
-        $room_id = DB::table('live_rooms')->where('streamname', $openid)->value('id');
-        $data = ['openid'=>$openid, 'room_id'=>$room_id];
+        $streamname = $request->stream_name;
+        $room_id = DB::table('live_rooms')->where('streamname', $streamname)->value('id');
+        $data = ['openid'=>$openid, 'room_id'=>$room_id,'created_at'=>time()];
         DB::table('live_rooms_follow')->insert($data);
         return $this->success_data('关注成功',[]);
+    }
+    public function changeFollow(Request $request){
+        $openid = $request->openid;
+        $streamname = $request->stream_name;
+        $room_id = DB::table('live_rooms')->where('streamname', $streamname)->value('id');
+        $data = ['openid'=>$openid, 'room_id'=>$room_id];
+        $info = DB::table('live_rooms_follow')->where($data)->first();
+        if($info->status == 1){
+            $msg = '取消成功';
+            $status = 0;
+        }else{
+            $msg = '关注成功';
+            $status = 1;
+        }
+        $res = DB::table('live_rooms_follow')->where($data)->update(['status'=>$status, 'updated_at'=>time()]);
+        return $this->success_data($msg,[]);
     }
 }
