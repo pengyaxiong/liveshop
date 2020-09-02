@@ -698,6 +698,7 @@ class LiveController extends Controller
 
     public function getStreamInfo(Request $request){
         $stream = $request->stream_name;
+        $openid = $request->openid;
         if(empty($stream)){
             return $this->error_data('获取失败，未提交必要的数据');
         }
@@ -707,6 +708,7 @@ class LiveController extends Controller
             $members = $this->TencentIm->getRoomMembers($info->groupid);
             $onlinenum = $this->TencentIm->getRoomUserStatus($members);
             $info->viewnum = $onlinenum;
+            $info->follow = DB::table('live_rooms_follow')->where([['room_id', $info->id],['openid',$openid]])->value('status');
         }
         //添加计算直播间观看人数
         $room_id = DB::table('live_rooms')->where('streamname', $stream)->value('id');
@@ -853,5 +855,13 @@ class LiveController extends Controller
             $coupons[$key]->status = 1;
         }
         return $this->success_data('可用优惠券列表',['list'=>$coupons]);
+    }
+
+    public function addFollow(Request $request){
+        $openid = $request->openid;
+        $room_id = DB::table('live_rooms')->where('streamname', $openid)->value('id');
+        $data = ['openid'=>$openid, 'room_id'=>$room_id];
+        DB::table('live_rooms_follow')->insert($data);
+        return $this->success_data('关注成功',[]);
     }
 }
