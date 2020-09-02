@@ -180,7 +180,10 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::get('coupons', 'LiveController@getCoupons');
     //确认订单页面优惠券列表
     Route::get('mycoupon', 'LiveController@getMyCouponNoUsed');
-
+    //关注主播
+    Route::post('addfollow', 'LiveController@addFollow');
+    //更新关注状态
+    Route::get('changefollow', 'LiveController@changeFollow');
     /*//原生直播小程序接口
     //创建直播间
     Route::post('createroom','MiniliveController@createLiveRoom');
