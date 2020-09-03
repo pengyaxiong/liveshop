@@ -17,7 +17,7 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['观看数量', '浏览商品数量','下单数量']
+                    data: ['观看数量', '浏览商品数量','下单数量','关注量']
                 },
                 toolbox: {
                     show: true,
@@ -65,6 +65,16 @@
                         name: '下单数量',
                         type: 'line',
                         data: data.amount.buy,
+                        markLine: {
+                            data: [
+                                {type: 'average', name: '平均值'}
+                            ]
+                        }
+                    },
+                    {
+                        name: '关注量',
+                        type: 'line',
+                        data: data.amount.follow,
                         markLine: {
                             data: [
                                 {type: 'average', name: '平均值'}
