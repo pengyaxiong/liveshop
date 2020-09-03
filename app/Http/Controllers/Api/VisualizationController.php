@@ -104,7 +104,7 @@ class VisualizationController extends Controller
                 $_t += DB::table('shop_order_product')->where([['origin',$origin]])->groupBy('order_id')->count('*');
             }
             $amount['buy'][] =$_t;
-            $follow = DB::table('live_rooms_follow')->where([['room_id',$id],['status',1]])->whereBetween(['updated_at',[$start,$end]])->count('*');
+            $follow = DB::table('live_rooms_follow')->where([['room_id',$id],['status',1]])->whereBetween('updated_at',[$start,$end])->count('*');
             $amount['follow'][] = $follow;
         }
         $data = [
