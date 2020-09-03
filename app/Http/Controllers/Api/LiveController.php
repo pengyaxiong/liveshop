@@ -438,6 +438,10 @@ class LiveController extends Controller
             $result = DB::table('live_rooms')->where('openid', $openId)->update($data);
             $data = DB::table('live_rooms')->where('openid', $openId)->first();
         }
+        $data['viewnum'] = 1;
+        $room_id = DB::table('live_rooms')->where('streamname',$openId)->value('id');
+        $follownum = DB::table('live_rooms_follow')->where('room_id', $room_id)->count('*');
+        $data['follownum'] = $follownum?$follownum:0;
         return $this->success_data('开播',$data);
     }
 
