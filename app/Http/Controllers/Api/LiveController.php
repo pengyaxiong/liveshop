@@ -709,6 +709,7 @@ class LiveController extends Controller
         }
         $info = DB::table('live_rooms')->where('streamname', $stream)->first();
         $info->intro = $info->intro?$info->intro:'';
+        $info->notice = $info->notice?$info->notice:'';
         $info->viewnum = 0;
         if($info->groupid){
             $members = $this->TencentIm->getRoomMembers($info->groupid);
