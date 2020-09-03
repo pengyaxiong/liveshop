@@ -884,4 +884,17 @@ class LiveController extends Controller
         $res = DB::table('live_rooms_follow')->where($data)->update(['status'=>$status, 'updated_at'=>time()]);
         return $this->success_data($msg,[]);
     }
+
+    public function viewAndNewFollow(Request $request){
+        $streamname = $request->stream_name;
+        $room_id = DB::table('live_rooms')->where('streamname',$streamname)->value('id');
+        $num = DB::table('live_rooms_view')->where([['room_id', $room_id],['view_date',date('Ymd', time())]])->value('view_num');
+        $view = !$num?0:$num;
+        $follow = DB::table('live_rooms_follow')->where('room_id',$room_id)->where(function($query){
+            $start = strtotime(date('Y-m-d',time()).' 00:00:00');
+            $end = strtotime(date('Y-m-d',time()).' 23:59:59');
+            $query->where('created_at',[$start,$end])->orWhere('updated_at',[$start, $end]);
+        })->count('*');
+        return $this->success_data('观看和新增粉丝',['view'=>$view, 'newfollow'=>$follow]);
+    }
 }
