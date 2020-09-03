@@ -184,6 +184,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('addfollow', 'LiveController@addFollow');
     //更新关注状态
     Route::get('changefollow', 'LiveController@changeFollow');
+    //观看以及新增粉丝量
+    Route::get('viewandnewfollow', 'LiveController@viewAndNewFollow');
     /*//原生直播小程序接口
     //创建直播间
     Route::post('createroom','MiniliveController@createLiveRoom');
