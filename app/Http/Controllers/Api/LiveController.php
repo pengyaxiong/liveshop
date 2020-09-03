@@ -654,7 +654,7 @@ class LiveController extends Controller
         if($info->groupid){
             $members = $this->TencentIm->getRoomMembers($info->groupid);
             $onlinenum = $this->TencentIm->getRoomUserStatus($members);
-            $info->viewnum = $onlinenum;
+            $info->viewnum = !$onlinenum?0:$onlinenum;
         }
         return $this->success_data('首页直播',['data'=>$info,'status'=>$status]);
     }
