@@ -41,8 +41,9 @@ class TencentCallbackController extends Controller
                 if(isset($callbackData->video_url)){
                     $data_['video_url'] = $callbackData->video_url;
                 }
-                $data_['updated_at'] = date('Y-m-d H:i:s',time());
-                $result = DB::table('live_rooms')->where('streamname', $callbackData->stream_id)->update($data_);
+                $data_['room_id'] = DB::table('live_rooms')->where('streamname',$callbackData->stream_id)-value('id');
+                $data_['streamname'] = $callbackData->stream_id;
+                $result = DB::table('live_rooms_replay')->insert($data_);
                 break;
             case 200://直播截图
             case '200':
