@@ -77,7 +77,7 @@ class LiveController extends AdminController{
 
     protected function Form(){
         $form = new Form(new Live());
-        $form->text('group_id','聊天室ID');
+        $form->text('groupid','聊天室ID');
         $form->textarea('intro','直播详情');
         $form->textarea('notice','通告');
         return $form;
