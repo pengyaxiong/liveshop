@@ -226,7 +226,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'wechat', 'as' => 'wechat.'], fu
     Route::post('sendroommsg','LiveController@sendNotification');
     //禁言或者取消禁言
     Route::post('shutupornot','LiveController@shutUp');
-
+    Route::get('memberroom', 'MiniliveController@getMemberJoinInRoom');
     //接收回调
     //接收推断流回调
     Route::post('LiveCallback','TencentCallbackController@LiveCallback');
