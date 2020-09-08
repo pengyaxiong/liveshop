@@ -703,6 +703,15 @@ class MiniliveController extends Controller
         }
     }
 
+
+    public function getMemberJoinInRoom(Request $request){
+        $url = 'v4/group_open_http_svc/get_joined_group_list';
+        $uid = $request->uid;
+        $data = ['Member_Account'=>$uid];
+        $result = $this->requestDom($url, $data);
+        return $result;
+    }
+
     /**
      * @param Request $request
      *              groupId	String	必填	需要修改基础信息的群组的 ID
