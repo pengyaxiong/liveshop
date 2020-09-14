@@ -435,6 +435,8 @@ class LiveController extends Controller
 
             if($chatr['ErrorCode'] == 0){
                 $data['groupid'] = $chatr['GroupId'];
+            }else{
+                $this->error_data('创建直播间群失败，请联系管理员',[]);
             }
             $id = DB::table('live_rooms')->insert($data);
             $data = DB::table('live_rooms')->where('openid', $openId)->first();
