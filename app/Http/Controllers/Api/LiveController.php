@@ -428,7 +428,11 @@ class LiveController extends Controller
         $info = DB::table('live_rooms')->where('openid',$openId)->first();
         if(empty($info)){
             $data = ['openid'=>$openId, 'streamname'=>$openId,'nickname'=>$nickName, 'title'=>$roomTitle, 'coverimg'=>$cover,'avator'=>$vataor, 'pushurl'=>$pushUrl, 'StreamState'=>'inactive','playurl'=>$playUrl,'created_at'=>time()];
+            if(iconv_strlen($nickName,'UTF-8')>28){
+                $nickName = mb_substr($nickName,0,10);
+            }
             $chatr = $this->createChatRoom(['userId'=>$userId, 'name'=> $nickName]);
+
             if($chatr['ErrorCode'] == 0){
                 $data['groupid'] = $chatr['GroupId'];
             }
