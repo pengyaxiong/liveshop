@@ -887,7 +887,7 @@ class LiveController extends Controller
         $room_id = DB::table('live_rooms')->where('streamname', $streamname)->value('id');
         $data = ['openid'=>$openid, 'room_id'=>$room_id];
         $info = DB::table('live_rooms_follow')->where($data)->first();
-        if($info->status == 1){
+        if($info['status'] == 1){
             $msg = '取消成功';
             $status = 0;
         }else{
